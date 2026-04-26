@@ -7,16 +7,28 @@
 [ext_resource type="Texture2D" uid="uid://bq3316affgjgt" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_long.png" id="5_iej5p"]
 [ext_resource type="Texture2D" uid="uid://b30dswxjxabwt" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_short.png" id="6_id3bs"]
 [ext_resource type="Texture2D" uid="uid://b2lapixwerq3e" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_moon.png" id="7_b3er0"]
-[ext_resource type="Texture2D" uid="uid://dw6vyoccl5m2d" path="res://Assets/UI/Interface3/Fantasy Medieval UI Pack – Complete RPG Interface/Fantasy Medieval UI Pack – Complete RPG Interface/UI Elements/3/IMG_2356.PNG" id="8_83n0s"]
+[ext_resource type="Texture2D" uid="uid://dt4x8arv1opa2" path="res://Assets/UI/Interface2/UIBundleFree/UIBundleFree/MediavelFree.png" id="8_83n0s"]
 [ext_resource type="Script" uid="uid://yknxwurgarir" path="res://MainMenu/buttons.gd" id="8_iej5p"]
-[ext_resource type="Texture2D" uid="uid://dq0cqxr1pgd2r" path="res://Assets/UI/Interface3/Fantasy Medieval UI Pack – Complete RPG Interface/Fantasy Medieval UI Pack – Complete RPG Interface/UI Elements/3/IMG_2365.PNG" id="9_8n28k"]
-[ext_resource type="Texture2D" uid="uid://pviur6428k3u" path="res://Assets/UI/Interface3/Fantasy Medieval UI Pack – Complete RPG Interface/Fantasy Medieval UI Pack – Complete RPG Interface/UI Elements/3/IMG_2364.PNG" id="11_id3bs"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iej5p"]
-bg_color = Color(0.38771847, 0.49194342, 0.91117406, 0.99215686)
-shadow_color = Color(0.49708265, 0.602346, 0.63457286, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, -70)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n28k"]
+atlas = ExtResource("8_83n0s")
+region = Rect2(3, 1, 71, 92)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iej5p"]
+texture = SubResource("AtlasTexture_8n28k")
+region_rect = Rect2(0, 0, 71, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id3bs"]
+atlas = ExtResource("8_83n0s")
+region = Rect2(246, 116, 4, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3er0"]
+atlas = ExtResource("8_83n0s")
+region = Rect2(226, 98, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmlj8"]
+atlas = ExtResource("8_83n0s")
+region = Rect2(212, 83, 7, 8)
 
 [node name="MainMenu" type="Control" unique_id=1682308484]
 layout_mode = 3
@@ -28,132 +40,140 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Parallax2D" type="Node2D" parent="." unique_id=2025290385]
-visible = false
+scale = Vector2(0.3, 0.3)
 
 [node name="Parallax2DSky" type="Parallax2D" parent="Parallax2D" unique_id=1198101091]
-repeat_size = Vector2(1900, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3800, 0)
 autoscroll = Vector2(20, 0)
 
 [node name="TextureRectSky" type="TextureRect" parent="Parallax2D/Parallax2DSky" unique_id=571009883]
 offset_right = 1900.0
 offset_bottom = 1200.0
+scale = Vector2(2, 2)
 texture = ExtResource("1_jdgnk")
 
 [node name="Parallax2DMountain" type="Parallax2D" parent="Parallax2D" unique_id=181008992]
-repeat_size = Vector2(1898, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3798, 0)
 autoscroll = Vector2(30, 0)
 
 [node name="TextureRectMountain" type="TextureRect" parent="Parallax2D/Parallax2DMountain" unique_id=1421428713]
 offset_right = 1900.0
 offset_bottom = 1200.0
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_r0x8f")
 
 [node name="Parallax2DBack" type="Parallax2D" parent="Parallax2D" unique_id=2010610114]
-repeat_size = Vector2(1900, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3800, 0)
 autoscroll = Vector2(40, 0)
 
 [node name="TextureRectBack" type="TextureRect" parent="Parallax2D/Parallax2DBack" unique_id=71827507]
 offset_right = 1900.0
 offset_bottom = 1200.0
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_83n0s")
 
 [node name="Parallax2DMid" type="Parallax2D" parent="Parallax2D" unique_id=1748577223]
-repeat_size = Vector2(1900, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3800, 0)
 autoscroll = Vector2(55, 0)
 
 [node name="TextureRectMid" type="TextureRect" parent="Parallax2D/Parallax2DMid" unique_id=228530934]
 offset_right = 1900.0
 offset_bottom = 1200.0
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_8n28k")
 
 [node name="Parallax2DLong" type="Parallax2D" parent="Parallax2D" unique_id=1439139977]
-repeat_size = Vector2(1900, 0)
+scroll_offset = Vector2(50, 845)
+repeat_size = Vector2(3800, 0)
 autoscroll = Vector2(70, 0)
 
 [node name="TextureRectLong" type="TextureRect" parent="Parallax2D/Parallax2DLong" unique_id=1827864981]
-offset_right = 1900.0
+offset_right = 3800.0
 offset_bottom = 1200.0
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_iej5p")
 
 [node name="Parallax2DShort" type="Parallax2D" parent="Parallax2D" unique_id=344517143]
-repeat_size = Vector2(1896, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3792, 0)
 autoscroll = Vector2(80, 0)
 
 [node name="TextureRectShort" type="TextureRect" parent="Parallax2D/Parallax2DShort" unique_id=915316410]
 offset_right = 3800.0
 offset_bottom = 2400.0
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_id3bs")
 
 [node name="Parallax2DMoon" type="Parallax2D" parent="Parallax2D" unique_id=1144358263]
-repeat_size = Vector2(1900, 0)
+scroll_offset = Vector2(50, 0)
+repeat_size = Vector2(3800, 0)
 autoscroll = Vector2(30, 0)
 
 [node name="TextureRectMoon" type="TextureRect" parent="Parallax2D/Parallax2DMoon" unique_id=1938924171]
 offset_right = 3800.0
 offset_bottom = 2400.0
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_b3er0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1279105745]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=287050589]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=988305577]
+custom_minimum_size = Vector2(330, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -145.0
+offset_right = 115.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_iej5p")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer" unique_id=988305577]
-custom_minimum_size = Vector2(230, 290)
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=1503157491]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_iej5p")
+theme_override_constants/margin_top = 111
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/PanelContainer" unique_id=1503157491]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer" unique_id=1072898391]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/PanelContainer/MarginContainer" unique_id=1072898391]
 layout_mode = 2
 
-[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer" unique_id=125223346]
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer" unique_id=125223346]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 script = ExtResource("8_iej5p")
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=144206244]
+[node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=144206244]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "PLAY"
-icon = ExtResource("8_83n0s")
+icon = SubResource("AtlasTexture_id3bs")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=862361474]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=862361474]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "OPTIONS"
-icon = ExtResource("9_8n28k")
+icon = SubResource("AtlasTexture_b3er0")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=233524075]
+[node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=233524075]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "QUIT"
-icon = ExtResource("11_id3bs")
+icon = SubResource("AtlasTexture_qmlj8")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[connection signal="pressed" from="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_options_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_options_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_quit_button_pressed"]
