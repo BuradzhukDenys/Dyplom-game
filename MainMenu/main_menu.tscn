@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b3jbcsxtl21qg"]
 
+[ext_resource type="Script" uid="uid://bakcp4s0evucp" path="res://MainMenu/main_menu.gd" id="1_8n28k"]
 [ext_resource type="Texture2D" uid="uid://chuhdd1i4vr8b" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_sky.png" id="1_jdgnk"]
 [ext_resource type="Texture2D" uid="uid://bfbddbyrd2m7h" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_mountain.png" id="2_r0x8f"]
 [ext_resource type="Texture2D" uid="uid://kupjysgcys55" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_back.png" id="3_83n0s"]
@@ -31,12 +32,14 @@ atlas = ExtResource("8_83n0s")
 region = Rect2(212, 83, 7, 8)
 
 [node name="MainMenu" type="Control" unique_id=1682308484]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8n28k")
 metadata/_edit_use_anchors_ = true
 
 [node name="Parallax2D" type="Node2D" parent="." unique_id=2025290385]
