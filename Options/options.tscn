@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://0kj3tb51vxje"]
 
 [ext_resource type="Texture2D" uid="uid://b4lg3331xab0m" path="res://Assets/UI/Interface/MegaPackFree/MegaPackFree/UIBundleFree/MediavelFree.png" id="1_6k1gw"]
+[ext_resource type="Script" uid="uid://sux0ft82o20v" path="res://Options/options.gd" id="1_ooduq"]
+[ext_resource type="Theme" uid="uid://eogs1xs75p0y" path="res://Themes_AnotherFiles/new_theme.tres" id="3_ymabl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooduq"]
 atlas = ExtResource("1_6k1gw")
@@ -37,31 +39,51 @@ region = Rect2(161, 34, 14, 13)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2p05n"]
 texture = SubResource("AtlasTexture_pp08d")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymabl"]
+atlas = ExtResource("1_6k1gw")
+region = Rect2(81, 33, 14, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijs52"]
+texture = SubResource("AtlasTexture_ymabl")
+
+[sub_resource type="InputEventKey" id="InputEventKey_ymabl"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ijs52"]
+events = [SubResource("InputEventKey_ymabl")]
+
 [node name="Options" type="CanvasLayer" unique_id=1866982236]
 process_mode = 3
+script = ExtResource("1_ooduq")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1227912220]
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="OptionMenu" type="MarginContainer" parent="." unique_id=1227912220]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -648.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 90
 theme_override_constants/margin_top = -70
 theme_override_constants/margin_right = 90
 theme_override_constants/margin_bottom = 60
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=47820540]
+[node name="PanelContainer" type="PanelContainer" parent="OptionMenu" unique_id=47820540]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ymabl")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1999132644]
+[node name="MarginContainer" type="MarginContainer" parent="OptionMenu/PanelContainer" unique_id=1999132644]
 layout_mode = 2
 theme_override_constants/margin_left = 150
 theme_override_constants/margin_top = 225
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 90
 
-[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1025506477]
+[node name="ExitButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=1025506477]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -71,8 +93,11 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uyw5h")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_pp08d")
 theme_override_styles/hover = SubResource("StyleBoxTexture_22ryi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_2p05n")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_ijs52")
+shortcut = SubResource("Shortcut_ijs52")
+metadata/ignore_disable = true
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=2142209756]
+[node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=2142209756]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -80,111 +105,130 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 text = "Options"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1838870822]
+[node name="MarginContainer" type="MarginContainer" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=1838870822]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_top = 65
 
-[node name="SoundsSettings" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer" unique_id=1749594041]
+[node name="SoundsSettings" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=1749594041]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 45
 alignment = 2
 
-[node name="Sound" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=700457254]
+[node name="Sound" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=700457254]
 layout_mode = 2
 
-[node name="SoundLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=278761112]
+[node name="SoundLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=278761112]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 text = "Sound"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SoundHSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=812251003]
-custom_minimum_size = Vector2(300, 0)
+[node name="SoundHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=812251003]
 layout_mode = 2
+min_value = 0.001
+step = 0.01
+value = 100.0
 rounded = true
 
-[node name="Music" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=1591972771]
+[node name="Music" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=1591972771]
 layout_mode = 2
 
-[node name="MusicLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1339214142]
+[node name="MusicLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1339214142]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicHSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1480896058]
-custom_minimum_size = Vector2(300, 0)
+[node name="MusicHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1480896058]
 layout_mode = 2
+min_value = 0.001
+step = 0.01
+value = 100.0
 rounded = true
 
-[node name="SFX" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=218453709]
+[node name="SFX" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=218453709]
 layout_mode = 2
+size_flags_vertical = 8
 
-[node name="SFXLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=1099053285]
+[node name="SFXLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=1099053285]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXHSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=479135008]
-custom_minimum_size = Vector2(300, 0)
+[node name="SFXHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=479135008]
 layout_mode = 2
+min_value = 0.001
+step = 0.01
+value = 100.0
 rounded = true
 
-[node name="Settings" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer" unique_id=929097594]
-custom_minimum_size = Vector2(280, 0)
+[node name="Settings" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=929097594]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 45
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings" unique_id=438649606]
-custom_minimum_size = Vector2(280, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings" unique_id=438649606]
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_constants/separation = 18
+theme_override_constants/separation = 15
 alignment = 2
 
-[node name="CheckBox" type="CheckBox" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings/HBoxContainer" unique_id=1259414048]
+[node name="FullScreen" type="CheckBox" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/HBoxContainer" unique_id=1259414048]
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 20
 text = "Fullscreen"
 alignment = 2
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings/HBoxContainer" unique_id=1775886772]
+[node name="Resolution" type="OptionButton" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/HBoxContainer" unique_id=1775886772]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 20
 alignment = 1
 selected = 0
-item_count = 1
+item_count = 4
 popup/item_0/text = "1920x1080"
 popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+popup/item_3/id = 3
 
-[node name="MainButtons" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings" unique_id=682972468]
-custom_minimum_size = Vector2(280, 0)
+[node name="MainButtons" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings" unique_id=682972468]
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 15
 
-[node name="ChangeKeybinds" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1393674571]
+[node name="ChangeKeybinds" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1393674571]
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
 text = "Change keybinds"
 
-[node name="ResetSettings" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1351697031]
+[node name="ResetSettings" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1351697031]
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
 text = "Reset settings"
 
-[node name="ResetProgress" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1366779204]
+[node name="ResetProgress" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/MainButtons" unique_id=1366779204]
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
 text = "Reset progress"
+
+[connection signal="pressed" from="OptionMenu/PanelContainer/MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="OptionMenu/PanelContainer/MarginContainer/MarginContainer/Settings/HBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]
