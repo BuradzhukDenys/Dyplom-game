@@ -275,5 +275,6 @@ expand_icon = true
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="animation_ended" from="Options" to="." method="_on_options_animation_ended"]
 [connection signal="options_closed" from="Options" to="." method="_on_options_closed"]
 >>>>>>> feature/options

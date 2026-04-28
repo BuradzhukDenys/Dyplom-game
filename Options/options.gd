@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal options_closed
+signal animation_ended
 
 const START_MENU_POSITION: Vector2 = Vector2(0, -648)
 
@@ -8,12 +9,16 @@ const START_MENU_POSITION: Vector2 = Vector2(0, -648)
 @onready var options_buttons: MarginContainer = $OptionMenu/PanelContainer/MarginContainer
 
 var current_tween: Tween = null
+var options_close: bool = false
 
 func _ready() -> void:
 	options_menu.global_position = START_MENU_POSITION
 	hide()
+	
+	open_menu() #delete
 
 func open_menu() -> void:
+	options_close = false
 	show()
 	switch_buttons_disable(options_buttons, true)
 	if current_tween and current_tween.is_valid():
@@ -22,6 +27,8 @@ func open_menu() -> void:
 	current_tween = create_tween()
 	current_tween.tween_property(options_menu, "global_position", Vector2(0, 0), 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	current_tween.tween_callback(switch_buttons_disable.bind(options_buttons, false))
+	await current_tween.finished
+	animation_ended.emit()
 
 func switch_buttons_disable(container: Node, disable: bool) -> void:
 	for child in container.get_children():
@@ -32,6 +39,10 @@ func switch_buttons_disable(container: Node, disable: bool) -> void:
 			switch_buttons_disable(child, disable)
 
 func _on_exit_button_pressed() -> void:
+	if options_close:
+		return
+		
+	options_close = true
 	options_closed.emit()
 	switch_buttons_disable(options_buttons, true)
 	if current_tween and current_tween.is_valid():
