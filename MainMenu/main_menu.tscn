@@ -9,11 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b30dswxjxabwt" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_short.png" id="6_id3bs"]
 [ext_resource type="Texture2D" uid="uid://b2lapixwerq3e" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_moon.png" id="7_b3er0"]
 [ext_resource type="Texture2D" uid="uid://dt4x8arv1opa2" path="res://Assets/UI/Interface2/UIBundleFree/UIBundleFree/MediavelFree.png" id="8_83n0s"]
-<<<<<<< HEAD
-[ext_resource type="Script" path="res://MainMenu/buttons.gd" id="8_iej5p"]
-=======
 [ext_resource type="PackedScene" uid="uid://0kj3tb51vxje" path="res://Options/options.tscn" id="11_iej5p"]
->>>>>>> feature/options
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n28k"]
 atlas = ExtResource("8_83n0s")
@@ -46,20 +42,6 @@ grow_vertical = 2
 script = ExtResource("1_8n28k")
 metadata/_edit_use_anchors_ = true
 
-<<<<<<< HEAD
-[node name="Parallax2D" type="Node2D" parent="." unique_id=2025290385]
-scale = Vector2(0.3, 0.3)
-
-[node name="Parallax2DSky" type="Parallax2D" parent="Parallax2D" unique_id=1198101091]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3800, 0)
-autoscroll = Vector2(20, 0)
-
-[node name="TextureRectSky" type="TextureRect" parent="Parallax2D/Parallax2DSky" unique_id=571009883]
-offset_right = 1900.0
-offset_bottom = 1200.0
-scale = Vector2(2, 2)
-=======
 [node name="Parallax" type="Node2D" parent="." unique_id=2025290385]
 
 [node name="Parallax2DSky" type="Parallax2D" parent="Parallax" unique_id=1198101091]
@@ -68,90 +50,36 @@ autoscroll = Vector2(20, 0)
 
 [node name="Sprite2DSky" type="Sprite2D" parent="Parallax/Parallax2DSky" unique_id=1162032586]
 scale = Vector2(0.6, 0.6)
->>>>>>> feature/options
 texture = ExtResource("1_jdgnk")
 centered = false
 
-<<<<<<< HEAD
-[node name="Parallax2DMountain" type="Parallax2D" parent="Parallax2D" unique_id=181008992]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3798, 0)
-autoscroll = Vector2(30, 0)
-
-[node name="TextureRectMountain" type="TextureRect" parent="Parallax2D/Parallax2DMountain" unique_id=1421428713]
-offset_right = 1900.0
-offset_bottom = 1200.0
-=======
 [node name="Parallax2DMountain" type="Parallax2D" parent="Parallax" unique_id=181008992]
 repeat_size = Vector2(1139.4, 0)
 autoscroll = Vector2(30, 0)
 
 [node name="Sprite2DMountain" type="Sprite2D" parent="Parallax/Parallax2DMountain" unique_id=1732607339]
 scale = Vector2(0.3, 0.3)
->>>>>>> feature/options
 texture = ExtResource("2_r0x8f")
 centered = false
 
-<<<<<<< HEAD
-[node name="Parallax2DBack" type="Parallax2D" parent="Parallax2D" unique_id=2010610114]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3800, 0)
-autoscroll = Vector2(40, 0)
-
-[node name="TextureRectBack" type="TextureRect" parent="Parallax2D/Parallax2DBack" unique_id=71827507]
-offset_right = 1900.0
-offset_bottom = 1200.0
-=======
 [node name="Parallax2DBack" type="Parallax2D" parent="Parallax" unique_id=2010610114]
 repeat_size = Vector2(1140, 0)
 autoscroll = Vector2(40, 0)
 
 [node name="Sprite2DBack" type="Sprite2D" parent="Parallax/Parallax2DBack" unique_id=429675631]
 scale = Vector2(0.3, 0.3)
->>>>>>> feature/options
 texture = ExtResource("3_83n0s")
 centered = false
 
-<<<<<<< HEAD
-[node name="Parallax2DMid" type="Parallax2D" parent="Parallax2D" unique_id=1748577223]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3800, 0)
-autoscroll = Vector2(55, 0)
-
-[node name="TextureRectMid" type="TextureRect" parent="Parallax2D/Parallax2DMid" unique_id=228530934]
-offset_right = 1900.0
-offset_bottom = 1200.0
-=======
 [node name="Parallax2DMid" type="Parallax2D" parent="Parallax" unique_id=1748577223]
 repeat_size = Vector2(1140, 0)
 autoscroll = Vector2(60, 0)
 
 [node name="Sprite2DMid" type="Sprite2D" parent="Parallax/Parallax2DMid" unique_id=1764423234]
 scale = Vector2(0.3, 0.3)
->>>>>>> feature/options
 texture = ExtResource("4_8n28k")
 centered = false
 
-<<<<<<< HEAD
-[node name="Parallax2DLong" type="Parallax2D" parent="Parallax2D" unique_id=1439139977]
-scroll_offset = Vector2(50, 845)
-repeat_size = Vector2(3800, 0)
-autoscroll = Vector2(70, 0)
-
-[node name="TextureRectLong" type="TextureRect" parent="Parallax2D/Parallax2DLong" unique_id=1827864981]
-offset_right = 3800.0
-offset_bottom = 1200.0
-texture = ExtResource("5_iej5p")
-
-[node name="Parallax2DShort" type="Parallax2D" parent="Parallax2D" unique_id=344517143]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3792, 0)
-autoscroll = Vector2(80, 0)
-
-[node name="TextureRectShort" type="TextureRect" parent="Parallax2D/Parallax2DShort" unique_id=915316410]
-offset_right = 3800.0
-offset_bottom = 2400.0
-=======
 [node name="Parallax2DLong" type="Parallax2D" parent="Parallax" unique_id=1439139977]
 repeat_size = Vector2(1140, 0)
 autoscroll = Vector2(80, 0)
@@ -168,27 +96,15 @@ autoscroll = Vector2(100, 0)
 
 [node name="Sprite2DShort" type="Sprite2D" parent="Parallax/Parallax2DShort" unique_id=558587739]
 scale = Vector2(0.3, 0.3)
->>>>>>> feature/options
 texture = ExtResource("6_id3bs")
 centered = false
 
-<<<<<<< HEAD
-[node name="Parallax2DMoon" type="Parallax2D" parent="Parallax2D" unique_id=1144358263]
-scroll_offset = Vector2(50, 0)
-repeat_size = Vector2(3800, 0)
-autoscroll = Vector2(30, 0)
-
-[node name="TextureRectMoon" type="TextureRect" parent="Parallax2D/Parallax2DMoon" unique_id=1938924171]
-offset_right = 3800.0
-offset_bottom = 2400.0
-=======
 [node name="Parallax2DMoon" type="Parallax2D" parent="Parallax" unique_id=1144358263]
 repeat_size = Vector2(1140, 0)
 autoscroll = Vector2(20, 0)
 
 [node name="Sprite2DMoon" type="Sprite2D" parent="Parallax/Parallax2DMoon" unique_id=463278009]
 scale = Vector2(0.3, 0.3)
->>>>>>> feature/options
 texture = ExtResource("7_b3er0")
 centered = false
 
@@ -221,10 +137,6 @@ layout_mode = 2
 [node name="Buttons" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer" unique_id=125223346]
 layout_mode = 2
 theme_override_constants/separation = 20
-<<<<<<< HEAD
-script = ExtResource("8_iej5p")
-=======
->>>>>>> feature/options
 
 [node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=144206244]
 custom_minimum_size = Vector2(150, 55)
@@ -241,10 +153,7 @@ expand_icon = true
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-<<<<<<< HEAD
-=======
 theme_override_constants/outline_size = 6
->>>>>>> feature/options
 text = "OPTIONS"
 icon = SubResource("AtlasTexture_b3er0")
 icon_alignment = 1
@@ -255,21 +164,13 @@ expand_icon = true
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-<<<<<<< HEAD
-=======
 theme_override_constants/outline_size = 6
->>>>>>> feature/options
 text = "QUIT"
 icon = SubResource("AtlasTexture_qmlj8")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-<<<<<<< HEAD
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_options_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" method="_on_quit_button_pressed"]
-=======
 [node name="Options" parent="." unique_id=1866982236 instance=ExtResource("11_iej5p")]
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
@@ -277,4 +178,3 @@ expand_icon = true
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="animation_ended" from="Options" to="." method="_on_options_animation_ended"]
 [connection signal="options_closed" from="Options" to="." method="_on_options_closed"]
->>>>>>> feature/options
