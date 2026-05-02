@@ -1,5 +1,7 @@
 extends Control
 
+const level_scene: PackedScene = preload("res://Levels/level.tscn")
+
 @onready var options: CanvasLayer = $Options
 @onready var menu: CanvasLayer = $CanvasLayer
 
@@ -10,7 +12,7 @@ func _on_options_closed() -> void:
 	menu.show()
 
 func _on_play_button_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_packed(level_scene)
 
 func _on_options_button_pressed() -> void:
 	options.open_menu()

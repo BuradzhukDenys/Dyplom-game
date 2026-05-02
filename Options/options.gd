@@ -14,8 +14,6 @@ var options_close: bool = false
 func _ready() -> void:
 	options_menu.global_position = START_MENU_POSITION
 	hide()
-	
-	open_menu() #delete
 
 func open_menu() -> void:
 	options_close = false
