@@ -16,6 +16,7 @@ shape = SubResource("CircleShape2D_vjdnk")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1776622611]
 collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1027653867]
 shape = SubResource("CircleShape2D_docf1")

@@ -67,8 +67,14 @@ move_down={
 
 2d_physics/layer_1="hitbox"
 2d_physics/layer_2="hurtbox"
-2d_physics/layer_5="object_collision"
-2d_physics/layer_6="wall"
+2d_physics/layer_3="player_hitbox"
+2d_physics/layer_4="player_hurtbox"
+2d_physics/layer_5="enemy_hitbox"
+2d_physics/layer_6="enemy_hurtbox"
+2d_physics/layer_9="object_collision"
+2d_physics/layer_10="wall"
+2d_physics/layer_11="enemy"
+2d_physics/layer_12="player"
 
 [physics]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://be0y7tpgog8nq" path="res://Character/character.gd" id="1_jkkns"]
 [ext_resource type="PackedScene" uid="uid://b7cot3gtue8gq" path="res://Components/hitbox_hurtbox_component.tscn" id="1_k3002"]
 [ext_resource type="Texture2D" uid="uid://deas4qrt32pke" path="res://Assets/SpritesheetsKnight/Spritesheet_with_Shadows.png" id="1_nwtvh"]
-[ext_resource type="Script" uid="uid://c4w1xn7aypyp7" path="res://Character/hitbox.gd" id="4_a23tb"]
+[ext_resource type="Script" uid="uid://c4w1xn7aypyp7" path="res://Character/hurtbox.gd" id="4_a23tb"]
 [ext_resource type="PackedScene" uid="uid://dpjmwtes25g06" path="res://Components/hp_component.tscn" id="4_twwou"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jkkns"]
@@ -860,7 +860,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3q1v6")
 }],
-"loop": true,
+"loop": false,
 "name": &"TakeDamageUp",
 "speed": 8.0
 }, {
@@ -871,31 +871,34 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3002"]
-radius = 13.0
-height = 58.0
+radius = 14.0
+height = 56.0
 
 [node name="Character" type="CharacterBody2D" unique_id=1651891733]
-collision_layer = 16
-collision_mask = 32
+collision_layer = 2048
+collision_mask = 512
 script = ExtResource("1_jkkns")
 metadata/_edit_vertical_guides_ = [-576.0]
 metadata/_edit_horizontal_guides_ = [-324.0]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1621105656]
 sprite_frames = SubResource("SpriteFrames_k3002")
-animation = &"TakeDamageRight"
+animation = &"TakeDamageDown"
 autoplay = "IdleDown"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1516558692]
 shape = SubResource("CapsuleShape2D_k3002")
 
 [node name="HitboxHurtboxComponent" parent="." unique_id=1559901478 instance=ExtResource("1_k3002")]
-visible = false
 
-[node name="Hitbox" parent="HitboxHurtboxComponent" index="0" unique_id=549158713 groups=["player_hitbox"]]
+[node name="Hitbox" parent="HitboxHurtboxComponent" index="0" unique_id=549158713]
+collision_layer = 4
+collision_mask = 32
+
+[node name="Hurtbox" parent="HitboxHurtboxComponent" index="1" unique_id=1776622611 node_paths=PackedStringArray("hp_component")]
+collision_layer = 8
 script = ExtResource("4_a23tb")
+hp_component = NodePath("../../HPComponent")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1225629116]
 process_callback = 0
@@ -912,12 +915,10 @@ editor_draw_limits = true
 
 [node name="TakeDamageTimer" type="Timer" parent="." unique_id=500171561]
 process_callback = 0
-wait_time = 0.8
 one_shot = true
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=545272548]
 process_callback = 0
-wait_time = 1.5
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

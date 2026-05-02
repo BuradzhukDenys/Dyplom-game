@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hp_component: Node = $HPComponent
+@onready var hp_component: HPComponent = $HPComponent
 @onready var take_damage_timer: Timer = $TakeDamageTimer
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 
@@ -9,7 +9,6 @@ const SPEED: float = 300.0
 
 var last_direction: Vector2 = Vector2.DOWN
 var can_attack: bool = true
-var can_take_damage: bool = true
 
 enum States
 {
@@ -40,12 +39,15 @@ func _enter_state(state: States) -> void:
 			attack_cooldown_timer.start()
 			play_animation_directionaly("Attack")
 		States.TAKE_DAMAGE:
-			can_take_damage = false
-			take_damage_timer.start()
 			play_animation_directionaly("TakeDamage")
 		States.DEAD:
 			PlayerData.player_dead = true
 			play_animation_directionaly("Die")
+			set_physics_process(false)
+			set_process_unhandled_input(false)
+			
+			$HitboxHurtboxComponent/Hitbox/CollisionShape2D.set_deferred("disabled", true)
+			$HitboxHurtboxComponent/Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _exit_state(state: States) -> void:
 	match state:
@@ -54,9 +56,9 @@ func _exit_state(state: States) -> void:
 		States.MOVE:
 			pass
 		States.ATTACK:
-			pass
+			animated_sprite.self_modulate = Color(1, 1, 1, 1)
 		States.TAKE_DAMAGE:
-			can_take_damage = true
+			pass
 		States.DEAD:
 			pass
 
@@ -107,21 +109,30 @@ func play_animation_directionaly(anim_name: String) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation.containsn("Attack") or animated_sprite.animation.containsn("TakeDamage"):
-		switch_state(States.IDLE)
+		if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
+			switch_state(States.MOVE)
+		else:
+			switch_state(States.IDLE)
 	elif animated_sprite.animation.containsn("Die"):
 		get_tree().change_scene_to_file("res://MainMenu/main_menu.tscn")
 
 func _on_hp_component_health_changed(new_value: float) -> void:
-	if not can_take_damage:
+	if hp_component.is_invincible:
 		return
 		
 	if new_value > 0:
-		switch_state(States.TAKE_DAMAGE)
+		hp_component.is_invincible = true
+		take_damage_timer.start()
+		
+		if current_state != States.ATTACK:
+			switch_state(States.TAKE_DAMAGE)
+		else:
+			animated_sprite.self_modulate = Color(0.7, 0, 0, 0.75)
 	else:
 		switch_state(States.DEAD)
 
-#func _on_take_damage_timer_timeout() -> void:
-	#can_take_damage = true
+func _on_take_damage_timer_timeout() -> void:
+	hp_component.is_invincible = false
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true

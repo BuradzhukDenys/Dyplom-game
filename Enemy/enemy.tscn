@@ -255,9 +255,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2pb1h"]
 radius = 13.0
 
-[node name="Enemy" type="Area2D" unique_id=1253913973]
-collision_layer = 16
-collision_mask = 32
+[node name="Enemy" type="CharacterBody2D" unique_id=298853584]
+collision_layer = 1024
+collision_mask = 1536
 script = ExtResource("1_px1sc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1263937817]
@@ -274,14 +274,14 @@ shape = SubResource("CircleShape2D_2pb1h")
 
 [node name="Hitbox" parent="HitboxHurtboxComponent" index="0" unique_id=549158713]
 position = Vector2(0, 4)
+collision_layer = 16
+collision_mask = 8
 
 [node name="Hurtbox" parent="HitboxHurtboxComponent" index="1" unique_id=1776622611]
-position = Vector2(0, 5)
+position = Vector2(0, 4)
+collision_layer = 32
 
-[node name="CollisionShape2D" parent="HitboxHurtboxComponent/Hurtbox" index="0" unique_id=1027653867]
-position = Vector2(0, -1)
-
-[connection signal="area_entered" from="HitboxHurtboxComponent/Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="area_exited" from="HitboxHurtboxComponent/Hurtbox" to="." method="_on_hurtbox_area_exited"]
+[connection signal="area_entered" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_exited"]
 
 [editable path="HitboxHurtboxComponent"]
