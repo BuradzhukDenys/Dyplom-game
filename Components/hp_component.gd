@@ -1,18 +1,25 @@
 extends Node
 class_name HPComponent
 
-signal health_changed(new_value: float)
+signal health_changed(new_value: float, type: HEALTH_CHANGED_TYPE)
 
-const BASE_MAX_HEALTH: float = 100.0
+enum HEALTH_CHANGED_TYPE
+{
+	TAKE_DAMAGE,
+	HEAL,
+	PASSIVE_HEAL
+}
+
+@export var base_health: float = 100
 var health: float
-var is_invincible: bool = false
 
 func _ready() -> void:
-	health = BASE_MAX_HEALTH
+	health = base_health
 	
-func take_damage(amount) -> void:
-	if is_invincible:
-		return
-	
-	health = clamp(health - amount, 0, BASE_MAX_HEALTH)
-	health_changed.emit(health)
+func take_damage(amount: float) -> void:
+	health = clampf(health - amount, 0, base_health)
+	health_changed.emit(health, HEALTH_CHANGED_TYPE.TAKE_DAMAGE)
+
+func heal(amount: float) -> void:
+	health = clampf(health + amount, 0, base_health)
+	health_changed.emit(health, HEALTH_CHANGED_TYPE.HEAL)

@@ -10,11 +10,17 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_0 and event.is_pressed():
 			_on_spawn_enemies_timer_timeout()
+		elif event.keycode == KEY_1 and event.is_pressed():
+			var slime: CharacterBody2D = slime_scene.instantiate()
+			slime.global_position = get_global_mouse_position()
+			enemies.add_child(slime)
+			slime.enemy_dead.connect(_on_enenmy_dead.bind(slime))
 
 func _on_spawn_enemies_timer_timeout() -> void:
 	var slime: CharacterBody2D = slime_scene.instantiate()
 	slime.global_position = random_spawn_pos()
 	enemies.add_child(slime)
+	slime.enemy_dead.connect(_on_enenmy_dead.bind(slime))
 
 func random_spawn_pos() -> Vector2:
 	var test_position: Vector2
@@ -34,3 +40,6 @@ func random_spawn_pos() -> Vector2:
 	test_position.y = clamp(test_position.y, -960, 960)
 	
 	return test_position
+
+func _on_enenmy_dead(enemy: CharacterBody2D) -> void:
+	enemy.queue_free()

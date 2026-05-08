@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://be0y7tpgog8nq" path="res://Character/character.gd" id="1_jkkns"]
 [ext_resource type="PackedScene" uid="uid://b7cot3gtue8gq" path="res://Components/hitbox_hurtbox_component.tscn" id="1_k3002"]
 [ext_resource type="Texture2D" uid="uid://deas4qrt32pke" path="res://Assets/SpritesheetsKnight/Spritesheet_with_Shadows.png" id="1_nwtvh"]
-[ext_resource type="Script" uid="uid://c4w1xn7aypyp7" path="res://Character/hurtbox.gd" id="4_a23tb"]
-[ext_resource type="PackedScene" uid="uid://dpjmwtes25g06" path="res://Components/hp_component.tscn" id="4_twwou"]
+[ext_resource type="Texture2D" uid="uid://bowkfuntvtib" path="res://Assets/particles/Healing particle.png" id="5_a23tb"]
+[ext_resource type="Texture2D" uid="uid://c61n1valrogpy" path="res://Assets/particles/Mana particle.png" id="6_uerqc"]
+[ext_resource type="PackedScene" uid="uid://bg80umpiau45g" path="res://Components/player_hp_mana_component.tscn" id="8_q4sqr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jkkns"]
 atlas = ExtResource("1_nwtvh")
@@ -871,34 +872,108 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3002"]
-radius = 14.0
-height = 56.0
+radius = 13.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_twwou"]
+radius = 7.0
+height = 42.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l6l2"]
+
+[sub_resource type="Gradient" id="Gradient_1l6l2"]
+offsets = PackedFloat32Array(0, 0.6272401)
+colors = PackedColorArray(0, 1, 0, 1, 2.1418184e-06, 0.56846994, 7.70092e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q4sqr"]
+gradient = SubResource("Gradient_1l6l2")
+
+[sub_resource type="Curve" id="Curve_4te0c"]
+_limits = [0.0, 1.0, 0.0, 1.5]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1.5, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_veuuo"]
+curve = SubResource("Curve_4te0c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_twwou"]
+lifetime_randomness = 0.75
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 8, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 6.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -70, 0)
+scale_curve = SubResource("CurveTexture_veuuo")
+color_ramp = SubResource("GradientTexture1D_q4sqr")
+hue_variation_min = -0.100000024
+hue_variation_max = 0.09999997
+
+[sub_resource type="Gradient" id="Gradient_uerqc"]
+offsets = PackedFloat32Array(0, 0.6272401)
+colors = PackedColorArray(0.75696456, 0.4593464, 0.99272805, 1, 0.6402343, 0.06486036, 0.8154038, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1l6l2"]
+gradient = SubResource("Gradient_uerqc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uerqc"]
+lifetime_randomness = 0.75
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 8, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 6.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -70, 0)
+scale_curve = SubResource("CurveTexture_veuuo")
+color_ramp = SubResource("GradientTexture1D_1l6l2")
 
 [node name="Character" type="CharacterBody2D" unique_id=1651891733]
 collision_layer = 2048
 collision_mask = 512
+motion_mode = 1
 script = ExtResource("1_jkkns")
 metadata/_edit_vertical_guides_ = [-576.0]
 metadata/_edit_horizontal_guides_ = [-324.0]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1621105656]
+scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_k3002")
-animation = &"TakeDamageDown"
+animation = &"AttackRight"
 autoplay = "IdleDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1516558692]
+position = Vector2(0, 31)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_k3002")
 
 [node name="HitboxHurtboxComponent" parent="." unique_id=1559901478 instance=ExtResource("1_k3002")]
 
 [node name="Hitbox" parent="HitboxHurtboxComponent" index="0" unique_id=549158713]
+position = Vector2(0, 32)
 collision_layer = 4
 collision_mask = 32
 
 [node name="Hurtbox" parent="HitboxHurtboxComponent" index="1" unique_id=1776622611 node_paths=PackedStringArray("hp_component")]
 collision_layer = 8
-script = ExtResource("4_a23tb")
-hp_component = NodePath("../../HPComponent")
+hp_component = NodePath("../../PlayerHPManaComponent")
+
+[node name="CollisionShape2D" parent="HitboxHurtboxComponent/Hurtbox" index="0" unique_id=1027653867]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_twwou")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1225629116]
 process_callback = 0
@@ -911,8 +986,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 editor_draw_limits = true
 
-[node name="HPComponent" parent="." unique_id=775051027 instance=ExtResource("4_twwou")]
-
 [node name="TakeDamageTimer" type="Timer" parent="." unique_id=500171561]
 process_callback = 0
 one_shot = true
@@ -921,9 +994,39 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="health_changed" from="HPComponent" to="." method="_on_hp_component_health_changed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=531083139]
+libraries/ = SubResource("AnimationLibrary_1l6l2")
+
+[node name="ParticleManager" type="Node2D" parent="." unique_id=393308327]
+
+[node name="HealParticles" type="GPUParticles2D" parent="ParticleManager" unique_id=656687446]
+emitting = false
+amount = 12
+texture = ExtResource("5_a23tb")
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.3
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_twwou")
+
+[node name="ManaParticles" type="GPUParticles2D" parent="ParticleManager" unique_id=1498122924]
+emitting = false
+amount = 12
+texture = ExtResource("6_uerqc")
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.3
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_uerqc")
+
+[node name="PlayerHPManaComponent" parent="." unique_id=715499662 instance=ExtResource("8_q4sqr")]
+
+[connection signal="area_entered" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[connection signal="health_changed" from="PlayerHPManaComponent" to="." method="_on_hp_component_health_changed"]
+[connection signal="mana_changed" from="PlayerHPManaComponent" to="." method="_on_player_hp_mana_component_mana_changed"]
 
 [editable path="HitboxHurtboxComponent"]

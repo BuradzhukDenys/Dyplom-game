@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bg80umpiau45g"]
+
+[ext_resource type="PackedScene" uid="uid://dpjmwtes25g06" path="res://Components/hp_component.tscn" id="1_njf5w"]
+[ext_resource type="Script" uid="uid://csg2m4sv51tgy" path="res://Components/player_hp_mana_component.gd" id="2_0ucoa"]
+
+[node name="PlayerHPManaComponent" unique_id=775051027 instance=ExtResource("1_njf5w")]
+script = ExtResource("2_0ucoa")
+base_mana = 100

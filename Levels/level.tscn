@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://csekskgcx3koo" path="res://Levels/level.gd" id="1_xto7t"]
 [ext_resource type="PackedScene" uid="uid://d3lngxpgehu1j" path="res://Character/knight.tscn" id="2_gtnvv"]
 [ext_resource type="PackedScene" uid="uid://cllx0syaukocd" path="res://Enemy/enemy.tscn" id="3_wav5q"]
+[ext_resource type="PackedScene" uid="uid://dr2s1fjyptjah" path="res://UI/ui.tscn" id="5_uhyyw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnvv"]
 texture = ExtResource("1_s41d2")
@@ -37,10 +38,13 @@ size = Vector2(3988, 6)
 size = Vector2(6, 2014)
 
 [node name="Level" type="Node2D" unique_id=342569920]
+y_sort_enabled = true
 script = ExtResource("1_xto7t")
 slime_scene = ExtResource("3_wav5q")
 metadata/_edit_vertical_guides_ = [-2000.0, 2000.0]
 metadata/_edit_horizontal_guides_ = [-1008.0, 1007.0]
+
+[node name="UI" parent="." unique_id=1403278747 instance=ExtResource("5_uhyyw")]
 
 [node name="Map" type="Node2D" parent="." unique_id=1912721121]
 

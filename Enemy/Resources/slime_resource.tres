@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://com8rr67dd78e"]
+
+[ext_resource type="Script" uid="uid://d34ein411aagx" path="res://Enemy/Resources/enemy_resource.gd" id="1_d0e0i"]
+
+[resource]
+script = ExtResource("1_d0e0i")
+speed = 100.0
+damage = 10.0
+expirience_gain = 8
+gold_gain = 3
+knockback_strength = 300.0
+knockback_friction = 800.0
+metadata/_custom_type_script = "uid://d34ein411aagx"
