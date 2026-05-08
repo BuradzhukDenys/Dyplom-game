@@ -145,7 +145,10 @@ func attack_take_damage_change() -> void:
 		switch_state(States.IDLE)
 
 func cast_skill(skill_resource: SkillResource) -> void:
-	PlayerData.skill1_cooldown = true
+	#PlayerData.skill1_cooldown = true
+	if hp_mana_component.mana <= 0:
+		EventBus.no_mana.emit()
+		
 	if hp_mana_component.mana < skill_resource.mana_cost:
 		return
 		

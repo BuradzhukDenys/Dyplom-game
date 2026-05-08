@@ -131,14 +131,24 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 
-[node name="ManaBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=41527189]
-self_modulate = Color(0.8509804, 0.011764706, 0.90588236, 1)
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=930680261]
 custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
+
+[node name="ManaBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control" unique_id=41527189]
+self_modulate = Color(0.8509804, 0.011764706, 0.90588236, 1)
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 value = 100.0
 show_percentage = false
 
-[node name="ManaValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/ManaBar" unique_id=269764382]
+[node name="ManaValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar" unique_id=269764382]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

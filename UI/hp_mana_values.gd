@@ -1,16 +1,19 @@
 extends VBoxContainer
 
 @onready var health_bar: ProgressBar = $HP/HPBar
-@onready var mana_bar: ProgressBar = $Mana/ManaBar
+@onready var mana_bar: ProgressBar = $Mana/Control/ManaBar
 @onready var health_value_label: Label = $HP/HPBar/HealthValueLabel
-@onready var mana_value_label: Label = $Mana/ManaBar/ManaValueLabel
+@onready var mana_value_label: Label = $Mana/Control/ManaBar/ManaValueLabel
 
 var health_tween: Tween
 var mana_tween: Tween
+var no_mana_tween: Tween
 
 func _ready() -> void:
 	EventBus.player_health_changed.connect(_on_player_health_changed)
 	EventBus.player_mana_changed.connect(_on_player_mana_changed)
+	EventBus.no_mana.connect(_on_no_mana)
+	
 	health_bar.max_value = PlayerData.MAX_HEALTH
 	mana_bar.max_value = PlayerData.MAX_MANA
 	health_bar.value = PlayerData.current_health
@@ -35,3 +38,15 @@ func _on_player_mana_changed(new_value: float) -> void:
 		
 	mana_tween = create_tween()
 	mana_tween.tween_property(mana_bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func _on_no_mana() -> void:
+	mana_bar.modulate = Color(0.824, 0.0, 0.0, 1)
+	
+	if no_mana_tween and no_mana_tween.is_valid():
+		no_mana_tween.kill()
+		
+	no_mana_tween = create_tween()
+	no_mana_tween.tween_property(mana_bar, "modulate", Color.WHITE, 0.1)
+	no_mana_tween.parallel().tween_property(mana_bar, "rotation", deg_to_rad(-5), 0.1)
+	no_mana_tween.tween_property(mana_bar, "rotation", deg_to_rad(5), 0.1)
+	no_mana_tween.tween_property(mana_bar, "rotation", deg_to_rad(0), 0.1)

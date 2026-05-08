@@ -28,11 +28,8 @@ func take_damage(amount: float) -> void:
 func spend_mana(amount: int) -> void:
 	mana = clamp(mana - amount, 0, base_mana)
 	
-	if mana <= 0:
-		EventBus.no_mana.emit()
-		return
-	
 	mana_changed.emit(mana, MANA_CHANGED_TYPE.SPEND)
+	
 	
 func restore_mana(amount: int) -> void:
 	mana = clamp(mana + amount, 0, base_mana)
