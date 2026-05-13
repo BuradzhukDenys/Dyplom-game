@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://f2dcp76ix73a"]
+
+[ext_resource type="Texture2D" uid="uid://mj765hnpcr27" path="res://Assets/Custom Border and Panels Menu All Part/Border All 5.png" id="2_vlsjh"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="3_ontol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fiuh"]
+atlas = ExtResource("2_vlsjh")
+region = Rect2(128, 128, 64, 64)
+filter_clip = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h81ot"]
+texture = SubResource("AtlasTexture_4fiuh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rr40"]
+atlas = ExtResource("3_ontol")
+region = Rect2(211, 16, 10, 16)
+
+[node name="ManaPotion" type="VBoxContainer" unique_id=103913418]
+custom_minimum_size = Vector2(65, 65)
+offset_right = 65.0
+offset_bottom = 129.0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1424228278]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_h81ot")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=141082336]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_6rr40")
+stretch_mode = 5
+
+[node name="ManaPotionLabel" type="Label" parent="." unique_id=1282031803]
+layout_mode = 2
+text = "Mana
+Potion
+Q"
+horizontal_alignment = 1
+vertical_alignment = 1

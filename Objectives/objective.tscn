@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bn7nbsgnck1vb"]
+
+[ext_resource type="Script" uid="uid://cy8ws2orc0f5" path="res://Objectives/building.gd" id="1_pw077"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl55f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3n4a"]
+size = Vector2(60, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1jpq"]
+size = Vector2(40, 40)
+
+[node name="Objective" type="StaticBody2D" unique_id=842312657]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_pw077")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1468209027]
+offset = Vector2(0, -73)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=124753214]
+shape = SubResource("RectangleShape2D_cl55f")
+
+[node name="Tooltip" type="PanelContainer" parent="." unique_id=794372981]
+visible = false
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = 20.0
+offset_right = 87.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Tooltip" unique_id=277008620]
+layout_mode = 2
+text = "Press E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=817146500]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1380336412]
+shape = SubResource("RectangleShape2D_u3n4a")
+
+[node name="BehindArea" type="Area2D" parent="." unique_id=465380390]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BehindArea" unique_id=2019860368]
+shape = SubResource("RectangleShape2D_d1jpq")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BehindArea" to="." method="_on_behind_area_body_entered"]
+[connection signal="body_exited" from="BehindArea" to="." method="_on_behind_area_body_exited"]

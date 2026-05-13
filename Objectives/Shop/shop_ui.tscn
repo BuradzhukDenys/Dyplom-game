@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://cdrrfpugvvnyy"]
+
+[ext_resource type="Script" uid="uid://c27cysd8yoroe" path="res://Objectives/Shop/shop_ui.gd" id="1_imdgr"]
+[ext_resource type="Texture2D" uid="uid://cmhxp5fvqan6w" path="res://Assets/Custom Border and Panels Menu All Part/Border All 1.png" id="2_1bgb5"]
+[ext_resource type="PackedScene" uid="uid://cvp7ju32o6nqr" path="res://Objectives/Shop/item_info.tscn" id="3_pyha1"]
+[ext_resource type="PackedScene" uid="uid://oq0xaksigvok" path="res://Objectives/Shop/item_container.tscn" id="3_tmtiu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tmtiu"]
+texture = ExtResource("2_1bgb5")
+region_rect = Rect2(256, 64, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bgb5"]
+bg_color = Color(0.9261619, 0, 0.4710933, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="InputEventKey" id="InputEventKey_pyha1"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_xi5vk"]
+events = [SubResource("InputEventKey_pyha1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_fi2cs"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_dvq3w"]
+events = [SubResource("InputEventKey_fi2cs")]
+
+[node name="ShopUI" type="CanvasLayer" unique_id=1795808343]
+process_mode = 3
+script = ExtResource("1_imdgr")
+item_container_scene = ExtResource("3_tmtiu")
+item_information_scene = ExtResource("3_pyha1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1827632675]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1077494941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UiBackground" type="PanelContainer" parent="CenterContainer" unique_id=98970997]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tmtiu")
+
+[node name="Items" type="MarginContainer" parent="CenterContainer/UiBackground" unique_id=890599298]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 190
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/UiBackground/Items" unique_id=220202255]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 5
+
+[node name="Intearctive" type="MarginContainer" parent="CenterContainer/UiBackground" unique_id=931753845]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 115
+theme_override_constants/margin_right = 115
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/UiBackground/Intearctive" unique_id=821958090]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer" unique_id=1595248711]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Refresh" type="Button" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer/Buttons" unique_id=2040130240]
+custom_minimum_size = Vector2(110, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bgb5")
+shortcut = SubResource("Shortcut_xi5vk")
+text = "Refresh
+R"
+
+[node name="Close" type="Button" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer/Buttons" unique_id=1159798453]
+custom_minimum_size = Vector2(110, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bgb5")
+shortcut = SubResource("Shortcut_dvq3w")
+text = "Close
+ESC"
+
+[node name="RefreshCostLabel" type="Label" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer" unique_id=1260126575]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "Refresh cost - 3 gold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer" unique_id=1205664017]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="PlayerGoldLabel" type="Label" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer/Control" unique_id=1058956356]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.99999946, 0.69562703, 0.09132051, 1)
+theme_override_font_sizes/font_size = 20
+text = "Gold: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/UiBackground/Intearctive/VBoxContainer/Buttons/Refresh" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="CenterContainer/UiBackground/Intearctive/VBoxContainer/Buttons/Close" to="." method="_on_close_pressed"]

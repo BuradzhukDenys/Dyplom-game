@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://d1lsin81qruet"]
+
+[ext_resource type="Script" uid="uid://c27cysd8yoroe" path="res://Objectives/Shop/shop_ui.gd" id="1_ek57v"]
+[ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="2_gomnv"]
+[ext_resource type="Texture2D" uid="uid://bqy1wt0q0alda" path="res://Assets/FrostMage_Free/FrostMage_Free/FrostMage_4.png" id="3_3tkcx"]
+
+[node name="SkillTree" type="CanvasLayer" unique_id=1795808343]
+script = ExtResource("1_ek57v")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1077494941]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Line2D" type="Line2D" parent="." unique_id=235664932]
+points = PackedVector2Array(297, 68, 232, 489, 1080, 438)
+width = 15.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=214038888]
+offset_left = 83.0
+offset_top = 397.0
+offset_right = 143.0
+offset_bottom = 457.0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1585928463]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("2_gomnv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1549547915]
+offset_left = 745.0
+offset_top = 160.0
+offset_right = 805.0
+offset_bottom = 220.0
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer2" unique_id=497856797]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("3_3tkcx")
+expand_mode = 1
+stretch_mode = 5
