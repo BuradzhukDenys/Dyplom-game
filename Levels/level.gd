@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var slime_scene: PackedScene
-@onready var enemies: Node2D = $Enemies
+@export var enemies: Node2D
 
 func _ready() -> void:
 	PlayerData.reset_data()

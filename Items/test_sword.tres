@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SwordData" format=3 uid="uid://batwcv5sihlvk"]
+
+[ext_resource type="Script" uid="uid://5mutwwf6aioh" path="res://Items/swords_resource.gd" id="1_l7qfd"]
+[ext_resource type="Texture2D" uid="uid://cbyuimp1h0uts" path="res://Assets/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_kaleh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vbl4"]
+atlas = ExtResource("2_kaleh")
+region = Rect2(96, 3008, 32, 32)
+
+[resource]
+script = ExtResource("1_l7qfd")
+damage = 200.0
+attack_interval = 0.001
+attack_range = 5000
+texture = SubResource("AtlasTexture_1vbl4")
+cost = 1
+item_name = "Test Sword"
+metadata/_custom_type_script = "uid://5mutwwf6aioh"

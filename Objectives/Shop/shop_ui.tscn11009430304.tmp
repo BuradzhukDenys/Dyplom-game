@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://cdrrfpugvvnyy"]
+
+[ext_resource type="Script" uid="uid://c27cysd8yoroe" path="res://Objectives/Shop/shop_ui.gd" id="1_imdgr"]
+[ext_resource type="Texture2D" uid="uid://cmhxp5fvqan6w" path="res://Assets/Custom Border and Panels Menu All Part/Border All 1.png" id="2_1bgb5"]
+[ext_resource type="PackedScene" uid="uid://oq0xaksigvok" path="res://Objectives/Shop/item_container.tscn" id="3_tmtiu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tmtiu"]
+texture = ExtResource("2_1bgb5")
+region_rect = Rect2(256, 64, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bgb5"]
+bg_color = Color(0.9261619, 0, 0.4710933, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ShopUI" type="CanvasLayer" unique_id=1795808343]
+script = ExtResource("1_imdgr")
+item_container_scene = ExtResource("3_tmtiu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1827632675]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1077494941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UiBackground" type="PanelContainer" parent="CenterContainer" unique_id=98970997]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tmtiu")
+
+[node name="Items" type="MarginContainer" parent="CenterContainer/UiBackground" unique_id=890599298]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 190
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/UiBackground/Items" unique_id=220202255]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 5
+
+[node name="Intearctive" type="MarginContainer" parent="CenterContainer/UiBackground" unique_id=931753845]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 115
+theme_override_constants/margin_right = 115
+theme_override_constants/margin_bottom = 70
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/UiBackground/Intearctive" unique_id=1595248711]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/UiBackground/Intearctive/Buttons" unique_id=2040130240]
+custom_minimum_size = Vector2(110, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bgb5")
+text = "refresh"
+
+[node name="Button3" type="Button" parent="CenterContainer/UiBackground/Intearctive/Buttons" unique_id=1159798453]
+custom_minimum_size = Vector2(110, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bgb5")
+text = "Close"
+
+[node name="Label" type="Label" parent="CenterContainer/UiBackground/Intearctive" unique_id=1260126575]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "Refresh cost - 3 gold"
+horizontal_alignment = 1
+vertical_alignment = 1

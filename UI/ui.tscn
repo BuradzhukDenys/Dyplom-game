@@ -1,33 +1,13 @@
 [gd_scene format=3 uid="uid://dr2s1fjyptjah"]
 
 [ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="1_2fwl4"]
-[ext_resource type="Script" uid="uid://ccnhcmptk87cc" path="res://UI/ui.gd" id="1_nm1m0"]
 [ext_resource type="Script" uid="uid://xth2fxddnml" path="res://UI/points.gd" id="2_dajm1"]
 [ext_resource type="Script" uid="uid://wi4jmxm3h3mh" path="res://UI/hp_mana_values.gd" id="2_e6gg6"]
 [ext_resource type="Texture2D" uid="uid://mj765hnpcr27" path="res://Assets/Custom Border and Panels Menu All Part/Border All 5.png" id="3_3sbvi"]
+[ext_resource type="PackedScene" uid="uid://bqhlgks5qkt3c" path="res://UI/skill_slot.tscn" id="4_6rr40"]
 [ext_resource type="Script" uid="uid://di6voiym35w3t" path="res://UI/poitions.gd" id="4_c7tqi"]
 [ext_resource type="Script" uid="uid://3qx2b2dmsk41" path="res://UI/skills.gd" id="4_h81ot"]
 [ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="4_nm1m0"]
-[ext_resource type="Texture2D" uid="uid://dc0d6gkuoaj3p" path="res://Assets/Custom Border and Panels Menu All Part/Ram Panels All.png" id="5_4fiuh"]
-[ext_resource type="Texture2D" uid="uid://dljhrxt6uy1to" path="res://Assets/FrostMage_Free/FrostMage_Free/FrostMage_10.png" id="6_h81ot"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6rr40"]
-texture = ExtResource("3_3sbvi")
-region_rect = Rect2(129, 321, 62, 62)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0w6e5"]
-texture = ExtResource("5_4fiuh")
-region_rect = Rect2(129, 321, 62, 62)
-
-[sub_resource type="Gradient" id="Gradient_3sbvi"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nm1m0"]
-gradient = SubResource("Gradient_3sbvi")
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5811966, 0.055555556)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7tqi"]
 texture = ExtResource("3_3sbvi")
@@ -44,6 +24,16 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="Gradient" id="Gradient_3sbvi"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nm1m0"]
+gradient = SubResource("Gradient_3sbvi")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5811966, 0.055555556)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fiuh"]
 atlas = ExtResource("3_3sbvi")
 region = Rect2(128, 128, 64, 64)
@@ -57,7 +47,6 @@ atlas = ExtResource("4_nm1m0")
 region = Rect2(211, 16, 10, 16)
 
 [node name="UI" type="CanvasLayer" unique_id=1403278747]
-script = ExtResource("1_nm1m0")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1961179591]
 anchors_preset = 15
@@ -71,6 +60,7 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="LeftSide" type="VBoxContainer" parent="MarginContainer" unique_id=617535113]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -106,7 +96,7 @@ theme_override_constants/separation = 12
 
 [node name="HPBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/HP" unique_id=770284638]
 self_modulate = Color(0, 0.8328853, 0, 1)
-custom_minimum_size = Vector2(150, 25)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 value = 100.0
 show_percentage = false
@@ -132,12 +122,12 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="Control" type="Control" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=930680261]
-custom_minimum_size = Vector2(150, 25)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="ManaBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control" unique_id=41527189]
 self_modulate = Color(0.8509804, 0.011764706, 0.90588236, 1)
-custom_minimum_size = Vector2(150, 25)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,9 +155,9 @@ text = "Mana"
 
 [node name="Skills" type="VBoxContainer" parent="MarginContainer/LeftSide" unique_id=766380225]
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("4_h81ot")
+skill_slot_scene = ExtResource("4_6rr40")
 
 [node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills" unique_id=1628861542]
 layout_mode = 2
@@ -175,238 +165,13 @@ text = "Skills"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LeftSide/Skills" unique_id=1046442673]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LeftSide/Skills" unique_id=1872333449]
 layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Skill1" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer" unique_id=1018895254]
-custom_minimum_size = Vector2(55, 55)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1" unique_id=500758504]
-clip_children = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0w6e5")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1/PanelContainer" unique_id=29332445]
-show_behind_parent = true
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-texture = ExtResource("6_h81ot")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1/PanelContainer" unique_id=298896528]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-
-[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1/PanelContainer/MarginContainer" unique_id=727851397]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "1"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1/PanelContainer" unique_id=123482521]
-layout_mode = 2
-value = 96.0
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_nm1m0")
-tint_progress = Color(1, 1, 1, 0.7058824)
-
-[node name="SecondsCooldown" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1/PanelContainer" unique_id=2043998688]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "10"
-
-[node name="CooldownTimer" type="Timer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill1" unique_id=178370739]
-one_shot = true
-
-[node name="Skill2" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer" unique_id=691286208]
-custom_minimum_size = Vector2(55, 55)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2" unique_id=1974046961]
-clip_children = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0w6e5")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2/PanelContainer" unique_id=712441797]
-show_behind_parent = true
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-texture = ExtResource("1_2fwl4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2/PanelContainer" unique_id=683568258]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-
-[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2/PanelContainer/MarginContainer" unique_id=1931880463]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "2"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2/PanelContainer" unique_id=1873853459]
-layout_mode = 2
-value = 62.0
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_nm1m0")
-tint_progress = Color(1, 1, 1, 0.7058824)
-
-[node name="SecondsCooldown" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2/PanelContainer" unique_id=1817144454]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "10"
-
-[node name="CooldownTimer" type="Timer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill2" unique_id=1281383797]
-one_shot = true
-
-[node name="Skill3" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer" unique_id=1524969603]
-custom_minimum_size = Vector2(55, 55)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3" unique_id=1589763878]
-clip_children = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0w6e5")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3/PanelContainer" unique_id=483342481]
-show_behind_parent = true
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-texture = ExtResource("1_2fwl4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3/PanelContainer" unique_id=496517986]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-
-[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3/PanelContainer/MarginContainer" unique_id=374527334]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "3"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3/PanelContainer" unique_id=105952186]
-layout_mode = 2
-value = 62.0
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_nm1m0")
-tint_progress = Color(1, 1, 1, 0.7058824)
-
-[node name="SecondsCooldown" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3/PanelContainer" unique_id=945111239]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "10"
-
-[node name="CooldownTimer" type="Timer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill3" unique_id=821055491]
-one_shot = true
-
-[node name="Skill4" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer" unique_id=513335300]
-custom_minimum_size = Vector2(55, 55)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4" unique_id=1477075909]
-clip_children = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0w6e5")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4/PanelContainer" unique_id=105472306]
-show_behind_parent = true
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-texture = ExtResource("1_2fwl4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4/PanelContainer" unique_id=993359153]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-
-[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4/PanelContainer/MarginContainer" unique_id=305841219]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "4"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4/PanelContainer" unique_id=923923179]
-layout_mode = 2
-value = 62.0
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_nm1m0")
-tint_progress = Color(1, 1, 1, 0.7058824)
-
-[node name="SecondsCooldown" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4/PanelContainer" unique_id=193494159]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "10"
-
-[node name="CooldownTimer" type="Timer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill4" unique_id=1298653807]
-one_shot = true
-
-[node name="Skill5" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer" unique_id=1624873961]
-custom_minimum_size = Vector2(55, 55)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5" unique_id=263759204]
-clip_children = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0w6e5")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5/PanelContainer" unique_id=1707620935]
-show_behind_parent = true
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-texture = ExtResource("1_2fwl4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5/PanelContainer" unique_id=1361962106]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 5
-
-[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5/PanelContainer/MarginContainer" unique_id=1964863815]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "5"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5/PanelContainer" unique_id=1176314819]
-layout_mode = 2
-value = 62.0
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_nm1m0")
-tint_progress = Color(1, 1, 1, 0.7058824)
-
-[node name="SecondsCooldown" type="Label" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5/PanelContainer" unique_id=1165559069]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "10"
-
-[node name="CooldownTimer" type="Timer" parent="MarginContainer/LeftSide/Skills/HBoxContainer/Skill5" unique_id=1798896123]
-one_shot = true
+alignment = 1
 
 [node name="Poitions" type="HBoxContainer" parent="MarginContainer/LeftSide" unique_id=2073007466]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 12
 script = ExtResource("4_c7tqi")
@@ -528,7 +293,7 @@ size_flags_vertical = 0
 theme_override_constants/separation = 15
 
 [node name="Points" type="VBoxContainer" parent="MarginContainer/RightSide" unique_id=363186716]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 6
@@ -545,7 +310,8 @@ text = "Gold: 0"
 
 [node name="Buttons" type="VBoxContainer" parent="MarginContainer/RightSide" unique_id=2118896313]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 10
 
 [node name="CheckStats" type="PanelContainer" parent="MarginContainer/RightSide/Buttons" unique_id=937107361]

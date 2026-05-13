@@ -873,7 +873,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3002"]
 radius = 13.0
-height = 50.0
+height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_twwou"]
 radius = 7.0
@@ -941,9 +941,9 @@ gravity = Vector3(0, -70, 0)
 scale_curve = SubResource("CurveTexture_veuuo")
 color_ramp = SubResource("GradientTexture1D_1l6l2")
 
-[node name="Character" type="CharacterBody2D" unique_id=1651891733]
+[node name="Character" type="CharacterBody2D" unique_id=1651891733 groups=["Character"]]
 collision_layer = 2048
-collision_mask = 512
+collision_mask = 768
 motion_mode = 1
 script = ExtResource("1_jkkns")
 metadata/_edit_vertical_guides_ = [-576.0]
@@ -954,16 +954,16 @@ scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_k3002")
 animation = &"AttackRight"
 autoplay = "IdleDown"
+offset = Vector2(0, -6.515)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1516558692]
-position = Vector2(0, 31)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_k3002")
 
 [node name="HitboxHurtboxComponent" parent="." unique_id=1559901478 instance=ExtResource("1_k3002")]
 
 [node name="Hitbox" parent="HitboxHurtboxComponent" index="0" unique_id=549158713]
-position = Vector2(0, 32)
+position = Vector2(0, -26)
 collision_layer = 4
 collision_mask = 32
 
@@ -972,7 +972,7 @@ collision_layer = 8
 hp_component = NodePath("../../PlayerHPManaComponent")
 
 [node name="CollisionShape2D" parent="HitboxHurtboxComponent/Hurtbox" index="0" unique_id=1027653867]
-position = Vector2(0, 10)
+position = Vector2(0, -21)
 shape = SubResource("CapsuleShape2D_twwou")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1225629116]
@@ -1000,6 +1000,7 @@ libraries/ = SubResource("AnimationLibrary_1l6l2")
 [node name="ParticleManager" type="Node2D" parent="." unique_id=393308327]
 
 [node name="HealParticles" type="GPUParticles2D" parent="ParticleManager" unique_id=656687446]
+position = Vector2(0, -26)
 emitting = false
 amount = 12
 texture = ExtResource("5_a23tb")
@@ -1011,6 +1012,7 @@ fixed_fps = 0
 process_material = SubResource("ParticleProcessMaterial_twwou")
 
 [node name="ManaParticles" type="GPUParticles2D" parent="ParticleManager" unique_id=1498122924]
+position = Vector2(0, -26)
 emitting = false
 amount = 12
 texture = ExtResource("6_uerqc")

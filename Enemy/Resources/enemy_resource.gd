@@ -7,3 +7,4 @@ class_name EnemyResource
 @export var gold_gain: int
 @export var knockback_strength: float
 @export var knockback_friction: float
+@export var health: float

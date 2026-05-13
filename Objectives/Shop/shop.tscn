@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c4t1llsx3riqq"]
+
+[ext_resource type="Script" uid="uid://bxa3nw6mbg3k5" path="res://Objectives/Shop/shop.gd" id="1_cl55f"]
+[ext_resource type="PackedScene" uid="uid://bn7nbsgnck1vb" path="res://Objectives/objective.tscn" id="1_r5evm"]
+[ext_resource type="Texture2D" uid="uid://bufqtasf3wrnf" path="res://Assets/Objectives/Shop.png" id="2_g55c7"]
+[ext_resource type="PackedScene" uid="uid://cdrrfpugvvnyy" path="res://Objectives/Shop/shop_ui.tscn" id="3_ksff2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g55c7"]
+size = Vector2(177, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gut6c"]
+size = Vector2(324, 290)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksff2"]
+size = Vector2(216, 141)
+
+[node name="Shop" unique_id=842312657 instance=ExtResource("1_r5evm")]
+script = ExtResource("1_cl55f")
+objective_interface_scene = ExtResource("3_ksff2")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1468209027]
+texture = ExtResource("2_g55c7")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=124753214]
+position = Vector2(-6.5, -58)
+shape = SubResource("RectangleShape2D_g55c7")
+
+[node name="Tooltip" parent="." index="2" unique_id=794372981]
+custom_minimum_size = Vector2(185, 23)
+
+[node name="InteractionArea" parent="." index="3" unique_id=817146500]
+position = Vector2(0, -71)
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0" unique_id=1380336412]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_gut6c")
+
+[node name="BehindArea" parent="." index="4" unique_id=465380390]
+position = Vector2(0, -71)
+
+[node name="CollisionShape2D" parent="BehindArea" index="0" unique_id=2019860368]
+position = Vector2(-7, -56.5)
+shape = SubResource("RectangleShape2D_ksff2")
