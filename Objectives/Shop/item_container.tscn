@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://oq0xaksigvok"]
+
+[ext_resource type="Texture2D" uid="uid://bw0sht0w8y85s" path="res://Assets/Custom Border and Panels Menu All Part/Border All 6.png" id="1_vpnvf"]
+[ext_resource type="Script" uid="uid://dbjlx2kucr385" path="res://Objectives/Shop/item_container.gd" id="2_1gklp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_afa23"]
+texture = ExtResource("1_vpnvf")
+region_rect = Rect2(321, 129, 62, 62)
+
+[node name="ItemContainer" type="PanelContainer" unique_id=54846229]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 42.0
+offset_bottom = 45.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_afa23")
+script = ExtResource("2_1gklp")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1982414450]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ItemTexture" type="TextureRect" parent="MarginContainer" unique_id=2048897222]
+layout_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

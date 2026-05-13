@@ -85,11 +85,13 @@ theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 90
 
 [node name="ExitButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=1025506477]
+texture_filter = 1
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
+theme = ExtResource("3_ymabl")
 theme_override_styles/normal = SubResource("StyleBoxTexture_uyw5h")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_pp08d")
 theme_override_styles/hover = SubResource("StyleBoxTexture_22ryi")
@@ -99,11 +101,13 @@ shortcut = SubResource("Shortcut_ijs52")
 metadata/ignore_disable = true
 
 [node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=2142209756]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme = ExtResource("3_ymabl")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 45
 text = "Options"
 
 [node name="MarginContainer" type="MarginContainer" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=1838870822]
@@ -132,7 +136,9 @@ alignment = 2
 layout_mode = 2
 
 [node name="SoundLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Sound" unique_id=278761112]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 21
 text = "Sound"
 horizontal_alignment = 1
@@ -149,7 +155,9 @@ rounded = true
 layout_mode = 2
 
 [node name="MusicLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Music" unique_id=1339214142]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 21
 text = "Music"
 horizontal_alignment = 1
@@ -167,7 +175,9 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="SFXLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/SFX" unique_id=1099053285]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 21
 text = "SFX"
 horizontal_alignment = 1
@@ -204,6 +214,7 @@ theme_override_constants/separation = 15
 alignment = 2
 
 [node name="FullScreen" type="CheckBox" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer" unique_id=1259414048]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("3_ymabl")
@@ -212,6 +223,7 @@ text = "Fullscreen"
 alignment = 2
 
 [node name="Resolution*" type="OptionButton" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer" unique_id=1775886772]
+texture_filter = 1
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -235,18 +247,21 @@ size_flags_vertical = 8
 theme_override_constants/separation = 15
 
 [node name="ChangeKeybinds" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1393674571]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
 text = "Change keybinds"
 
 [node name="ResetSettings" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1351697031]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
 text = "Reset settings"
 
 [node name="ResetProgress" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1366779204]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
 theme_override_font_sizes/font_size = 22
@@ -270,13 +285,18 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Message" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/VBoxContainer" unique_id=577432904]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
+theme_override_font_sizes/font_size = 30
 text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResetKeybinds" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/VBoxContainer" unique_id=136855232]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Reset keybinds"
 
 [node name="InventoryKeys" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions" unique_id=370048507]
@@ -290,18 +310,24 @@ offset_bottom = 46.5
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=600920804]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealingButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=1748087126]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Drink healing potion - F"
 flat = true
 
 [node name="ManaButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=399521200]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Drink mana potion - Q"
 flat = true
 
@@ -319,18 +345,24 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1790181886]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PauseButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1413066281]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Pause - ESC"
 flat = true
 
 [node name="ShootButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1313284639]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_ymabl")
 text = "Shoot - LMB"
 flat = true
 

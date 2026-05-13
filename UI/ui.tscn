@@ -1,0 +1,338 @@
+[gd_scene format=3 uid="uid://dr2s1fjyptjah"]
+
+[ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="1_2fwl4"]
+[ext_resource type="Script" uid="uid://xth2fxddnml" path="res://UI/points.gd" id="2_dajm1"]
+[ext_resource type="Script" uid="uid://wi4jmxm3h3mh" path="res://UI/hp_mana_values.gd" id="2_e6gg6"]
+[ext_resource type="Texture2D" uid="uid://mj765hnpcr27" path="res://Assets/Custom Border and Panels Menu All Part/Border All 5.png" id="3_3sbvi"]
+[ext_resource type="PackedScene" uid="uid://bqhlgks5qkt3c" path="res://UI/skill_slot.tscn" id="4_6rr40"]
+[ext_resource type="Script" uid="uid://di6voiym35w3t" path="res://UI/poitions.gd" id="4_c7tqi"]
+[ext_resource type="Script" uid="uid://3qx2b2dmsk41" path="res://UI/skills.gd" id="4_h81ot"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="4_nm1m0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7tqi"]
+texture = ExtResource("3_3sbvi")
+region_rect = Rect2(65, 129, 62, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbfhl"]
+atlas = ExtResource("4_nm1m0")
+region = Rect2(131, 16, 10, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7tqi"]
+bg_color = Color(0.88409525, 9.048581e-06, 0.57132274, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="Gradient" id="Gradient_3sbvi"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nm1m0"]
+gradient = SubResource("Gradient_3sbvi")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5811966, 0.055555556)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fiuh"]
+atlas = ExtResource("3_3sbvi")
+region = Rect2(128, 128, 64, 64)
+filter_clip = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h81ot"]
+texture = SubResource("AtlasTexture_4fiuh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7tqi"]
+atlas = ExtResource("4_nm1m0")
+region = Rect2(211, 16, 10, 16)
+
+[node name="UI" type="CanvasLayer" unique_id=1403278747]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1961179591]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="LeftSide" type="VBoxContainer" parent="MarginContainer" unique_id=617535113]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Info" type="HBoxContainer" parent="MarginContainer/LeftSide" unique_id=1135864149]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="WeaponBox" type="PanelContainer" parent="MarginContainer/LeftSide/Info" unique_id=1432436351]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Info/WeaponBox" unique_id=1175874951]
+layout_mode = 2
+texture = ExtResource("1_2fwl4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HPMana" type="VBoxContainer" parent="MarginContainer/LeftSide/Info" unique_id=212833778]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+script = ExtResource("2_e6gg6")
+
+[node name="HP" type="HBoxContainer" parent="MarginContainer/LeftSide/Info/HPMana" unique_id=900546598]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="HPBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/HP" unique_id=770284638]
+self_modulate = Color(0, 0.8328853, 0, 1)
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="HealthValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/HP/HPBar" unique_id=1022016254]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/HP" unique_id=816393046]
+layout_mode = 2
+text = "Health"
+
+[node name="Mana" type="HBoxContainer" parent="MarginContainer/LeftSide/Info/HPMana" unique_id=783786869]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=930680261]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ManaBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control" unique_id=41527189]
+self_modulate = Color(0.8509804, 0.011764706, 0.90588236, 1)
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+value = 100.0
+show_percentage = false
+
+[node name="ManaValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar" unique_id=269764382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=1115055715]
+layout_mode = 2
+text = "Mana"
+
+[node name="Skills" type="VBoxContainer" parent="MarginContainer/LeftSide" unique_id=766380225]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("4_h81ot")
+skill_slot_scene = ExtResource("4_6rr40")
+
+[node name="Label" type="Label" parent="MarginContainer/LeftSide/Skills" unique_id=1628861542]
+layout_mode = 2
+text = "Skills"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LeftSide/Skills" unique_id=1872333449]
+layout_mode = 2
+alignment = 1
+
+[node name="Poitions" type="HBoxContainer" parent="MarginContainer/LeftSide" unique_id=2073007466]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+script = ExtResource("4_c7tqi")
+
+[node name="HealingPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Poitions" unique_id=765840649]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Poitions/HealingPotion" unique_id=547111313]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control" unique_id=565652275]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_c7tqi")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer" unique_id=1655092978]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_cbfhl")
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer" unique_id=1116339359]
+clip_children = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7tqi")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer/PanelContainer" unique_id=785009236]
+layout_mode = 2
+value = 62.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_nm1m0")
+tint_progress = Color(1, 1, 1, 0.7058824)
+
+[node name="HealingPotionLabel" type="Label" parent="MarginContainer/LeftSide/Poitions/HealingPotion" unique_id=1986043693]
+layout_mode = 2
+text = "Healing
+Potion
+F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Poitions" unique_id=280367335]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Poitions/ManaPotion" unique_id=1992130230]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control" unique_id=790780649]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_h81ot")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer" unique_id=417970428]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_c7tqi")
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer" unique_id=1046901399]
+clip_children = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7tqi")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer/PanelContainer" unique_id=293045935]
+layout_mode = 2
+value = 78.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_nm1m0")
+tint_progress = Color(1, 1, 1, 0.7058824)
+
+[node name="ManaPotionLabel" type="Label" parent="MarginContainer/LeftSide/Poitions/ManaPotion" unique_id=93248519]
+layout_mode = 2
+text = "Mana
+Potion
+Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightSide" type="VBoxContainer" parent="MarginContainer" unique_id=1062973043]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Points" type="VBoxContainer" parent="MarginContainer/RightSide" unique_id=363186716]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 6
+script = ExtResource("2_dajm1")
+
+[node name="EXPLabel" type="Label" parent="MarginContainer/RightSide/Points" unique_id=444400241]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "EXP: 0"
+
+[node name="GoldLabel" type="Label" parent="MarginContainer/RightSide/Points" unique_id=635051005]
+layout_mode = 2
+text = "Gold: 0"
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/RightSide" unique_id=2118896313]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="CheckStats" type="PanelContainer" parent="MarginContainer/RightSide/Buttons" unique_id=937107361]
+custom_minimum_size = Vector2(65, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/RightSide/Buttons/CheckStats" unique_id=1973444876]
+layout_mode = 2
+text = "Check
+Stats
+X"
+
+[node name="CheckItems" type="PanelContainer" parent="MarginContainer/RightSide/Buttons" unique_id=954462256]
+custom_minimum_size = Vector2(65, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/RightSide/Buttons/CheckItems" unique_id=1761732613]
+layout_mode = 2
+text = "Check
+Items
+Z"
+
+[connection signal="healing_potion_cooldown_finished" from="MarginContainer/LeftSide/Poitions" to="MarginContainer/LeftSide/Poitions" method="_on_healing_potion_cooldown_finished"]
+[connection signal="mana_potion_cooldown_finished" from="MarginContainer/LeftSide/Poitions" to="MarginContainer/LeftSide/Poitions" method="_on_mana_potion_cooldown_finished"]

@@ -1,5 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://eogs1xs75p0y"]
 
+[ext_resource type="FontFile" uid="uid://byfklvj77fri3" path="res://Assets/Fonts/blockblueprint/BlockBlueprint.ttf" id="1_7x0ve"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5w38"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -49,10 +51,12 @@ corner_detail = 5
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/fonts/font = ExtResource("1_7x0ve")
 Button/styles/disabled = SubResource("StyleBoxFlat_r5w38")
 CheckBox/icons/checked_disabled = SubResource("DPITexture_r5w38")
 CheckBox/icons/radio_checked_disabled = SubResource("DPITexture_7x0ve")
 CheckBox/icons/radio_unchecked_disabled = SubResource("DPITexture_wbxxr")
 CheckBox/icons/unchecked_disabled = SubResource("DPITexture_7gh5x")
 CheckBox/styles/disabled = SubResource("StyleBoxEmpty_r5w38")
+Label/fonts/font = ExtResource("1_7x0ve")
 OptionButton/styles/disabled = SubResource("StyleBoxFlat_7x0ve")
