@@ -1,13 +1,5 @@
 extends PanelContainer
 
-#TODO:
-#1. Це слот, він повинен зберігати в собі скілл
-#2. Спочатку слот повинен бути пустим
-#3. Коли вивчаю новий скілл, повинна передаватись інформація, якщо слот пустий
-#4. Коли скіл скастували, потрібно зробити його неактивним
-#5. запустити кулдаун
-#6. Коли кулдаун закінчився, потрібно повідомити про це
-
 @onready var skill_icon: TextureRect = $PanelContainer/TextureRect
 @onready var skill_cooldown: TextureProgressBar = $PanelContainer/TextureProgressBar
 @onready var skill_cooldown_label: Label = $PanelContainer/SecondsCooldown
@@ -50,8 +42,8 @@ func setup_slot(skill_resource: SkillResource) -> void:
 	skill_cooldown_timer.wait_time = skill_data.cooldown
 	SkillsManager.skills[slot_position] = skill_resource
 	
-func _on_skill_casted(skill_resource: SkillResource) -> void:
-	if skill_resource != skill_data:
+func _on_skill_casted(casted_slot: int, cooldown_time) -> void:
+	if casted_slot != slot_position:
 		return
 	
 	skill_cooldown.value = skill_cooldown.max_value
@@ -60,10 +52,9 @@ func _on_skill_casted(skill_resource: SkillResource) -> void:
 	if current_tween and current_tween.is_valid():
 		current_tween.kill()
 		
-	skill_cooldown_timer.start(skill_data.cooldown)
+	skill_cooldown_timer.start(cooldown_time)
 	current_tween = create_tween()
-	current_tween.tween_property(skill_cooldown, "value", skill_cooldown.min_value, skill_data.cooldown)
+	current_tween.tween_property(skill_cooldown, "value", skill_cooldown.min_value, cooldown_time)
 
 func _on_cooldown_timer_timeout() -> void:
-	SkillsManager.set_skill_cooldown_at_pos(slot_position, false)
 	skill_cooldown_label.visible = false

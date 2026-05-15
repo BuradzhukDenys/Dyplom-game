@@ -2,7 +2,7 @@ extends Node
 
 const ICE_HAMMER: SkillResource = preload("res://Skills/SkillsResources/ice_hammer.tres")
 
-var skills: Dictionary = {
+var skills: Dictionary[int, SkillResource] = {
 	1: null,
 	2: null,
 	3: null,
@@ -10,14 +10,14 @@ var skills: Dictionary = {
 	5: null
 }
 
-func skill_in_cooldown_at_pos(pos: int) -> bool:
-	if skills[pos] != null:
-		return skills[pos].in_cooldown
-	return false
+var next_cast_times: Dictionary = {1: 0.0, 2: 0.0, 3: 0.0}
 
-func get_skill_data_at_pos(pos: int) -> SkillResource:
-	return skills[pos]
+func is_skill_ready(pos: int) -> bool:
+	if skills[pos] == null: return false
+	
+	return Time.get_ticks_msec() >= next_cast_times[pos]
 
-func set_skill_cooldown_at_pos(pos: int, value: bool) -> void:
-	if skills[pos] != null:
-		skills[pos].in_cooldown = value
+func put_skill_on_cooldown(pos: int) -> void:
+	var skill: SkillResource = skills[pos]
+	if skill:
+		next_cast_times[pos] = Time.get_ticks_msec() + (skill.cooldown * 1000.0)

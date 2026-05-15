@@ -24,8 +24,8 @@ func open_menu() -> void:
 		
 	current_tween = create_tween()
 	current_tween.tween_property(options_menu, "global_position", Vector2(0, 0), 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	current_tween.tween_callback(switch_buttons_disable.bind(options_buttons, false))
 	await current_tween.finished
+	switch_buttons_disable(options_buttons, false)
 	animation_ended.emit()
 
 func switch_buttons_disable(container: Node, disable: bool) -> void:

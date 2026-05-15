@@ -47,6 +47,6 @@ func _on_no_mana() -> void:
 		
 	no_mana_tween = create_tween()
 	no_mana_tween.tween_property(mana_bar, "modulate", Color.WHITE, 0.1)
-	no_mana_tween.parallel().tween_property(mana_bar, "rotation", deg_to_rad(-4), 0.1)
-	no_mana_tween.tween_property(mana_bar, "rotation", deg_to_rad(4), 0.1)
-	no_mana_tween.tween_property(mana_bar, "rotation", deg_to_rad(0), 0.1)
+	no_mana_tween.parallel().tween_property(mana_bar, "rotation_degrees", -4, 0.1)
+	no_mana_tween.tween_property(mana_bar, "rotation", 4, 0.1)
+	no_mana_tween.tween_property(mana_bar, "rotation", 0, 0.1)

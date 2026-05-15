@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @export var skill_slot_scene: PackedScene
 @onready var skills_container: HBoxContainer = $HBoxContainer
-var max_skills_count: int = PlayerData.skills_slots_count
+var max_skills_count: int = GameData.skills_slots_count
 
 func _ready() -> void:
 	for i in max_skills_count:

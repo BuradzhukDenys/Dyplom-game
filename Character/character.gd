@@ -17,6 +17,8 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 @export var damage: int = 10
 
+var can_drink_healing_potion: bool = true
+var can_drink_mana_potion: bool = true
 const SPEED_WHEN_ATTACK: float = 0.5
 const SPEED_TAKE_DAMAGE_SLOWNESS: float = 0.8
 var last_direction: Vector2 = Vector2.DOWN
@@ -41,22 +43,24 @@ enum States
 var current_state: States = States.IDLE
 #endregion
 
+func _ready() -> void:
+	EventBus.healing_potion_cooldown_finished.connect(func(): can_drink_healing_potion = true)
+	EventBus.mana_potion_cooldown_finished.connect(func(): can_drink_mana_potion = true)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack and current_state in [States.IDLE, States.MOVE]:
 		switch_state(States.ATTACK)
 	if not PlayerData.player_dead:
-		if event.is_action_pressed("drink_healing_potion") and PlayerData.can_drink_healing_potion and hp_mana_component.health < PlayerData.MAX_HEALTH:
-			PlayerData.can_drink_healing_potion = false
+		if event.is_action_pressed("drink_healing_potion") and can_drink_healing_potion and hp_mana_component.health < PlayerData.MAX_HEALTH:
+			can_drink_healing_potion = false
 			hp_mana_component.heal(PlayerData.healing_potion_heal)
 			EventBus.healing_potion_drank.emit()
-		if event.is_action_pressed("drink_mana_potion") and PlayerData.can_drink_mana_potion and hp_mana_component.mana < PlayerData.MAX_MANA:
-			PlayerData.can_drink_mana_potion = false
+		if event.is_action_pressed("drink_mana_potion") and can_drink_mana_potion and hp_mana_component.mana < PlayerData.MAX_MANA:
+			can_drink_mana_potion = false
 			hp_mana_component.restore_mana(int(PlayerData.mana_potion_heal))
 			EventBus.mana_potion_drank.emit()
-		if event.is_action_pressed("ui_accept"):
-			if not SkillsManager.skill_in_cooldown_at_pos(1) and SkillsManager.get_skill_data_at_pos(1):
-				#SkillsManager.set_skill_cooldown_at_pos(1, true)
-				cast_skill(SkillsManager.get_skill_data_at_pos(1))
+		if event.is_action_pressed("skill1"):
+			try_cast_skill_at_slot(1)
 
 func _physics_process(_delta: float) -> void:
 	process_state(_delta)
@@ -150,17 +154,22 @@ func attack_take_damage_change() -> void:
 	else:
 		switch_state(States.IDLE)
 
-func cast_skill(skill_resource: SkillResource) -> void:
-	if hp_mana_component.mana < skill_resource.mana_cost or hp_mana_component.mana <= 0:
+func try_cast_skill_at_slot(slot: int) -> void:
+	if not SkillsManager.is_skill_ready(slot): return
+	
+	var skill_data: SkillResource = SkillsManager.skills[slot]
+	if hp_mana_component.mana < skill_data.mana_cost or hp_mana_component.mana <= 0:
 		EventBus.no_mana.emit()
 		return
 		
-	var skill: Area2D = skill_resource.scene.instantiate()
-	skill.set_direction(last_direction)
-	add_child(skill)
-	hp_mana_component.spend_mana(skill_resource.mana_cost)
-	skill.area_entered.connect(_on_hitbox_area_entered.bind(skill_resource.damage))
-	EventBus.skill_casted.emit(skill_resource)
+	hp_mana_component.spend_mana(skill_data.mana_cost)
+	SkillsManager.put_skill_on_cooldown(slot)
+	EventBus.skill_casted.emit(slot, skill_data.cooldown)
+	
+	var skill: Area2D = skill_data.scene.instantiate()
+	skill.setup(last_direction, skill_data.damage)
+	get_tree().current_scene.add_child(skill)
+	skill.global_position = global_position
 
 func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_CHANGED_TYPE) -> void:
 	EventBus.player_health_changed.emit(new_value)
@@ -193,9 +202,9 @@ func _on_take_damage_timer_timeout() -> void:
 func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true
 
-func _on_hitbox_area_entered(area: Area2D, damage_value: float = damage) -> void:
+func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_hurtbox"):
-		area.get_hp_component().take_damage(damage_value)
+		area.get_hp_component().take_damage(damage)
 
 func _on_player_hp_mana_component_mana_changed(new_value: int, type: PlayerHPManaComponent.MANA_CHANGED_TYPE) -> void:
 	EventBus.player_mana_changed.emit(new_value)

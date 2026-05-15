@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://dr2s1fjyptjah"]
 
-[ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="1_2fwl4"]
+[ext_resource type="Script" uid="uid://c8pxn05b03w32" path="res://UI/weapon_box.gd" id="1_4fiuh"]
+[ext_resource type="Texture2D" uid="uid://cwpprjimvik0h" path="res://Assets/Custom Border and Panels Menu All Part/Border All 13.png" id="1_h81ot"]
 [ext_resource type="Script" uid="uid://xth2fxddnml" path="res://UI/points.gd" id="2_dajm1"]
 [ext_resource type="Script" uid="uid://wi4jmxm3h3mh" path="res://UI/hp_mana_values.gd" id="2_e6gg6"]
 [ext_resource type="Texture2D" uid="uid://mj765hnpcr27" path="res://Assets/Custom Border and Panels Menu All Part/Border All 5.png" id="3_3sbvi"]
 [ext_resource type="PackedScene" uid="uid://bqhlgks5qkt3c" path="res://UI/skill_slot.tscn" id="4_6rr40"]
-[ext_resource type="Script" uid="uid://di6voiym35w3t" path="res://UI/poitions.gd" id="4_c7tqi"]
+[ext_resource type="Script" uid="uid://di6voiym35w3t" path="res://UI/potions.gd" id="4_c7tqi"]
 [ext_resource type="Script" uid="uid://3qx2b2dmsk41" path="res://UI/skills.gd" id="4_h81ot"]
 [ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="4_nm1m0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6rr40"]
+texture = ExtResource("1_h81ot")
+region_rect = Rect2(129, 257, 62, 62)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7tqi"]
 texture = ExtResource("3_3sbvi")
@@ -75,12 +80,20 @@ custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
+script = ExtResource("1_4fiuh")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Info/WeaponBox" unique_id=1175874951]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Info/WeaponBox" unique_id=1761359532]
 layout_mode = 2
-texture = ExtResource("1_2fwl4")
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Info/WeaponBox/MarginContainer" unique_id=1175874951]
+layout_mode = 2
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="HPMana" type="VBoxContainer" parent="MarginContainer/LeftSide/Info" unique_id=212833778]
 layout_mode = 2
@@ -169,24 +182,24 @@ vertical_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Poitions" type="HBoxContainer" parent="MarginContainer/LeftSide" unique_id=2073007466]
+[node name="Potions" type="HBoxContainer" parent="MarginContainer/LeftSide" unique_id=2073007466]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 12
 script = ExtResource("4_c7tqi")
 
-[node name="HealingPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Poitions" unique_id=765840649]
+[node name="HealingPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Potions" unique_id=765840649]
 custom_minimum_size = Vector2(65, 65)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MarginContainer/LeftSide/Poitions/HealingPotion" unique_id=547111313]
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Potions/HealingPotion" unique_id=547111313]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control" unique_id=565652275]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Potions/HealingPotion/Control" unique_id=565652275]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 15
@@ -199,7 +212,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_c7tqi")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer" unique_id=1655092978]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Potions/HealingPotion/Control/PanelContainer" unique_id=1655092978]
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -207,7 +220,7 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_cbfhl")
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer" unique_id=1116339359]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Potions/HealingPotion/Control/PanelContainer" unique_id=1116339359]
 clip_children = 1
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -215,7 +228,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_c7tqi")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Poitions/HealingPotion/Control/PanelContainer/PanelContainer" unique_id=785009236]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Potions/HealingPotion/Control/PanelContainer/PanelContainer" unique_id=785009236]
 layout_mode = 2
 value = 62.0
 fill_mode = 5
@@ -223,7 +236,7 @@ nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_nm1m0")
 tint_progress = Color(1, 1, 1, 0.7058824)
 
-[node name="HealingPotionLabel" type="Label" parent="MarginContainer/LeftSide/Poitions/HealingPotion" unique_id=1986043693]
+[node name="HealingPotionLabel" type="Label" parent="MarginContainer/LeftSide/Potions/HealingPotion" unique_id=1986043693]
 layout_mode = 2
 text = "Healing
 Potion
@@ -231,17 +244,17 @@ F"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ManaPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Poitions" unique_id=280367335]
+[node name="ManaPotion" type="VBoxContainer" parent="MarginContainer/LeftSide/Potions" unique_id=280367335]
 custom_minimum_size = Vector2(65, 65)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MarginContainer/LeftSide/Poitions/ManaPotion" unique_id=1992130230]
+[node name="Control" type="Control" parent="MarginContainer/LeftSide/Potions/ManaPotion" unique_id=1992130230]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control" unique_id=790780649]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Potions/ManaPotion/Control" unique_id=790780649]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 15
@@ -254,7 +267,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_h81ot")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer" unique_id=417970428]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LeftSide/Potions/ManaPotion/Control/PanelContainer" unique_id=417970428]
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -262,7 +275,7 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_c7tqi")
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer" unique_id=1046901399]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/LeftSide/Potions/ManaPotion/Control/PanelContainer" unique_id=1046901399]
 clip_children = 1
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -270,7 +283,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_c7tqi")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Poitions/ManaPotion/Control/PanelContainer/PanelContainer" unique_id=293045935]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/LeftSide/Potions/ManaPotion/Control/PanelContainer/PanelContainer" unique_id=293045935]
 layout_mode = 2
 value = 78.0
 fill_mode = 5
@@ -278,7 +291,7 @@ nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_nm1m0")
 tint_progress = Color(1, 1, 1, 0.7058824)
 
-[node name="ManaPotionLabel" type="Label" parent="MarginContainer/LeftSide/Poitions/ManaPotion" unique_id=93248519]
+[node name="ManaPotionLabel" type="Label" parent="MarginContainer/LeftSide/Potions/ManaPotion" unique_id=93248519]
 layout_mode = 2
 text = "Mana
 Potion
@@ -333,6 +346,3 @@ layout_mode = 2
 text = "Check
 Items
 Z"
-
-[connection signal="healing_potion_cooldown_finished" from="MarginContainer/LeftSide/Poitions" to="MarginContainer/LeftSide/Poitions" method="_on_healing_potion_cooldown_finished"]
-[connection signal="mana_potion_cooldown_finished" from="MarginContainer/LeftSide/Poitions" to="MarginContainer/LeftSide/Poitions" method="_on_mana_potion_cooldown_finished"]

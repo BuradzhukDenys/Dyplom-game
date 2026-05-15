@@ -6,14 +6,12 @@ const MAX_GOLD: int = 999999
 const MAX_EXPIRIENCE: int = 999999
 const PLAYER_RADIUS_SPAWN_ENEMIES: float = 730.0
 
-var current_weapon: SwordData = ItemsManager.get_item(ItemsManager.ItemsType.TEST_SWORD)
+var current_weapon: SwordData = ItemsManager.items[ItemsManager.ItemsType.BASE_SWORD]
 var passive_items: Array[ItemData] = []
 var skills: Array[SkillResource] = []
 
 var player_dead: bool = false
 var player_position: Vector2 = Vector2.ZERO
-
-var skills_slots_count: int = 2
 
 var experience: int = 0
 var gold: int = 99999990
@@ -24,16 +22,11 @@ var current_mana: float = MAX_MANA
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
 
-var can_drink_healing_potion: bool = true
-var can_drink_mana_potion: bool = true
-
 func reset_data() -> void:
 	player_dead = false
 	player_position = Vector2.ZERO
 	experience = 0
 	gold = 99999990
-	can_drink_healing_potion = true
-	can_drink_mana_potion = true
 	EventBus.gold_changed.emit(gold)
 	EventBus.experience_changed.emit(experience)
 	

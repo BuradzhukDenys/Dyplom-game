@@ -8,17 +8,18 @@ signal interface_closed
 @onready var items: GridContainer = $CenterContainer/UiBackground/Items/GridContainer
 @onready var player_gold_label: Label = $CenterContainer/UiBackground/Intearctive/VBoxContainer/Control/PlayerGoldLabel
 @onready var refresh_cost_label: Label = $CenterContainer/UiBackground/Intearctive/VBoxContainer/RefreshCostLabel
+
 var max_items: int = GameData.slots_in_shop
 var timer_to_show_tooltip: Timer = Timer.new()
 var current_tooltip: PanelContainer = null
 var hovered_item_data: ItemData = null
 
 var not_enough_money_tween: Tween
-var refresh_cost: float = 3
+var refresh_cost: float = GameData.base_refresh_shop_cost
 
 func _ready() -> void:
 	player_gold_label.text = "Gold: %d" % PlayerData.gold
-	refresh_cost_label.text = "Refresh cost - %.0f gold" % refresh_cost
+	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	timer_to_show_tooltip.timeout.connect(_on_timer_to_show_tooltip_timeout)
 	timer_to_show_tooltip.one_shot = true
 	add_child(timer_to_show_tooltip)
@@ -95,7 +96,7 @@ func refresh_shop() -> void:
 		
 	refresh_cost += refresh_cost * 0.1
 	PlayerData.spend_gold(int(refresh_cost))
-	refresh_cost_label.text = "Refresh cost - %.0f gold" % refresh_cost
+	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	
 func _on_gold_changed(new_value: int) -> void:
 	player_gold_label.text = "Gold: %d" % new_value

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SwordData" format=3 uid="uid://batwcv5sihlvk"]
+
+[ext_resource type="Script" uid="uid://5mutwwf6aioh" path="res://Items/swords_resource.gd" id="1_2xabt"]
+[ext_resource type="Texture2D" uid="uid://cbyuimp1h0uts" path="res://Assets/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_41dg2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vbl4"]
+atlas = ExtResource("2_41dg2")
+region = Rect2(96, 3008, 32, 32)
+
+[resource]
+script = ExtResource("1_2xabt")
+damage = 15.0
+attack_interval = 1.5
+attack_range = 150
+texture = SubResource("AtlasTexture_1vbl4")
+cost = 5
+item_name = "Base sword"
+metadata/_custom_type_script = "uid://5mutwwf6aioh"

@@ -4,6 +4,7 @@ signal enemy_dead()
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $HitboxHurtboxComponent/Hitbox
+@onready var hp_component: HPComponent = $HPComponent
 
 @export var resource: EnemyResource
 
@@ -13,7 +14,11 @@ var another_animation_play: bool = false
 var knockback_velocity: Vector2 = Vector2.ZERO
 var push_velocity: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+	hp_component.health = resource.health
+
 func _physics_process(delta: float) -> void:
+	print(hp_component.health)
 	target_direction = global_position.direction_to(PlayerData.player_position)
 	
 	push_velocity = push_velocity.move_toward(Vector2.ZERO, resource.knockback_friction * delta)

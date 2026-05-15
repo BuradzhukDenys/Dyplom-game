@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7mlhif7slned"]
 
-[ext_resource type="Texture2D" uid="uid://ck4ey2qotb788" path="res://Assets/Pixel Art VFX - Frost Knight - FREE Version/VFX1/sprite-sheet/sprite-sheet.png" id="1_j65sh"]
-[ext_resource type="Script" uid="uid://dxlsu5o6jnis4" path="res://Skills/skill.gd" id="1_vd1nl"]
+[ext_resource type="Script" uid="uid://dxlsu5o6jnis4" path="res://Skills/skill.gd" id="1_bqvkx"]
+[ext_resource type="Texture2D" uid="uid://ck4ey2qotb788" path="res://Assets/Pixel Art VFX - Frost Knight - FREE Version/VFX1/sprite-sheet/sprite-sheet.png" id="2_thjd7"]
 
 [sub_resource type="Animation" id="Animation_lkblw"]
 length = 0.001
@@ -242,59 +242,59 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ard2h"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(0, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1p1sj"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(256, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7n0j6"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(512, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pted6"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(768, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2kb22"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(1024, 0, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fccjb"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(0, 128, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uv5qb"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(256, 128, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdkrg"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(512, 128, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gf8id"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(768, 128, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xap3p"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(1024, 128, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_558ks"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(0, 256, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygq5l"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(256, 256, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2fdt"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(512, 256, 256, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s70t3"]
-atlas = ExtResource("1_j65sh")
+atlas = ExtResource("2_thjd7")
 region = Rect2(768, 256, 256, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ltgw6"]
@@ -350,11 +350,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_eop5i"]
 radius = 45.0
 
-[node name="Skill1" type="Area2D" unique_id=480585961]
+[node name="Skill1" type="Area2D" unique_id=480585961 node_paths=PackedStringArray("hitbox")]
 show_behind_parent = true
 collision_layer = 4
 collision_mask = 32
-script = ExtResource("1_vd1nl")
+script = ExtResource("1_bqvkx")
+hitbox = NodePath(".")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=436582105]
 libraries/ = SubResource("AnimationLibrary_gws8o")
