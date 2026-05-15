@@ -6,13 +6,21 @@ const MAX_GOLD: int = 999999
 const MAX_EXPIRIENCE: int = 999999
 const PLAYER_RADIUS_SPAWN_ENEMIES: float = 730.0
 
-var skills_slots_count: int = 2
-var player_position: Vector2 = Vector2.ZERO
+var current_weapon: SwordData = ItemsManager.get_item(ItemsManager.ItemsType.TEST_SWORD)
+var passive_items: Array[ItemData] = []
+var skills: Array[SkillResource] = []
+
 var player_dead: bool = false
+var player_position: Vector2 = Vector2.ZERO
+
+var skills_slots_count: int = 2
+
 var experience: int = 0
 var gold: int = 99999990
+
 var current_health: float = MAX_HEALTH
 var current_mana: float = MAX_MANA
+
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
 

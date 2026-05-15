@@ -10,7 +10,7 @@ region = Rect2(384, 3424, 30, 32)
 [resource]
 script = ExtResource("1_6ffuj")
 damage = 15.0
-attack_interval = 3
+attack_interval = 3.0
 attack_range = 150
 additional_effects = 15
 fire_duration = 10.0
