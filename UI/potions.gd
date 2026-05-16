@@ -14,12 +14,10 @@ func _ready() -> void:
 	healing_potion_cooldown.value = 0
 	mana_potion_cooldown.value = 0
 	
-	EventBus.healing_potion_drank.connect(_on_healing_potion_drank)
-	EventBus.healing_potion_cooldown_finished.connect(_on_healing_potion_cooldown_finished)
-	EventBus.mana_potion_drank.connect(_on_mana_potion_drank)
-	EventBus.mana_potion_cooldown_finished.connect(_on_mana_potion_cooldown_finished)
+	EventBus.potion_drank.connect(_on_potion_drank)
+	EventBus.potion_cooldown_finished.connect(_on_potion_cooldown_finished)
 
-func start_cooldown(cooldown: TextureProgressBar, end_signal: Signal, cooldown_tween: Tween, duration: float) -> Tween:
+func start_cooldown(cooldown: TextureProgressBar, potion_type: EventBus.PotionType, cooldown_tween: Tween, duration: float) -> Tween:
 	if cooldown_tween and cooldown_tween.is_valid():
 		cooldown_tween.kill()
 	
@@ -28,7 +26,7 @@ func start_cooldown(cooldown: TextureProgressBar, end_signal: Signal, cooldown_t
 	
 	new_tween.tween_property(cooldown, "value", cooldown.min_value, duration)
 	
-	new_tween.finished.connect(func(): end_signal.emit())
+	new_tween.finished.connect(func(): EventBus.potion_cooldown_finished.emit(potion_type))
 	return new_tween
 
 func play_animation_finished(scale_tween: Tween, icon: PanelContainer) -> Tween:
@@ -41,14 +39,16 @@ func play_animation_finished(scale_tween: Tween, icon: PanelContainer) -> Tween:
 	
 	return new_tween
 
-func _on_healing_potion_drank() -> void:
-	healing_cooldown_tween = start_cooldown(healing_potion_cooldown, EventBus.healing_potion_cooldown_finished, healing_cooldown_tween, 8)
+func _on_potion_drank(type: EventBus.PotionType) -> void:
+	match type:
+		EventBus.PotionType.HEALING:
+			healing_cooldown_tween = start_cooldown(healing_potion_cooldown, type, healing_cooldown_tween, 8)
+		EventBus.PotionType.MANA:
+			mana_cooldown_tween = start_cooldown(mana_potion_cooldown, type, mana_cooldown_tween, 8)
 
-func _on_mana_potion_drank() -> void:
-	mana_cooldown_tween = start_cooldown(mana_potion_cooldown, EventBus.mana_potion_cooldown_finished, mana_cooldown_tween, 8)
-
-func _on_healing_potion_cooldown_finished() -> void:
-	healing_scale_tween = play_animation_finished(healing_scale_tween, healing_potion_icon)
-
-func _on_mana_potion_cooldown_finished() -> void:
-	mana_scale_tween = play_animation_finished(mana_scale_tween, mana_potion_icon)
+func _on_potion_cooldown_finished(type: EventBus.PotionType) -> void:
+	match type:
+		EventBus.PotionType.HEALING:
+			healing_scale_tween = play_animation_finished(healing_scale_tween, healing_potion_icon)
+		EventBus.PotionType.MANA:
+			mana_scale_tween = play_animation_finished(mana_scale_tween, mana_potion_icon)

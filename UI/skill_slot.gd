@@ -32,6 +32,9 @@ func _process(_delta: float) -> void:
 func is_free() -> bool:
 	return not has_skill
 
+func set_slot_position(new_slot_position: int) -> void:
+	slot_position = new_slot_position
+
 func setup_slot(skill_resource: SkillResource) -> void:
 	if skill_data != skill_resource:
 		skill_data = skill_resource

@@ -15,7 +15,7 @@ extends CharacterBody2D
 
 #region values
 @export var speed: float = 300.0
-@export var damage: int = 10
+@export var damage: float = PlayerData.current_weapon.damage
 
 var can_drink_healing_potion: bool = true
 var can_drink_mana_potion: bool = true
@@ -44,8 +44,7 @@ var current_state: States = States.IDLE
 #endregion
 
 func _ready() -> void:
-	EventBus.healing_potion_cooldown_finished.connect(func(): can_drink_healing_potion = true)
-	EventBus.mana_potion_cooldown_finished.connect(func(): can_drink_mana_potion = true)
+	EventBus.potion_cooldown_finished.connect(_on_potion_cooldown_finished)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack and current_state in [States.IDLE, States.MOVE]:
@@ -54,15 +53,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("drink_healing_potion") and can_drink_healing_potion and hp_mana_component.health < PlayerData.MAX_HEALTH:
 			can_drink_healing_potion = false
 			hp_mana_component.heal(PlayerData.healing_potion_heal)
-			EventBus.healing_potion_drank.emit()
+			EventBus.potion_drank.emit(EventBus.PotionType.HEALING)
 		if event.is_action_pressed("drink_mana_potion") and can_drink_mana_potion and hp_mana_component.mana < PlayerData.MAX_MANA:
 			can_drink_mana_potion = false
 			hp_mana_component.restore_mana(int(PlayerData.mana_potion_heal))
-			EventBus.mana_potion_drank.emit()
+			EventBus.potion_drank.emit(EventBus.PotionType.MANA)
 		if event.is_action_pressed("skill1"):
 			try_cast_skill_at_slot(1)
+		if event.is_action_pressed("skill2"):
+			try_cast_skill_at_slot(2)
+		if event.is_action_pressed("skill3"):
+			try_cast_skill_at_slot(3)
+		if event.is_action_pressed("skill4"):
+			try_cast_skill_at_slot(4)
+		if event.is_action_pressed("skill5"):
+			try_cast_skill_at_slot(5)
 
 func _physics_process(_delta: float) -> void:
+	print(damage)
 	process_state(_delta)
 	move_and_slide()
 	if global_position != PlayerData.player_position:
@@ -205,6 +213,13 @@ func _on_attack_cooldown_timer_timeout() -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_hurtbox"):
 		area.get_hp_component().take_damage(damage)
+
+func _on_potion_cooldown_finished(type: EventBus.PotionType) -> void:
+	match type:
+		EventBus.PotionType.HEALING:
+			can_drink_healing_potion = true
+		EventBus.PotionType.MANA:
+			can_drink_mana_potion = true
 
 func _on_player_hp_mana_component_mana_changed(new_value: int, type: PlayerHPManaComponent.MANA_CHANGED_TYPE) -> void:
 	EventBus.player_mana_changed.emit(new_value)

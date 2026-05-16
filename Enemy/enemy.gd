@@ -18,7 +18,6 @@ func _ready() -> void:
 	hp_component.health = resource.health
 
 func _physics_process(delta: float) -> void:
-	print(hp_component.health)
 	target_direction = global_position.direction_to(PlayerData.player_position)
 	
 	push_velocity = push_velocity.move_toward(Vector2.ZERO, resource.knockback_friction * delta)

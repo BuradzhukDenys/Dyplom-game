@@ -1,9 +1,13 @@
 extends Node
 
-signal healing_potion_cooldown_finished
-signal mana_potion_cooldown_finished
-signal healing_potion_drank
-signal mana_potion_drank
+enum PotionType
+{
+	HEALING,
+	MANA
+}
+
+signal potion_drank(type: PotionType)
+signal potion_cooldown_finished(type: PotionType)
 signal player_mana_changed(new_value: float)
 signal player_health_changed(new_value: float)
 signal experience_changed(new_value: int)
