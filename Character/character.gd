@@ -1,24 +1,25 @@
 extends CharacterBody2D
+class_name Character
 
 #region nodes
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hp_mana_component: PlayerHPManaComponent = $PlayerHPManaComponent
-@onready var take_damage_timer: Timer = $TakeDamageTimer
+@onready var potions_component: PotionsComponent = $PotionsComponent
+@onready var skill_component: SkillComponent = $SkillComponent
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var hitbox: Area2D = $HitboxHurtboxComponent/Hitbox
 @onready var hitbox_collision: CollisionShape2D = $HitboxHurtboxComponent/Hitbox/CollisionShape2D
 @onready var hurtbox_collision: CollisionShape2D = $HitboxHurtboxComponent/Hurtbox/CollisionShape2D
 @onready var healing_particles: GPUParticles2D = $ParticleManager/HealParticles
 @onready var mana_particles: GPUParticles2D = $ParticleManager/ManaParticles
+@onready var target_point: Marker2D = $TargetPoint
 #endregion
 
 #region values
-@export var speed: float = 300.0
-@export var damage: float = PlayerData.current_weapon.damage
+var speed: float
+var damage: float
 
-var can_drink_healing_potion: bool = true
-var can_drink_mana_potion: bool = true
 const SPEED_WHEN_ATTACK: float = 0.5
 const SPEED_TAKE_DAMAGE_SLOWNESS: float = 0.8
 var last_direction: Vector2 = Vector2.DOWN
@@ -26,7 +27,7 @@ var can_attack: bool = true
 #endregion
 
 #region tweens
-var mana_restor_tween: Tween
+var mana_restore_tween: Tween
 var heal_tween: Tween
 #endregion
 
@@ -44,37 +45,29 @@ var current_state: States = States.IDLE
 #endregion
 
 func _ready() -> void:
-	EventBus.potion_cooldown_finished.connect(_on_potion_cooldown_finished)
+	speed = PlayerData.max_speed
+	damage = PlayerData.current_weapon.damage
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack and current_state in [States.IDLE, States.MOVE]:
 		switch_state(States.ATTACK)
-	if not PlayerData.player_dead:
-		if event.is_action_pressed("drink_healing_potion") and can_drink_healing_potion and hp_mana_component.health < PlayerData.MAX_HEALTH:
-			can_drink_healing_potion = false
-			hp_mana_component.heal(PlayerData.healing_potion_heal)
-			EventBus.potion_drank.emit(EventBus.PotionType.HEALING)
-		if event.is_action_pressed("drink_mana_potion") and can_drink_mana_potion and hp_mana_component.mana < PlayerData.MAX_MANA:
-			can_drink_mana_potion = false
-			hp_mana_component.restore_mana(int(PlayerData.mana_potion_heal))
-			EventBus.potion_drank.emit(EventBus.PotionType.MANA)
-		if event.is_action_pressed("skill1"):
-			try_cast_skill_at_slot(1)
-		if event.is_action_pressed("skill2"):
-			try_cast_skill_at_slot(2)
-		if event.is_action_pressed("skill3"):
-			try_cast_skill_at_slot(3)
-		if event.is_action_pressed("skill4"):
-			try_cast_skill_at_slot(4)
-		if event.is_action_pressed("skill5"):
-			try_cast_skill_at_slot(5)
+		
+	if event.is_action_pressed("drink_healing_potion"):
+		potions_component.try_drink(PlayerData.PotionType.HEALING)
+	if event.is_action_pressed("drink_mana_potion"):
+		potions_component.try_drink(PlayerData.PotionType.MANA)
+		
+	for i in range(1, 6):
+		if event.is_action_pressed("skill" + str(i)):
+			skill_component.try_cast_skill_at_slot(i, last_direction)
+			break
 
-func _physics_process(_delta: float) -> void:
-	print(damage)
-	process_state(_delta)
+func _physics_process(delta: float) -> void:
+	process_state(delta)
 	move_and_slide()
-	if global_position != PlayerData.player_position:
-		PlayerData.player_position = global_position 
+	
+	PlayerData.player_position = global_position 
+	PlayerData.target_point = target_point.global_position
 
 #region states_handle
 func _enter_state(state: States) -> void:
@@ -83,12 +76,11 @@ func _enter_state(state: States) -> void:
 			play_animation_directionaly("Idle")
 		States.ATTACK:
 			can_attack = false
-			attack_cooldown_timer.start()
+			attack_cooldown_timer.start(PlayerData.current_weapon.attack_interval)
 			play_animation_directionaly("Attack")
 		States.TAKE_DAMAGE:
 			play_animation_directionaly("TakeDamage")
 		States.DEAD:
-			PlayerData.player_dead = true
 			play_animation_directionaly("Die")
 			set_physics_process(false)
 			set_process_unhandled_input(false)
@@ -153,8 +145,8 @@ func play_animation_directionaly(anim_name: String) -> void:
 			
 	animation_player.play(animation)
 
-func return_to_main_menu() -> void:
-	get_tree().change_scene_to_file("res://MainMenu/main_menu.tscn")
+func show_defeat() -> void:
+	EventBus.defeat.emit()
 	
 func attack_take_damage_change() -> void:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
@@ -162,26 +154,7 @@ func attack_take_damage_change() -> void:
 	else:
 		switch_state(States.IDLE)
 
-func try_cast_skill_at_slot(slot: int) -> void:
-	if not SkillsManager.is_skill_ready(slot): return
-	
-	var skill_data: SkillResource = SkillsManager.skills[slot]
-	if hp_mana_component.mana < skill_data.mana_cost or hp_mana_component.mana <= 0:
-		EventBus.no_mana.emit()
-		return
-		
-	hp_mana_component.spend_mana(skill_data.mana_cost)
-	SkillsManager.put_skill_on_cooldown(slot)
-	EventBus.skill_casted.emit(slot, skill_data.cooldown)
-	
-	var skill: Area2D = skill_data.scene.instantiate()
-	skill.setup(last_direction, skill_data.damage)
-	get_tree().current_scene.add_child(skill)
-	skill.global_position = global_position
-
 func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_CHANGED_TYPE) -> void:
-	EventBus.player_health_changed.emit(new_value)
-	
 	match type:
 		HPComponent.HEALTH_CHANGED_TYPE.HEAL:
 			animated_sprite.self_modulate = Color(0, 0.8, 0, 0.75)
@@ -194,9 +167,6 @@ func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_
 			heal_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
 		HPComponent.HEALTH_CHANGED_TYPE.TAKE_DAMAGE:
 			if new_value > 0:
-				hp_mana_component.is_invincible = true
-				take_damage_timer.start()
-				
 				if current_state != States.ATTACK:
 					switch_state(States.TAKE_DAMAGE)
 				else:
@@ -204,33 +174,21 @@ func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_
 			else:
 				switch_state(States.DEAD)
 
-func _on_take_damage_timer_timeout() -> void:
-	hp_mana_component.is_invincible = false
-
-func _on_attack_cooldown_timer_timeout() -> void:
-	can_attack = true
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy_hurtbox"):
-		area.get_hp_component().take_damage(damage)
-
-func _on_potion_cooldown_finished(type: EventBus.PotionType) -> void:
-	match type:
-		EventBus.PotionType.HEALING:
-			can_drink_healing_potion = true
-		EventBus.PotionType.MANA:
-			can_drink_mana_potion = true
-
-func _on_player_hp_mana_component_mana_changed(new_value: int, type: PlayerHPManaComponent.MANA_CHANGED_TYPE) -> void:
-	EventBus.player_mana_changed.emit(new_value)
-	
+func _on_player_hp_mana_component_mana_changed(_new_value: int, type: PlayerHPManaComponent.MANA_CHANGED_TYPE) -> void:
 	match type:
 		PlayerHPManaComponent.MANA_CHANGED_TYPE.RESTORE:
 			animated_sprite.self_modulate = Color(0.765, 0.137, 0.953, 1.0)
 			mana_particles.emitting = true
 			
-			if mana_restor_tween and mana_restor_tween.is_valid():
-				mana_restor_tween.kill()
+			if mana_restore_tween and mana_restore_tween.is_valid():
+				mana_restore_tween.kill()
 				
-			mana_restor_tween = create_tween()
-			mana_restor_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
+			mana_restore_tween = create_tween()
+			mana_restore_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
+
+func _on_attack_cooldown_timer_timeout() -> void:
+	can_attack = true
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
+		area.take_damage(damage)

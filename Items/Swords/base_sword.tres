@@ -9,8 +9,8 @@ region = Rect2(96, 3008, 32, 32)
 
 [resource]
 script = ExtResource("1_2xabt")
-damage = 150000.0
-attack_interval = 1.5
+damage = 25.0
+attack_interval = 0.1
 attack_range = 150
 texture = SubResource("AtlasTexture_1vbl4")
 cost = 5

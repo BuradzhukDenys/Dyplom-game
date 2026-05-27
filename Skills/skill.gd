@@ -1,4 +1,5 @@
 extends Area2D
+class_name Skill
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @export var hitbox: Area2D
@@ -20,6 +21,6 @@ func setup(new_direction: Vector2, new_damage: float) -> void:
 	direction = new_direction
 	damage = new_damage
 
-func _on_hitbox_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy_hurtbox"):
-		area.get_hp_component().take_damage(damage)
+func _on_hitbox_entered(area: Hurtbox) -> void:
+	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
+		area.take_damage(damage)

@@ -5,4 +5,9 @@
 
 [node name="PlayerHPManaComponent" unique_id=775051027 instance=ExtResource("1_njf5w")]
 script = ExtResource("2_0ucoa")
-base_mana = 100
+
+[node name="TakeDamageTimer" type="Timer" parent="." index="0" unique_id=1450354928]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]

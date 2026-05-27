@@ -10,16 +10,20 @@ enum HEALTH_CHANGED_TYPE
 	PASSIVE_HEAL
 }
 
-@export var base_health: float = 100
+var max_health: float = 100:
+	set(new_value):
+		max_health = new_value
+		
+		health = min(health, max_health)
 var health: float
 
 func _ready() -> void:
-	health = base_health
+	health = max_health
 	
 func take_damage(amount: float) -> void:
-	health = clampf(health - amount, 0, base_health)
+	health = clampf(health - amount, 0, max_health)
 	health_changed.emit(health, HEALTH_CHANGED_TYPE.TAKE_DAMAGE)
 
 func heal(amount: float) -> void:
-	health = clampf(health + amount, 0, base_health)
+	health = clampf(health + amount, 0, max_health)
 	health_changed.emit(health, HEALTH_CHANGED_TYPE.HEAL)

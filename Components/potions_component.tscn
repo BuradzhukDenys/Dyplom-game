@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ci20aou2dtpfp"]
+
+[ext_resource type="Script" uid="uid://dp4uielkhrqp5" path="res://Components/potions_component.gd" id="1_e6t20"]
+
+[node name="PotionsComponent" type="Node" unique_id=110570453]
+script = ExtResource("1_e6t20")
