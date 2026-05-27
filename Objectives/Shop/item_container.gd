@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name ItemContainer
 
 signal not_enought_gold
 
@@ -25,10 +26,9 @@ func _on_mouse_exited() -> void:
 	scale_tween.tween_property(self, "scale", Vector2(1, 1), 0.15)
 
 func setup(new_item_data: ItemData) -> void:
-	if item_data == new_item_data:
-		return
+	if not item_data == new_item_data:
+		item_data = new_item_data
 		
-	item_data = new_item_data
 	item_texture.texture = new_item_data.texture
 
 func buy_item() -> void:

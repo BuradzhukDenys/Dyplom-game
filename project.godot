@@ -18,10 +18,13 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerData="*uid://fkv1vvujsqqw"
-EventBus="*uid://vrkkeixun7je"
 SkillsManager="*uid://c5m75byiel7fw"
-GameData="*uid://dkxcqokusenr1"
 ItemsManager="*uid://coabopj4xx7bf"
+EventBus="*uid://d01u51ga3qupw"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
@@ -38,6 +41,10 @@ project/assembly_name="Game"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://eogs1xs75p0y"
 
 [input]
 

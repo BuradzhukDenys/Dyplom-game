@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProjectileResource" format=3 uid="uid://1j7adwdvrr1g"]
+
+[ext_resource type="Script" uid="uid://rum3ppxmw683" path="res://Enemy/Resources/projectile_resource.gd" id="1_kx28d"]
+
+[resource]
+script = ExtResource("1_kx28d")
+speed = 210.0
+damage = 8.0
+metadata/_custom_type_script = "uid://rum3ppxmw683"

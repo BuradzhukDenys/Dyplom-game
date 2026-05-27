@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://bn7nbsgnck1vb"]
 
 [ext_resource type="Script" uid="uid://cy8ws2orc0f5" path="res://Objectives/building.gd" id="1_pw077"]
+[ext_resource type="Texture2D" uid="uid://54k5hy6l05w2" path="res://Assets/Keyboard Keys/Keyboard Letters and Symbols.png" id="2_pw077"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl55f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crn8i"]
+atlas = ExtResource("2_pw077")
+region = Rect2(65, 34, 13, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3n4a"]
 size = Vector2(60, 60)
@@ -34,11 +39,23 @@ offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Tooltip" unique_id=277008620]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tooltip" unique_id=704974696]
 layout_mode = 2
-text = "Press E"
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="Tooltip/HBoxContainer" unique_id=277008620]
+layout_mode = 2
+text = "Press"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Tooltip/HBoxContainer" unique_id=686862252]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_crn8i")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=817146500]
 collision_layer = 0

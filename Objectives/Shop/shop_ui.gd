@@ -1,6 +1,5 @@
-extends CanvasLayer
-
-signal interface_closed
+extends Interface
+class_name ShopUI
 
 @export var item_container_scene: PackedScene
 @export var item_information_scene: PackedScene
@@ -9,15 +8,18 @@ signal interface_closed
 @onready var player_gold_label: Label = $CenterContainer/UiBackground/Intearctive/VBoxContainer/Control/PlayerGoldLabel
 @onready var refresh_cost_label: Label = $CenterContainer/UiBackground/Intearctive/VBoxContainer/RefreshCostLabel
 
-var max_items: int = GameData.slots_in_shop
+const BASE_REFRESH_COST: int = 3
+
+var max_items: int
 var timer_to_show_tooltip: Timer = Timer.new()
 var current_tooltip: PanelContainer = null
 var hovered_item_data: ItemData = null
 
 var not_enough_money_tween: Tween
-var refresh_cost: float = GameData.base_refresh_shop_cost
+var refresh_cost: float = BASE_REFRESH_COST
 
 func _ready() -> void:
+	max_items = PlayerData.slots_in_shop
 	player_gold_label.text = "Gold: %d" % PlayerData.gold
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	timer_to_show_tooltip.timeout.connect(_on_timer_to_show_tooltip_timeout)
@@ -34,7 +36,7 @@ func _ready() -> void:
 		item_container.mouse_entered.connect(_on_item_container_mouse_entered.bind(item_container))
 		item_container.mouse_exited.connect(_on_item_container_mouse_exited)
 		
-	EventBus.gold_changed.connect(_on_gold_changed)
+	PlayerData.gold_changed.connect(_on_gold_changed)
 
 func _on_item_container_mouse_entered(container: PanelContainer) -> void:
 	var data: ItemData = container.item_data
@@ -79,8 +81,8 @@ func _on_timer_to_show_tooltip_timeout() -> void:
 	current_tooltip.modulate.a = 1.0
 
 func show_error() -> void:
-	if not_enough_money_tween and not_enough_money_tween.is_valid():
-		not_enough_money_tween.kill()
+	if not_enough_money_tween and not_enough_money_tween.is_running():
+		return
 		
 	not_enough_money_tween = create_tween()
 	player_gold_label.self_modulate = Color(0.592, 0.0, 0.0, 1.0)
@@ -94,8 +96,8 @@ func refresh_shop() -> void:
 		var random_item_index: int = randi_range(0, ItemsManager.all_items_count() - 1)
 		container.setup(ItemsManager.get_item(random_item_index))
 		
-	refresh_cost += refresh_cost * 0.1
 	PlayerData.spend_gold(int(refresh_cost))
+	refresh_cost += refresh_cost * 0.1
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	
 func _on_gold_changed(new_value: int) -> void:
@@ -105,7 +107,7 @@ func _on_not_enought_gold() -> void:
 	show_error()
 
 func _on_close_pressed() -> void:
-	interface_closed.emit()
+	close()
 
 func _on_refresh_pressed() -> void:
 	if PlayerData.gold < refresh_cost:

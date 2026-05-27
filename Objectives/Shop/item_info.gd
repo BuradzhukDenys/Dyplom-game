@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name ItemTooltip
 
 @onready var item_name_label: RichTextLabel = $VBoxContainer/ItemName
 @onready var item_description_label: RichTextLabel = $VBoxContainer/ItemDescription

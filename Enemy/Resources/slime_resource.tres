@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_d0e0i")
-speed = 100.0
+speed = 150.0
 damage = 10.0
 expirience_gain = 8
 gold_gain = 3
