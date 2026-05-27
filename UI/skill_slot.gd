@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name SkillSlot
 
 @onready var skill_icon: TextureRect = $PanelContainer/TextureRect
 @onready var skill_cooldown: TextureProgressBar = $PanelContainer/TextureProgressBar
@@ -13,8 +14,6 @@ var current_tween: Tween
 var has_skill: bool = false
 
 func _ready() -> void:
-	EventBus.skill_casted.connect(_on_skill_casted)
-	
 	skill_cooldown.value = 0
 	skill_cooldown_label.text = ""
 	skill_cooldown_label.visible = false
@@ -28,12 +27,19 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if skill_cooldown_label.visible:
 		skill_cooldown_label.text = str(int(skill_cooldown_timer.time_left) + 1)
+		
+func setup(skill_comp: SkillComponent, new_slot_position: int) -> void:
+	skill_comp.skill_casted.connect(_on_skill_casted)
+	skill_comp.skill_cooldown_finished.connect(_on_skill_cooldown_finished)
+	
+	slot_position = new_slot_position
+	skill_key_label.text = str(slot_position)
+	
+	if skill_comp.skills.has(slot_position) and skill_comp.skills[slot_position] != SkillsManager.SkillType.NONE:
+		setup_slot(SkillsManager.SKILLS[skill_comp.skills[slot_position]])
 
 func is_free() -> bool:
 	return not has_skill
-
-func set_slot_position(new_slot_position: int) -> void:
-	slot_position = new_slot_position
 
 func setup_slot(skill_resource: SkillResource) -> void:
 	if skill_data != skill_resource:
@@ -43,9 +49,8 @@ func setup_slot(skill_resource: SkillResource) -> void:
 	
 	skill_icon.texture = skill_data.skill_icon
 	skill_cooldown_timer.wait_time = skill_data.cooldown
-	SkillsManager.skills[slot_position] = skill_resource
 	
-func _on_skill_casted(casted_slot: int, cooldown_time) -> void:
+func _on_skill_casted(casted_slot: int, cooldown_time: float) -> void:
 	if casted_slot != slot_position:
 		return
 	
@@ -59,5 +64,6 @@ func _on_skill_casted(casted_slot: int, cooldown_time) -> void:
 	current_tween = create_tween()
 	current_tween.tween_property(skill_cooldown, "value", skill_cooldown.min_value, cooldown_time)
 
-func _on_cooldown_timer_timeout() -> void:
-	skill_cooldown_label.visible = false
+func _on_skill_cooldown_finished(slot: int) -> void:
+	if slot == slot_position:
+		skill_cooldown_label.visible = false

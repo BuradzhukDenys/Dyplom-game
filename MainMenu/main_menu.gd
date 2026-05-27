@@ -1,4 +1,5 @@
 extends Control
+class_name MainMenu
 
 const level_scene: PackedScene = preload("res://Levels/level.tscn")
 

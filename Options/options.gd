@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name Options
 
 signal options_closed
 signal animation_ended

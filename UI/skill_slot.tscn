@@ -68,5 +68,3 @@ text = "10"
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=1457941647]
 one_shot = true
-
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

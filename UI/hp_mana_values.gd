@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name HPManaBars
 
 @onready var health_bar: ProgressBar = $HP/HPBar
 @onready var mana_bar: ProgressBar = $Mana/Control/ManaBar
@@ -10,19 +11,20 @@ var mana_tween: Tween
 var no_mana_tween: Tween
 
 func _ready() -> void:
-	EventBus.player_health_changed.connect(_on_player_health_changed)
-	EventBus.player_mana_changed.connect(_on_player_mana_changed)
-	EventBus.no_mana.connect(_on_no_mana)
-	
-	health_bar.max_value = PlayerData.MAX_HEALTH
-	mana_bar.max_value = PlayerData.MAX_MANA
-	health_bar.value = PlayerData.current_health
-	mana_bar.value = PlayerData.current_mana
-	health_value_label.text = str(PlayerData.current_health) + "/" + str(PlayerData.MAX_HEALTH)
-	mana_value_label.text = str(PlayerData.current_mana) + "/" + str(PlayerData.MAX_MANA)
+	health_bar.max_value = PlayerData.max_health
+	mana_bar.max_value = PlayerData.max_mana
+	health_bar.value = health_bar.max_value
+	mana_bar.value = mana_bar.max_value
+	health_value_label.text = str(PlayerData.max_health) + "/" + str(PlayerData.max_health)
+	mana_value_label.text = str(PlayerData.max_mana) + "/" + str(PlayerData.max_mana)
 
-func _on_player_health_changed(new_value: float) -> void:
-	health_value_label.text = str(new_value) + "/" + str(PlayerData.MAX_HEALTH)
+func setup(hp_mana_comp: PlayerHPManaComponent) -> void:
+	hp_mana_comp.health_changed.connect(_on_player_health_changed)
+	hp_mana_comp.mana_changed.connect(_on_player_mana_changed)
+	hp_mana_comp.no_mana.connect(_on_no_mana)
+
+func _on_player_health_changed(new_value: float, _type: HPComponent.HEALTH_CHANGED_TYPE) -> void:
+	health_value_label.text = str(new_value) + "/" + str(PlayerData.max_health)
 	
 	if health_tween and health_tween.is_valid():
 		health_tween.kill()
@@ -30,8 +32,8 @@ func _on_player_health_changed(new_value: float) -> void:
 	health_tween = create_tween()
 	health_tween.tween_property(health_bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-func _on_player_mana_changed(new_value: float) -> void:
-	mana_value_label.text = str(new_value) + "/" + str(PlayerData.MAX_MANA)
+func _on_player_mana_changed(new_value: float, _type: PlayerHPManaComponent.MANA_CHANGED_TYPE) -> void:
+	mana_value_label.text = str(new_value) + "/" + str(PlayerData.max_mana)
 	
 	if mana_tween and mana_tween.is_valid():
 		mana_tween.kill()

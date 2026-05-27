@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bdwu8tgoscrqf"]
+
+[ext_resource type="Script" uid="uid://dvk8s0gh6ipb7" path="res://Screens/end_screen.gd" id="1_vf13v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dusc"]
+content_margin_left = 15.0
+content_margin_top = 25.0
+content_margin_right = 15.0
+content_margin_bottom = 25.0
+bg_color = Color(0.7574366, 0.54987967, 0.3865854, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.64668554, 0.17838323, 0.45560747, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="EndScreen" type="CanvasLayer" unique_id=1939718799]
+process_mode = 3
+script = ExtResource("1_vf13v")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=897072094]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25565878, 0.25565878, 0.25565878, 0.2)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=871824221]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=1310995194]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer" unique_id=1076700743]
+custom_minimum_size = Vector2(550, 350)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3dusc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer" unique_id=586159605]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer" unique_id=1348808729]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Control" unique_id=1131836755]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.5
+offset_right = 104.5
+offset_bottom = 90.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 65
+text = "Defeat"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Items" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer" unique_id=1190968799]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 22
+text = "Check items"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer" unique_id=1812236284]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 45
+
+[node name="MainMenu" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=420647254]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Main Menu"
+
+[node name="Restart" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1771956933]
+custom_minimum_size = Vector2(95, 35)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Restart"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Items" to="." method="_on_items_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/Restart" to="." method="_on_restart_pressed"]
