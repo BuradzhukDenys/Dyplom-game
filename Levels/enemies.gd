@@ -63,4 +63,5 @@ func _on_level_manager_all_waves_spawned() -> void:
 
 func check_victory() -> void:
 	if all_waves_spawned and enemies_alive <= 0:
+		EventBus.game_end = true
 		EventBus.victory.emit()

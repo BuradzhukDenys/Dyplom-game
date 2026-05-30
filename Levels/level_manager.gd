@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func start_level() -> void:
 	for wave: WaveResource in level_resource.waves:
-		EventBus.wave_changed.emit("Wave %d" % (level_resource.waves.find(wave) + 1))
+		EventBus.wave_changed.emit("Wave %d/%d" % [(level_resource.waves.find(wave) + 1), level_resource.waves.size()])
 		
 		for group: GroupResource in wave.wave_enemies:
 			group_spawned += 1
