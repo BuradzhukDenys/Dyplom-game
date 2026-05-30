@@ -17,6 +17,8 @@ var mana: float
 var is_invincible: bool = false
 
 func _ready() -> void:
+	PlayerData.max_health_changed.connect(_on_max_health_changed)
+	
 	max_health = PlayerData.max_health
 	health = max_health
 	mana = PlayerData.max_mana
@@ -41,3 +43,17 @@ func restore_mana(amount: float) -> void:
 
 func _on_take_damage_timer_timeout() -> void:
 	is_invincible = false
+
+func _on_max_health_changed(new_value: float) -> void:
+	var difference: float = new_value - max_health
+	
+	if difference == 0.0:
+		return
+		
+	max_health = new_value
+	
+	if difference > 0:
+		health += difference
+		health_changed.emit(health, HEALTH_CHANGED_TYPE.HEAL)
+	elif health > max_health:
+		health = max_health
