@@ -1,9 +1,7 @@
 extends CanvasLayer
+class_name EndScreen
 
 @onready var end_screen_label: Label = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Control/Label
-@onready var main_menu_button: Button = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/MainMenu
-@onready var restart_button: Button = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/Restart
-@onready var items_button: Button = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Items
 
 var label_tween: Tween
 var label_color_tween: Tween
@@ -77,13 +75,12 @@ func start_rotation_tween_deg(rotation_degrees: float, time: float, loops: int =
 	
 func return_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://MainMenu/main_menu.tscn")
+	EventBus.game_end = false
 	
 func restart() -> void:
+	EventBus.game_end = false
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	
-func show_items() -> void:
-	print("Items: %s" % PlayerData.current_weapon.item_name)
 
 func _on_main_menu_pressed() -> void:
 	return_to_main_menu()
@@ -92,4 +89,7 @@ func _on_restart_pressed() -> void:
 	restart()
 
 func _on_items_pressed() -> void:
-	show_items()
+	EventBus.inventory_opened.emit()
+
+func _on_stats_pressed() -> void:
+	EventBus.stats_opened.emit()
