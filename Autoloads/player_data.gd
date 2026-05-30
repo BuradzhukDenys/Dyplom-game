@@ -27,6 +27,7 @@ var current_weapon: SwordData:
 	set(new_value):
 		if current_weapon != new_value:
 			current_weapon = new_value
+			base_damage = current_weapon.damage
 			weapon_changed.emit(current_weapon)
 		
 var passive_items: Array[ItemData] = []
@@ -36,20 +37,25 @@ var target_point: Vector2 = Vector2.ZERO
 
 var max_health: float = 100.0:
 	set(value):
-		max_health = value
-		max_health_changed.emit(max_health)
+		if max_health != value:
+			max_health = value
+			max_health_changed.emit(max_health)
 var max_mana: float = 100000.0:
 	set(value):
-		max_mana = value
-		max_mana_changed.emit(max_mana)
+		if max_mana != value:
+			max_mana = value
+			max_mana_changed.emit(max_mana)
 var damage: float:
 	set(value):
-		damage = value
-		damage_changed.emit(damage)
+		if damage != value:
+			damage = value
+			damage_changed.emit(damage)
 var speed: float = 300.0:
 	set(value):
-		speed = clamp(value, min_speed, max_speed)
-		speed_changed.emit(speed)
+		var clamped_value = clamp(value, min_speed, max_speed)
+		if speed != clamped_value:
+			speed = clamped_value
+			speed_changed.emit(speed)
 		
 var max_speed: float = 1450.0
 var min_speed: float = 160.0
@@ -70,12 +76,14 @@ var target_speed: float = 0.0
 
 var passive_health_restore: float = 0.0:
 	set(value):
-		passive_health_restore = value
-		health_restore_changed.emit(passive_health_restore)
+		if passive_health_restore != value:
+			passive_health_restore = value
+			health_restore_changed.emit(passive_health_restore)
 var passive_mana_restore: float = 0.0:
 	set(value):
-		passive_mana_restore = value
-		mana_restore_changed.emit(passive_mana_restore)
+		if passive_mana_restore != value:
+			passive_mana_restore = value
+			mana_restore_changed.emit(passive_mana_restore)
 
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
@@ -106,9 +114,6 @@ func _ready() -> void:
 	
 	damage = current_weapon.damage
 	base_damage = current_weapon.damage
-	
-	slots_in_shop = slots_in_shop
-	skills_slots_count = skills_slots_count
 
 func reset_data() -> void:
 	player_position = Vector2.ZERO
@@ -130,7 +135,9 @@ func spend_expirience(amount: int) -> void:
 func _on_item_bought(item_data: ItemData) -> void:
 	if item_data is PassiveItem:
 		passive_items.append(item_data)
-		recalculate_stats()
+	elif item_data is SwordData:
+		current_weapon = item_data
+	recalculate_stats()
 	
 func recalculate_stats() -> void:
 	target_health = base_health
@@ -141,6 +148,7 @@ func recalculate_stats() -> void:
 	target_speed = base_speed
 	
 	var target_percent_speed: float = 1.0
+	var target_percent_damage: float = 1.0
 	
 	for item_data: PassiveItem in passive_items:
 		if (item_data.buffs & 1) != 0:
@@ -152,15 +160,22 @@ func recalculate_stats() -> void:
 		if (item_data.buffs & 8) != 0:
 			target_mana_restore += item_data.mana_restore_bonus
 		if (item_data.buffs & 16) != 0:
-			pass
+			if item_data.damage_type == PassiveItem.StatType.FLAT:
+				target_damage += item_data.damage_bonus
+			elif item_data.damage_type == PassiveItem.StatType.PERCENT:
+				target_percent_damage += item_data.damage_percent_bonus
 		if (item_data.buffs & 32) != 0:
-			target_percent_speed += item_data.speed_percent_bonus
-			target_speed += item_data.speed_bonus
+			if item_data.speed_type == PassiveItem.StatType.FLAT:
+				target_speed += item_data.speed_bonus
+			elif item_data.speed_type == PassiveItem.StatType.PERCENT:
+				target_percent_speed += item_data.speed_percent_bonus
 			
+	target_damage *= target_percent_damage
 	target_speed *= target_percent_speed
 			
 	max_health = target_health
 	passive_health_restore = target_health_restore
 	max_mana = target_mana
 	passive_mana_restore = target_mana_restore
+	damage = target_damage
 	speed = target_speed
