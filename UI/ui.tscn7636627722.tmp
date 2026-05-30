@@ -236,6 +236,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 10
 
 [node name="CheckStats" type="PanelContainer" parent="MarginContainer/RightDownSide/Buttons" unique_id=937107361]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0w6e5")

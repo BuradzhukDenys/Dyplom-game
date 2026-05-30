@@ -11,6 +11,8 @@ var mana_tween: Tween
 var no_mana_tween: Tween
 
 func _ready() -> void:
+	PlayerData.max_health_changed.connect(_on_max_health_changed)
+	
 	health_bar.max_value = PlayerData.max_health
 	mana_bar.max_value = PlayerData.max_mana
 	health_bar.value = health_bar.max_value
@@ -52,3 +54,8 @@ func _on_no_mana() -> void:
 	no_mana_tween.parallel().tween_property(mana_bar, "rotation_degrees", -4, 0.1)
 	no_mana_tween.tween_property(mana_bar, "rotation", 4, 0.1)
 	no_mana_tween.tween_property(mana_bar, "rotation", 0, 0.1)
+	
+func _on_max_health_changed(new_value) -> void:
+	health_bar.max_value = new_value
+	
+	mana_value_label.text = str(health_bar.value) + "/" + str(health_bar.max_value)

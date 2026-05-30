@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://c6qgc3s56d7ju"]
+
+[ext_resource type="Script" uid="uid://bnc2c7k3xnepy" path="res://UI/inventory_ui.gd" id="1_dk10o"]
+[ext_resource type="PackedScene" uid="uid://oq0xaksigvok" path="res://Objectives/Shop/item_container.tscn" id="2_vy1hj"]
+[ext_resource type="Texture2D" uid="uid://cmhxp5fvqan6w" path="res://Assets/Custom Border and Panels Menu All Part/Border All 1.png" id="4_4ukvd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tmtiu"]
+texture = ExtResource("4_4ukvd")
+region_rect = Rect2(256, 64, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bgb5"]
+bg_color = Color(0.9261619, 0, 0.4710933, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="InputEventKey" id="InputEventKey_fi2cs"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_dvq3w"]
+events = [SubResource("InputEventKey_fi2cs")]
+
+[node name="InventoryUI" type="CanvasLayer" unique_id=1795808343]
+process_mode = 3
+script = ExtResource("1_dk10o")
+item_container_scene = ExtResource("2_vy1hj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1827632675]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1077494941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UiBackground" type="PanelContainer" parent="CenterContainer" unique_id=98970997]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tmtiu")
+
+[node name="Items" type="MarginContainer" parent="CenterContainer/UiBackground" unique_id=890599298]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/UiBackground/Items" unique_id=861007559]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/UiBackground/Items/VBoxContainer" unique_id=1339802387]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/UiBackground/Items/VBoxContainer/ScrollContainer" unique_id=158845630]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/UiBackground/Items/VBoxContainer/ScrollContainer/MarginContainer" unique_id=726613354]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 14
+columns = 5
+
+[node name="Close" type="Button" parent="CenterContainer/UiBackground/Items/VBoxContainer" unique_id=1159798453]
+custom_minimum_size = Vector2(110, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bgb5")
+shortcut = SubResource("Shortcut_dvq3w")
+text = "Close
+ESC"
+
+[connection signal="pressed" from="CenterContainer/UiBackground/Items/VBoxContainer/Close" to="." method="_on_close_pressed"]
