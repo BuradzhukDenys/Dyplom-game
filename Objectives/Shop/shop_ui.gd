@@ -11,74 +11,27 @@ class_name ShopUI
 const BASE_REFRESH_COST: int = 3
 
 var max_items: int
-var timer_to_show_tooltip: Timer = Timer.new()
-var current_tooltip: PanelContainer = null
-var hovered_item_data: ItemData = null
+var half_of_items: float
+var free_refresh: bool = false
 
 var not_enough_money_tween: Tween
 var refresh_cost: float = BASE_REFRESH_COST
 
 func _ready() -> void:
 	max_items = PlayerData.slots_in_shop
+	half_of_items = floori(max_items / 2.0)
 	player_gold_label.text = "Gold: %d" % PlayerData.gold
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
-	timer_to_show_tooltip.timeout.connect(_on_timer_to_show_tooltip_timeout)
-	timer_to_show_tooltip.one_shot = true
-	add_child(timer_to_show_tooltip)
 	
 	for i in max_items:
 		var random_item: int = randi_range(0, ItemsManager.all_items_count() - 1)
-		var item_container: PanelContainer = item_container_scene.instantiate()
+		var item_container: ItemContainer = item_container_scene.instantiate()
 		items.add_child(item_container)
 		item_container.setup(ItemsManager.get_item(random_item))
 		
-		item_container.not_enought_gold.connect(_on_not_enought_gold)
-		item_container.mouse_entered.connect(_on_item_container_mouse_entered.bind(item_container))
-		item_container.mouse_exited.connect(_on_item_container_mouse_exited)
+		item_container.clicked.connect(_on_slot_clicked)
 		
 	PlayerData.gold_changed.connect(_on_gold_changed)
-
-func _on_item_container_mouse_entered(container: PanelContainer) -> void:
-	var data: ItemData = container.item_data
-	
-	if not data:
-		return
-	
-	hovered_item_data = data
-	timer_to_show_tooltip.start(0.4)
-	
-func _on_item_container_mouse_exited() -> void:
-	timer_to_show_tooltip.stop()
-	hovered_item_data = null
-	
-	if current_tooltip:
-		current_tooltip.queue_free()
-		current_tooltip = null
-	
-func _on_timer_to_show_tooltip_timeout() -> void:
-	if not hovered_item_data or current_tooltip:
-		return
-	
-	current_tooltip = item_information_scene.instantiate()
-	current_tooltip.modulate.a = 0.0
-	add_child(current_tooltip)
-	current_tooltip.setup(hovered_item_data)
-	
-	var target_pos = get_viewport().get_mouse_position() + Vector2(15, 15)
-	var screen_size = get_viewport().get_visible_rect().size
-	
-	await get_tree().process_frame
-	
-	if not is_instance_valid(current_tooltip): return
-	
-	if target_pos.x + current_tooltip.size.x > screen_size.x:
-		target_pos.x = get_viewport().get_mouse_position().x - current_tooltip.size.x - 15
-		
-	if target_pos.y + current_tooltip.size.y > screen_size.y:
-		target_pos.y = screen_size.y - current_tooltip.size.y - 10
-		
-	current_tooltip.global_position = target_pos
-	current_tooltip.modulate.a = 1.0
 
 func show_error() -> void:
 	if not_enough_money_tween and not_enough_money_tween.is_running():
@@ -96,15 +49,15 @@ func refresh_shop() -> void:
 		var random_item_index: int = randi_range(0, ItemsManager.all_items_count() - 1)
 		container.setup(ItemsManager.get_item(random_item_index))
 		
-	PlayerData.spend_gold(int(refresh_cost))
-	refresh_cost += refresh_cost * 0.1
+	if not free_refresh:
+		PlayerData.spend_gold(int(refresh_cost))
+		refresh_cost += refresh_cost * 0.1
+	else:
+		free_refresh = false
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	
 func _on_gold_changed(new_value: int) -> void:
 	player_gold_label.text = "Gold: %d" % new_value
-	
-func _on_not_enought_gold() -> void:
-	show_error()
 
 func _on_close_pressed() -> void:
 	close()
@@ -115,3 +68,24 @@ func _on_refresh_pressed() -> void:
 		return
 		
 	refresh_shop()
+
+func check_free_refresh() -> void:
+	var empty_containers: int = 0
+	for item_container: ItemContainer in items.get_children():
+		if item_container.item_data == null:
+			empty_containers += 1
+			
+		if empty_containers >= half_of_items:
+			free_refresh = true
+			refresh_cost_label.text = "Refresh cost - FREE"
+			break
+	
+func _on_slot_clicked(item_data: ItemData, container: ItemContainer) -> void:
+	if PlayerData.gold < item_data.cost:
+		show_error()
+		return
+		
+	EventBus.item_bought.emit(item_data)
+	PlayerData.spend_gold(item_data.cost)
+	container.setup(null)
+	check_free_refresh()

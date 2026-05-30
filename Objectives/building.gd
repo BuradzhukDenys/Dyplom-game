@@ -1,10 +1,9 @@
 extends StaticBody2D
 class_name Building
 
-@export var objective_interface_scene: PackedScene
-
 @onready var tooltip: Control = $Tooltip
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var shop_ui: ShopUI = $"../../../ShopUI"
 
 var can_interact: bool = false
 
@@ -20,14 +19,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func interact() -> void:
 	get_tree().paused = true
-	objective_interface = objective_interface_scene.instantiate()
-	objective_interface.interface_closed.connect(_on_interface_closed)
-	get_tree().current_scene.add_child(objective_interface)
+	shop_ui.show()
 
-func _on_interface_closed() -> void:
+func _on_shop_ui_interface_closed() -> void:
 	get_tree().paused = false
-	objective_interface.queue_free()
-	objective_interface = null
+	shop_ui.hide()
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Character"):

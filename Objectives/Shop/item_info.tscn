@@ -6,6 +6,7 @@
 bg_color = Color(0.30980393, 0.30980393, 0.30980393, 0.7294118)
 
 [node name="ItemInfo" type="PanelContainer" unique_id=1109912372]
+top_level = true
 custom_minimum_size = Vector2(200, 0)
 offset_right = 200.0
 offset_bottom = 4.0
