@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Screen
 class_name EndScreen
 
 @onready var end_screen_label: Label = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Control/Label
@@ -13,8 +13,10 @@ func _ready() -> void:
 
 func setup(is_victory: bool) -> void:
 	if is_victory:
+		AudioManager.play_victory_fanfare()
 		on_victory()
 	else:
+		AudioManager.play_defeat_fanfare()
 		on_defeat()
 
 func on_victory() -> void:
@@ -74,19 +76,14 @@ func start_rotation_tween_deg(rotation_degrees: float, time: float, loops: int =
 	label_tween.tween_property(end_screen_label, "rotation_degrees", -rotation_degrees, time)
 	
 func return_to_main_menu() -> void:
-	get_tree().change_scene_to_file("res://MainMenu/main_menu.tscn")
+	super.return_to_main_menu()
+	
 	EventBus.game_end = false
 	
 func restart() -> void:
+	super.restart()
+	
 	EventBus.game_end = false
-	get_tree().paused = false
-	get_tree().reload_current_scene()
-
-func _on_main_menu_pressed() -> void:
-	return_to_main_menu()
-
-func _on_restart_pressed() -> void:
-	restart()
 
 func _on_items_pressed() -> void:
 	EventBus.inventory_opened.emit()
