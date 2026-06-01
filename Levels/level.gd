@@ -9,8 +9,7 @@ class_name Level
 @export var end_screen_scene: PackedScene
 
 func _ready() -> void:
-	PlayerData.reset_data()
-	
+	AudioManager.play_music(AudioManager.level_music)
 	EventBus.victory.connect(_on_victory)
 	EventBus.defeat.connect(_on_defeat)
 	EventBus.inventory_opened.connect(_on_inventory_opened)
@@ -18,6 +17,8 @@ func _ready() -> void:
 	
 	shop_ui.hide()
 	inventory_ui.hide()
+	
+	PlayerData.reset_data()
 
 func _on_victory() -> void:
 	spawn_end_screen(true)

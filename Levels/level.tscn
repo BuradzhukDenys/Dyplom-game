@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dbuavfrikvmh"]
 
 [ext_resource type="Script" uid="uid://csekskgcx3koo" path="res://Levels/level.gd" id="1_xto7t"]
-[ext_resource type="Resource" uid="uid://c8b2213mgkou8" path="res://Levels/Resources/level1.tres" id="2_ecu0b"]
+[ext_resource type="Resource" uid="uid://cug6m48d15sln" path="res://Levels/Resources/level1.tres" id="2_ecu0b"]
 [ext_resource type="PackedScene" uid="uid://d3lngxpgehu1j" path="res://Character/knight.tscn" id="2_gtnvv"]
 [ext_resource type="PackedScene" uid="uid://bdwu8tgoscrqf" path="res://Screens/end_screen.tscn" id="2_vx8ih"]
 [ext_resource type="Texture2D" uid="uid://c12jbu1j6lhf3" path="res://Assets/dungeon-pack-free_version/godot_autotiles/free_ground_autotile_17.png" id="4_8a2b0"]
