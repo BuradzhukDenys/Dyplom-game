@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3 uid="uid://c8b2213mgkou8"]
+
+[ext_resource type="Script" uid="uid://caup4ia2bww5m" path="res://Levels/Resources/level_resource.gd" id="1_fbh4e"]
+[ext_resource type="Script" uid="uid://cdbr4bxojd6dt" path="res://Levels/Resources/wave_resource.gd" id="2_klsv5"]
+[ext_resource type="Script" uid="uid://dnt7eeuqct1jx" path="res://Levels/Resources/group_resource.gd" id="3_cl72s"]
+[ext_resource type="PackedScene" uid="uid://463mta0mknj4" path="res://Enemy/bat.tscn" id="6_7btwm"]
+
+[sub_resource type="Resource" id="Resource_a81qn"]
+script = ExtResource("3_cl72s")
+enemy_scene = ExtResource("6_7btwm")
+count = 15
+time_interval = 0.05
+spawn_method = "Point"
+
+[sub_resource type="Resource" id="Resource_ryud0"]
+script = ExtResource("3_cl72s")
+enemy_scene = ExtResource("6_7btwm")
+count = 15
+time_interval = 0.05
+time_offset = 3.0
+spawn_method = "Point"
+
+[sub_resource type="Resource" id="Resource_7fuwy"]
+script = ExtResource("3_cl72s")
+enemy_scene = ExtResource("6_7btwm")
+count = 15
+time_interval = 0.05
+time_offset = 6.0
+spawn_method = "Point"
+
+[sub_resource type="Resource" id="Resource_jg2ti"]
+script = ExtResource("3_cl72s")
+enemy_scene = ExtResource("6_7btwm")
+count = 15
+time_interval = 0.05
+time_offset = 9.0
+spawn_method = "Point"
+
+[sub_resource type="Resource" id="Resource_2hgjm"]
+script = ExtResource("3_cl72s")
+enemy_scene = ExtResource("6_7btwm")
+count = 15
+time_interval = 0.05
+time_offset = 12.0
+spawn_method = "Point"
+
+[sub_resource type="Resource" id="Resource_1rton"]
+script = ExtResource("2_klsv5")
+wave_text = "Wave 2"
+wave_offset = 10.0
+wave_enemies = Array[ExtResource("3_cl72s")]([SubResource("Resource_a81qn"), SubResource("Resource_ryud0"), SubResource("Resource_7fuwy"), SubResource("Resource_jg2ti"), SubResource("Resource_2hgjm")])
+
+[resource]
+script = ExtResource("1_fbh4e")
+level_name = "Forest"
+waves = Array[ExtResource("2_klsv5")]([SubResource("Resource_1rton")])
+metadata/_custom_type_script = "uid://caup4ia2bww5m"

@@ -1,54 +1,213 @@
 extends Node
 
-const MAX_HEALTH: float = 100.0
-const MAX_MANA: float = 100000.0
+enum PotionType
+{
+	HEALING,
+	MANA
+}
+
+signal experience_changed(new_value: int)
+signal gold_changed(new_value: int)
+signal weapon_changed(new_weapon: SwordData)
+
+signal max_health_changed(new_value: float)
+signal health_restore_changed(new_value: float)
+signal max_mana_changed(new_value: float)
+signal mana_restore_changed(new_value: float)
+signal damage_changed(new_value: float)
+signal skill_damage_changed(new_value: float)
+signal speed_changed(new_value: float)
+
+const MAX_SHOP_SLOTS: int = 10
+const MAX_SKILLS_SLOTS: int = 5
 const MAX_GOLD: int = 999999
 const MAX_EXPIRIENCE: int = 999999
 const PLAYER_RADIUS_SPAWN_ENEMIES: float = 730.0
 
-var skills_slots_count: int = 2
+var current_weapon: SwordData:
+	set(new_value):
+		if current_weapon != new_value:
+			current_weapon = new_value
+			base_damage = current_weapon.damage
+			weapon_changed.emit(current_weapon)
+		
+var passive_items: Array[ItemData] = []
+
 var player_position: Vector2 = Vector2.ZERO
-var player_dead: bool = false
-var experience: int = 0
-var gold: int = 99999990
-var current_health: float = MAX_HEALTH
-var current_mana: float = MAX_MANA
+var target_point: Vector2 = Vector2.ZERO
+
+var max_health: float = 100.0:
+	set(value):
+		if max_health != value:
+			max_health = value
+			max_health_changed.emit(max_health)
+var max_mana: float = 100000.0:
+	set(value):
+		if max_mana != value:
+			max_mana = value
+			max_mana_changed.emit(max_mana)
+var damage: float:
+	set(value):
+		if damage != value:
+			damage = value
+			damage_changed.emit(damage)
+var skill_damage: float:
+	set(value):
+		if skill_damage != value:
+			skill_damage = value
+			skill_damage_changed.emit(skill_damage)
+var speed: float = 300.0:
+	set(value):
+		var clamped_value = clamp(value, min_speed, max_speed)
+		if speed != clamped_value:
+			speed = clamped_value
+			speed_changed.emit(speed)
+			
+var bonus_percent_damage: float = 1.0
+var bonus_percent_speed: float = 1.0
+var bonus_percent_skill_damage: float = 1.0
+
+var max_speed: float = 1000.0
+var min_speed: float = 160.0
+
+var base_health: float = 100.0
+var base_mana: float = 100.0
+var base_speed: float = 300.0
+var base_health_restore: float = 0.0
+var base_mana_restore: float = 0.0
+var base_damage: float
+var base_skill_damage: float = 0.0
+
+var target_health: float = 0.0
+var target_health_restore: float = 0.0
+var target_mana: float = 0.0
+var target_mana_restore: float = 0.0
+var target_damage: float = 0.0
+var target_skill_damage: float = 0.0
+var target_speed: float = 0.0
+
+var health_restore: float = 0.0:
+	set(value):
+		if health_restore != value:
+			health_restore = value
+			health_restore_changed.emit(health_restore)
+var mana_restore: float = 0.0:
+	set(value):
+		if mana_restore != value:
+			mana_restore = value
+			mana_restore_changed.emit(mana_restore)
+
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
+var healing_potion_cooldown: float = 8.0
+var mana_potion_cooldown: float = 8.0
 
-var can_drink_healing_potion: bool = true
-var can_drink_mana_potion: bool = true
+var slots_in_shop: int = 4:
+	set(value):
+		slots_in_shop = clampi(value, 0, MAX_SHOP_SLOTS)
+var skills_slots_count: int = 2:
+	set(value):
+		skills_slots_count = clampi(value, 0, MAX_SKILLS_SLOTS)
+
+var experience: int = 0:
+	set(new_value):
+		experience = clamp(new_value, 0, MAX_EXPIRIENCE)
+		experience_changed.emit(experience)
+var gold: int = 0:
+	set(new_value):
+		gold = clamp(new_value, 0, MAX_GOLD)
+		gold_changed.emit(gold)
+
+func _ready() -> void:
+	EventBus.item_bought.connect(_on_item_bought)
+	
+	current_weapon = ItemsManager.ITEMS[ItemsManager.ItemsType.BASE_SWORD]
+	passive_items.clear()
+	
+	damage = current_weapon.damage
+	base_damage = current_weapon.damage
 
 func reset_data() -> void:
-	player_dead = false
 	player_position = Vector2.ZERO
-	experience = 0
-	gold = 99999990
-	can_drink_healing_potion = true
-	can_drink_mana_potion = true
-	EventBus.gold_changed.emit(gold)
-	EventBus.experience_changed.emit(experience)
+	self.experience = 0
+	self.gold = MAX_GOLD
+	passive_items.clear()
+	current_weapon = ItemsManager.get_item(ItemsManager.ItemsType.BASE_SWORD)
+	max_health = base_health
+	health_restore = base_health_restore
+	max_mana = base_mana
+	mana_restore = base_mana_restore
+	damage = base_damage
+	speed = base_speed
 	
 func add_gold(amount: int) -> void:
-	if amount < 0:
-		amount = -amount
-	gold = clamp(gold + amount, 0, MAX_GOLD)
-	EventBus.gold_changed.emit(gold)
+	gold += abs(amount)
 
 func add_experience(amount: int) -> void:
-	if amount < 0:
-		amount = -amount
-	experience = clamp(experience + amount, 0, MAX_EXPIRIENCE)
-	EventBus.experience_changed.emit(experience)
+	experience += abs(amount)
 
 func spend_gold(amount: int) -> void:
-	if amount < 0:
-		amount = -amount
-	gold = clamp(gold - amount, 0, MAX_GOLD)
-	EventBus.gold_changed.emit(gold)
+	gold -= abs(amount)
 	
 func spend_expirience(amount: int) -> void:
-	if amount < 0:
-		amount = -amount
-	experience = clamp(experience - amount, 0, MAX_EXPIRIENCE)
-	EventBus.experience_changed.emit(experience)
+	experience -= abs(amount)
+
+func _on_item_bought(item_data: ItemData) -> void:
+	if item_data is PassiveItem:
+		passive_items.append(item_data)
+	elif item_data is SwordData:
+		current_weapon = item_data
+	recalculate_stats()
+	
+func recalculate_stats() -> void:
+	target_health = base_health
+	target_health_restore = base_health_restore
+	target_mana = base_mana
+	target_mana_restore = base_mana_restore
+	target_damage = base_damage
+	target_speed = base_speed
+	
+	var target_percent_speed: float = 1.0
+	var target_percent_damage: float = 1.0
+	var target_percent_skill_damage: float = 1.0
+	
+	for item_data: PassiveItem in passive_items:
+		if (item_data.buffs & 1) != 0:
+			target_health += item_data.max_health_bonus
+		if (item_data.buffs & 2) != 0:
+			target_health_restore += item_data.health_restore_bonus
+		if (item_data.buffs & 4) != 0:
+			target_mana += item_data.max_mana_bonus
+		if (item_data.buffs & 8) != 0:
+			target_mana_restore += item_data.mana_restore_bonus
+		if (item_data.buffs & 16) != 0:
+			if item_data.damage_type == PassiveItem.StatType.FLAT:
+				target_damage += item_data.damage_bonus
+			elif item_data.damage_type == PassiveItem.StatType.PERCENT:
+				target_percent_damage += item_data.damage_percent_bonus
+		if (item_data.buffs & 32) != 0:
+			if item_data.speed_type == PassiveItem.StatType.FLAT:
+				target_speed += item_data.speed_bonus
+			elif item_data.speed_type == PassiveItem.StatType.PERCENT:
+				target_percent_speed += item_data.speed_percent_bonus
+		if (item_data.buffs & 64) != 0:
+			if item_data.skill_damage_type == PassiveItem.StatType.FLAT:
+				target_skill_damage += item_data.skill_damage_bonus
+			elif item_data.skill_damage_type == PassiveItem.StatType.PERCENT:
+				target_percent_skill_damage += item_data.skill_damage_percent_bonus
+			
+	target_damage *= target_percent_damage
+	target_speed *= target_percent_speed
+	target_skill_damage *= target_percent_skill_damage
+	
+	bonus_percent_damage = target_percent_damage
+	bonus_percent_speed = target_percent_speed
+	bonus_percent_skill_damage = target_percent_skill_damage
+			
+	max_health = target_health
+	health_restore = target_health_restore
+	max_mana = target_mana
+	mana_restore = target_mana_restore
+	damage = target_damage
+	speed = target_speed
+	skill_damage = target_skill_damage

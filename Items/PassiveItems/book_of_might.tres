@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://buso11r1s7ud8"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_0rtps"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="2_rsjjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_rsjjt")
+region = Rect2(833, 176, 14, 16)
+
+[resource]
+script = ExtResource("1_0rtps")
+buffs = 85
+max_health_bonus = 35.0
+max_mana_bonus = 35.0
+damage_type = 1
+damage_percent_bonus = 0.1499999999999999
+skill_damage_type = 1
+skill_damage_percent_bonus = 0.1499999999999999
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 50
+item_name = "Book of Might"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

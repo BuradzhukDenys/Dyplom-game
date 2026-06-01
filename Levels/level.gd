@@ -1,45 +1,52 @@
 extends Node2D
+class_name Level
 
-@export var slime_scene: PackedScene
-@export var enemies: Node2D
+@onready var shop_ui: ShopUI = $ShopUI
+@onready var inventory_ui: InventoryUI = $InventoryUI
+@onready var stats_ui: StatsUI = $Stats
+@onready var pause_menu: PauseMenu = $Pause
+
+@export var end_screen_scene: PackedScene
 
 func _ready() -> void:
+	AudioManager.play_music(AudioManager.level_music)
+	EventBus.victory.connect(_on_victory)
+	EventBus.defeat.connect(_on_defeat)
+	EventBus.inventory_opened.connect(_on_inventory_opened)
+	EventBus.stats_opened.connect(_on_stats_opened)
+	
+	shop_ui.hide()
+	inventory_ui.hide()
+	
 	PlayerData.reset_data()
+
+func _on_victory() -> void:
+	spawn_end_screen(true)
+
+func _on_defeat() -> void:
+	spawn_end_screen(false)
+
+func spawn_end_screen(is_victory: bool) -> void:
+	get_tree().paused = true
+	var end_screen: EndScreen = end_screen_scene.instantiate()
+	add_child(end_screen)
+	end_screen.setup(is_victory)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.keycode == KEY_0 and event.is_pressed():
-			_on_spawn_enemies_timer_timeout()
-		elif event.keycode == KEY_1 and event.is_pressed():
-			var slime: CharacterBody2D = slime_scene.instantiate()
-			slime.global_position = get_global_mouse_position()
-			enemies.add_child(slime)
-			slime.enemy_dead.connect(_on_enenmy_dead.bind(slime))
+		if event.keycode == KEY_Y and event.is_pressed():
+			EventBus.game_end = true
+			EventBus.victory.emit()
+		elif event.keycode == KEY_B and event.is_pressed():
+			EventBus.game_end = true
+			EventBus.defeat.emit()
 
-func _on_spawn_enemies_timer_timeout() -> void:
-	var slime: CharacterBody2D = slime_scene.instantiate()
-	slime.global_position = random_spawn_pos()
-	enemies.add_child(slime)
-	slime.enemy_dead.connect(_on_enenmy_dead.bind(slime))
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		pause_menu.show_menu()
 
-func random_spawn_pos() -> Vector2:
-	var test_position: Vector2
-	var is_valid: bool = false
-	var attempts: int = 0
+func _on_inventory_opened() -> void:
+	inventory_ui.show_inventory()
 	
-	while not is_valid and attempts < 50:
-		var spawn_pos: Vector2 = Vector2.from_angle(TAU * randf()) * PlayerData.PLAYER_RADIUS_SPAWN_ENEMIES
-		test_position = PlayerData.player_position + spawn_pos
-		
-		if test_position.x < 1970 and test_position.x > -1970 and test_position.y < 960 and test_position.y > -960:
-			is_valid = true
-			
-		attempts += 1
-		
-	test_position.x = clamp(test_position.x, -1970, 1970)
-	test_position.y = clamp(test_position.y, -960, 960)
-	
-	return test_position
-
-func _on_enenmy_dead(enemy: CharacterBody2D) -> void:
-	enemy.queue_free()
+func _on_stats_opened() -> void:
+	stats_ui.show_stats()

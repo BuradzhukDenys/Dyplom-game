@@ -1,18 +1,12 @@
 extends PanelContainer
-
-#TODO:
-#1. Це слот, він повинен зберігати в собі скілл
-#2. Спочатку слот повинен бути пустим
-#3. Коли вивчаю новий скілл, повинна передаватись інформація, якщо слот пустий
-#4. Коли скіл скастували, потрібно зробити його неактивним
-#5. запустити кулдаун
-#6. Коли кулдаун закінчився, потрібно повідомити про це
+class_name SkillSlot
 
 @onready var skill_icon: TextureRect = $PanelContainer/TextureRect
 @onready var skill_cooldown: TextureProgressBar = $PanelContainer/TextureProgressBar
 @onready var skill_cooldown_label: Label = $PanelContainer/SecondsCooldown
 @onready var skill_cooldown_timer: Timer = $CooldownTimer
-@onready var skill_key_label: Label = $PanelContainer/MarginContainer/Label
+@onready var skill_key_label: Label = $PanelContainer/MarginContainer/Keybind
+@onready var mana_cost_label: Label = $PanelContainer/MarginContainer/ManaCost
 
 var current_tween: Tween
 
@@ -21,14 +15,13 @@ var current_tween: Tween
 var has_skill: bool = false
 
 func _ready() -> void:
-	EventBus.skill_casted.connect(_on_skill_casted)
-	
 	skill_cooldown.value = 0
 	skill_cooldown_label.text = ""
 	skill_cooldown_label.visible = false
 	skill_cooldown_timer.stop()
 	skill_icon.texture = null
 	skill_key_label.text = str(slot_position)
+	mana_cost_label.hide()
 	
 	if skill_data:
 		setup_slot(skill_data)
@@ -36,6 +29,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if skill_cooldown_label.visible:
 		skill_cooldown_label.text = str(int(skill_cooldown_timer.time_left) + 1)
+		
+func setup(skill_comp: SkillComponent, new_slot_position: int) -> void:
+	skill_comp.skill_casted.connect(_on_skill_casted)
+	skill_comp.skill_cooldown_finished.connect(_on_skill_cooldown_finished)
+	
+	slot_position = new_slot_position
+	skill_key_label.text = str(slot_position)
+	
+	if skill_comp.skills.has(slot_position) and skill_comp.skills[slot_position] != SkillsManager.SkillType.NONE:
+		setup_slot(SkillsManager.SKILLS[skill_comp.skills[slot_position]])
 
 func is_free() -> bool:
 	return not has_skill
@@ -48,10 +51,11 @@ func setup_slot(skill_resource: SkillResource) -> void:
 	
 	skill_icon.texture = skill_data.skill_icon
 	skill_cooldown_timer.wait_time = skill_data.cooldown
-	SkillsManager.skills[slot_position] = skill_resource
+	mana_cost_label.text = str(skill_data.mana_cost)
+	mana_cost_label.show()
 	
-func _on_skill_casted(skill_resource: SkillResource) -> void:
-	if skill_resource != skill_data:
+func _on_skill_casted(casted_slot: int, cooldown_time: float) -> void:
+	if casted_slot != slot_position:
 		return
 	
 	skill_cooldown.value = skill_cooldown.max_value
@@ -60,10 +64,10 @@ func _on_skill_casted(skill_resource: SkillResource) -> void:
 	if current_tween and current_tween.is_valid():
 		current_tween.kill()
 		
-	skill_cooldown_timer.start(skill_data.cooldown)
+	skill_cooldown_timer.start(cooldown_time)
 	current_tween = create_tween()
-	current_tween.tween_property(skill_cooldown, "value", skill_cooldown.min_value, skill_data.cooldown)
+	current_tween.tween_property(skill_cooldown, "value", skill_cooldown.min_value, cooldown_time)
 
-func _on_cooldown_timer_timeout() -> void:
-	SkillsManager.set_skill_cooldown_at_pos(slot_position, false)
-	skill_cooldown_label.visible = false
+func _on_skill_cooldown_finished(slot: int) -> void:
+	if slot == slot_position:
+		skill_cooldown_label.visible = false

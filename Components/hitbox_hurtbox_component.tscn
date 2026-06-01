@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7cot3gtue8gq"]
 
 [ext_resource type="Script" uid="uid://c4w1xn7aypyp7" path="res://Components/hurtbox.gd" id="1_docf1"]
+[ext_resource type="Script" uid="uid://ccfhcccwyliqq" path="res://Components/hitbox.gd" id="1_jko3c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vjdnk"]
 radius = 40.0
@@ -12,6 +13,7 @@ radius = 13.0
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=549158713]
 collision_mask = 2
+script = ExtResource("1_jko3c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1254751496]
 shape = SubResource("CircleShape2D_vjdnk")

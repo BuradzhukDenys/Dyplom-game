@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://g0htyhp6jpqc"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_81hhk"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="2_0i52o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p106"]
+atlas = ExtResource("2_0i52o")
+region = Rect2(432, 272, 16, 16)
+
+[resource]
+script = ExtResource("1_81hhk")
+buffs = 33
+max_health_bonus = 30.0
+speed_bonus = -60.0
+texture = SubResource("AtlasTexture_1p106")
+cost = 18
+item_name = "Mithrill Armor"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

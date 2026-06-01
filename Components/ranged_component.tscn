@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cdplihi5ufoju"]
+
+[ext_resource type="Script" uid="uid://don4p35phgoix" path="res://Components/ranged_component.gd" id="1_rlm4p"]
+
+[node name="RangedComponent" type="Node" unique_id=257472302]
+script = ExtResource("1_rlm4p")
+
+[node name="Timer" type="Timer" parent="." unique_id=612121185]
+one_shot = true

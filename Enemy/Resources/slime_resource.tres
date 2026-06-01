@@ -4,10 +4,11 @@
 
 [resource]
 script = ExtResource("1_d0e0i")
-speed = 100.0
+speed = 150.0
 damage = 10.0
 expirience_gain = 8
 gold_gain = 3
 knockback_strength = 300.0
 knockback_friction = 800.0
+health = 50.0
 metadata/_custom_type_script = "uid://d34ein411aagx"

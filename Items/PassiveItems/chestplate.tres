@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://d2ytc3ktuim0a"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_4tne8"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_t4whn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_t4whn")
+region = Rect2(16, 2048, 16, 15)
+
+[resource]
+script = ExtResource("1_4tne8")
+buffs = 1
+max_health_bonus = 20.0
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 15
+item_name = "Chestplate"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

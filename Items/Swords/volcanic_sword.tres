@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SwordData" format=3 uid="uid://cdxpn1badhiq1"]
+
+[ext_resource type="Script" uid="uid://5mutwwf6aioh" path="res://Items/swords_resource.gd" id="1_ldqp6"]
+[ext_resource type="Texture2D" uid="uid://cbyuimp1h0uts" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_8slqf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8slqf"]
+atlas = ExtResource("2_8slqf")
+region = Rect2(0, 3360, 32, 32)
+
+[resource]
+script = ExtResource("1_ldqp6")
+damage = 15.0
+attack_interval = 2.5
+additional_effects = 1
+fire_duration = 10.0
+fire_damage = 8.0
+texture = SubResource("AtlasTexture_8slqf")
+cost = 35
+item_name = "Volcanic Sword"
+metadata/_custom_type_script = "uid://5mutwwf6aioh"

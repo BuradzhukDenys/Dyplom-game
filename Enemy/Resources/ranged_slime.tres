@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RangedEnemyResource" format=3 uid="uid://dc55uyeipi60u"]
+
+[ext_resource type="Script" uid="uid://can60636rlg6p" path="res://Enemy/Resources/ranged_enemy_resource.gd" id="1_h0bei"]
+
+[resource]
+script = ExtResource("1_h0bei")
+shootspeed = 3.0
+speed = 125.0
+damage = 15.0
+expirience_gain = 18
+gold_gain = 6
+knockback_strength = 180.0
+knockback_friction = 670.0
+health = 85.0
+metadata/_custom_type_script = "uid://d34ein411aagx"

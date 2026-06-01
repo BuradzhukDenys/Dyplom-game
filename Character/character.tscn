@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://deas4qrt32pke" path="res://Assets/SpritesheetsKnight/Spritesheet_with_Shadows.png" id="1_nwtvh"]
 [ext_resource type="Texture2D" uid="uid://bowkfuntvtib" path="res://Assets/particles/Healing particle.png" id="5_a23tb"]
 [ext_resource type="Texture2D" uid="uid://c61n1valrogpy" path="res://Assets/particles/Mana particle.png" id="6_uerqc"]
+[ext_resource type="PackedScene" uid="uid://ci20aou2dtpfp" path="res://Components/potions_component.tscn" id="7_1l6l2"]
+[ext_resource type="PackedScene" uid="uid://cspgrodiap2h" path="res://Components/skill_component.tscn" id="8_4te0c"]
 [ext_resource type="PackedScene" uid="uid://bg80umpiau45g" path="res://Components/player_hp_mana_component.tscn" id="8_q4sqr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jkkns"]
@@ -941,7 +943,7 @@ gravity = Vector3(0, -70, 0)
 scale_curve = SubResource("CurveTexture_veuuo")
 color_ramp = SubResource("GradientTexture1D_1l6l2")
 
-[node name="Character" type="CharacterBody2D" unique_id=1651891733 groups=["Character"]]
+[node name="Character" type="CharacterBody2D" unique_id=1651891733 groups=["character"]]
 collision_layer = 2048
 collision_mask = 768
 motion_mode = 1
@@ -986,10 +988,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 editor_draw_limits = true
 
-[node name="TakeDamageTimer" type="Timer" parent="." unique_id=500171561]
-process_callback = 0
-one_shot = true
-
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=545272548]
 process_callback = 0
 one_shot = true
@@ -1025,8 +1023,20 @@ process_material = SubResource("ParticleProcessMaterial_uerqc")
 
 [node name="PlayerHPManaComponent" parent="." unique_id=715499662 instance=ExtResource("8_q4sqr")]
 
+[node name="PotionsComponent" parent="." unique_id=110570453 node_paths=PackedStringArray("hp_mana_component") instance=ExtResource("7_1l6l2")]
+hp_mana_component = NodePath("../PlayerHPManaComponent")
+
+[node name="SkillComponent" parent="." unique_id=480674583 node_paths=PackedStringArray("hp_mana_component") instance=ExtResource("8_4te0c")]
+hp_mana_component = NodePath("../PlayerHPManaComponent")
+skills = Dictionary[int, int]({
+1: 1,
+2: 2
+})
+
+[node name="TargetPoint" type="Marker2D" parent="." unique_id=953335223]
+position = Vector2(0, -24)
+
 [connection signal="area_entered" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="health_changed" from="PlayerHPManaComponent" to="." method="_on_hp_component_health_changed"]
 [connection signal="mana_changed" from="PlayerHPManaComponent" to="." method="_on_player_hp_mana_component_mana_changed"]
