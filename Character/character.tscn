@@ -978,7 +978,6 @@ position = Vector2(0, -21)
 shape = SubResource("CapsuleShape2D_twwou")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1225629116]
-zoom = Vector2(0.3, 0.3)
 process_callback = 0
 limit_left = -2000
 limit_top = -1008
@@ -1030,7 +1029,8 @@ hp_mana_component = NodePath("../PlayerHPManaComponent")
 [node name="SkillComponent" parent="." unique_id=480674583 node_paths=PackedStringArray("hp_mana_component") instance=ExtResource("8_4te0c")]
 hp_mana_component = NodePath("../PlayerHPManaComponent")
 skills = Dictionary[int, int]({
-1: 1
+1: 1,
+2: 2
 })
 
 [node name="TargetPoint" type="Marker2D" parent="." unique_id=953335223]

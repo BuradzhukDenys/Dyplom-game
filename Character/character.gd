@@ -8,7 +8,7 @@ class_name Character
 @onready var potions_component: PotionsComponent = $PotionsComponent
 @onready var skill_component: SkillComponent = $SkillComponent
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
-@onready var hitbox: Area2D = $HitboxHurtboxComponent/Hitbox
+@onready var hitbox: Hitbox = $HitboxHurtboxComponent/Hitbox
 @onready var hitbox_collision: CollisionShape2D = $HitboxHurtboxComponent/Hitbox/CollisionShape2D
 @onready var hurtbox_collision: CollisionShape2D = $HitboxHurtboxComponent/Hurtbox/CollisionShape2D
 @onready var healing_particles: GPUParticles2D = $ParticleManager/HealParticles
@@ -45,8 +45,13 @@ var current_state: States = States.IDLE
 #endregion
 
 func _ready() -> void:
-	speed = PlayerData.max_speed
-	damage = PlayerData.current_weapon.damage
+	PlayerData.speed_changed.connect(func(new_value): speed = new_value)
+	PlayerData.damage_changed.connect(func(new_value): damage = new_value)
+	speed = PlayerData.speed
+	damage = PlayerData.damage
+	
+	PlayerData.weapon_changed.connect(_on_weapon_changed)
+	_on_weapon_changed(PlayerData.current_weapon)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack and current_state in [States.IDLE, States.MOVE]:
@@ -146,6 +151,7 @@ func play_animation_directionaly(anim_name: String) -> void:
 	animation_player.play(animation)
 
 func show_defeat() -> void:
+	EventBus.game_end = true
 	EventBus.defeat.emit()
 	
 func attack_take_damage_change() -> void:
@@ -189,6 +195,11 @@ func _on_player_hp_mana_component_mana_changed(_new_value: int, type: PlayerHPMa
 func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
+func _on_hitbox_area_entered(area: Hurtbox) -> void:
 	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
 		area.take_damage(damage)
+		if hitbox.has_fire:
+			area.burn(PlayerData.current_weapon.fire_duration, PlayerData.current_weapon.fire_damage)
+
+func _on_weapon_changed(new_weapon: SwordData) -> void:
+	hitbox.has_fire = (new_weapon.additional_effects & 1) != 0
