@@ -12,11 +12,14 @@ signal enemy_dead()
 
 @export var resource: EnemyResource
 
+var is_dead: bool = false
 var is_touching_player: bool = false
 var target_direction: Vector2 = Vector2.ZERO
 var another_animation_play: bool = false
 var knockback_velocity: Vector2 = Vector2.ZERO
 var push_velocity: Vector2 = Vector2.ZERO
+
+var damage_flash_tween: Tween
 
 func _ready() -> void:
 	hp_component.max_health = resource.health
@@ -51,6 +54,9 @@ func _physics_process(delta: float) -> void:
 					collider.push_velocity = target_direction * (resource.speed * 0.8)
 
 func play_animation_directionaly(anim_name: String) -> void:
+	if is_dead and not anim_name.containsn("Die"):
+		return
+	
 	var animation_direction: float = Vector2.RIGHT.dot(target_direction)
 	var animation: String = anim_name
 	
@@ -87,24 +93,34 @@ func _on_hitbox_area_exited(_area: Area2D) -> void:
 	is_touching_player = false
 
 func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_CHANGED_TYPE) -> void:
+	if new_value <= 0:
+		if is_dead:
+			return
+			
+		is_dead = true
+		set_physics_process(false)
+		hitbox_collision.set_deferred("disabled", true)
+		hurtbox_collision.set_deferred("disabled", true)
+				
+		PlayerData.add_experience(resource.expirience_gain)
+		PlayerData.add_gold(resource.gold_gain)
+				
+		play_animation_directionaly("Die")
+		return
+	
+	if damage_flash_tween and damage_flash_tween.is_valid():
+		damage_flash_tween.kill()
+		
+	damage_flash_tween = create_tween()
+	animated_sprite.self_modulate = Color(0.22, 0.22, 0.22, 0.592)
+	damage_flash_tween.tween_property(animated_sprite, "self_modulate", Color(1, 1, 1, 1), 0.4)
+	
 	match type:
 		HPComponent.HEALTH_CHANGED_TYPE.TAKE_DAMAGE:
 			knockback_velocity = -target_direction * resource.knockback_strength
-			if new_value > 0:
-				play_animation_directionaly("TakeDamage")
-				animated_sprite.self_modulate = Color(0.9, 0, 0, 0.8)
-			else:
-				set_physics_process(false)
-				hitbox_collision.set_deferred("disabled", true)
-				hurtbox_collision.set_deferred("disabled", true)
-				
-				PlayerData.add_experience(resource.expirience_gain)
-				PlayerData.add_gold(resource.gold_gain)
-				
-				play_animation_directionaly("Die")
+			play_animation_directionaly("TakeDamage")
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	animated_sprite.self_modulate = Color(1, 1, 1, 1)
 	another_animation_play = false
 	
 	if animated_sprite.animation.containsn("Die"):
