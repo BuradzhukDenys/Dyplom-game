@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dmgxbb2kta8c2"]
+
+[ext_resource type="Script" uid="uid://7mdklp61mxo" path="res://Components/fire_burn_component.gd" id="1_u68y6"]
+
+[node name="FireBurnComponent" type="Node" unique_id=1511111482]
+script = ExtResource("1_u68y6")

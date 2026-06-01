@@ -43,6 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.3137255)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1077494941]
@@ -51,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="UiBackground" type="PanelContainer" parent="CenterContainer" unique_id=98970997]
 custom_minimum_size = Vector2(800, 500)
@@ -75,17 +77,20 @@ columns = 5
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/margin_left = 115
 theme_override_constants/margin_right = 115
 theme_override_constants/margin_bottom = 60
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/UiBackground/Intearctive" unique_id=821958090]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Buttons" type="HBoxContainer" parent="CenterContainer/UiBackground/Intearctive/VBoxContainer" unique_id=1595248711]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
 

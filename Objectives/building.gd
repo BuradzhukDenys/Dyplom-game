@@ -1,9 +1,9 @@
 extends StaticBody2D
-
-@export var objective_interface_scene: PackedScene
+class_name Building
 
 @onready var tooltip: Control = $Tooltip
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var shop_ui: ShopUI = $"../../../ShopUI"
 
 var can_interact: bool = false
 
@@ -18,7 +18,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		interact()
 
 func interact() -> void:
-	pass
+	get_tree().paused = true
+	shop_ui.show()
+
+func _on_shop_ui_interface_closed() -> void:
+	get_tree().paused = false
+	shop_ui.hide()
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Character"):

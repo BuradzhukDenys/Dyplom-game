@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://dy63gmngs8k2u"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_wxbtv"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_2oejc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_2oejc")
+region = Rect2(177, 2129, 14, 14)
+
+[resource]
+script = ExtResource("1_wxbtv")
+buffs = 80
+damage_type = 1
+damage_percent_bonus = 0.10000000000000009
+skill_damage_type = 1
+skill_damage_percent_bonus = 0.10000000000000009
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 28
+item_name = "Sigil of Might"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

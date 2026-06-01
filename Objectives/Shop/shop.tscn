@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://c4t1llsx3riqq"]
 
-[ext_resource type="Script" uid="uid://bxa3nw6mbg3k5" path="res://Objectives/Shop/shop.gd" id="1_cl55f"]
 [ext_resource type="PackedScene" uid="uid://bn7nbsgnck1vb" path="res://Objectives/objective.tscn" id="1_r5evm"]
 [ext_resource type="Texture2D" uid="uid://bufqtasf3wrnf" path="res://Assets/Objectives/Shop.png" id="2_g55c7"]
 [ext_resource type="PackedScene" uid="uid://cdrrfpugvvnyy" path="res://Objectives/Shop/shop_ui.tscn" id="3_ksff2"]
@@ -15,7 +14,6 @@ size = Vector2(324, 290)
 size = Vector2(216, 141)
 
 [node name="Shop" unique_id=842312657 instance=ExtResource("1_r5evm")]
-script = ExtResource("1_cl55f")
 objective_interface_scene = ExtResource("3_ksff2")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1468209027]

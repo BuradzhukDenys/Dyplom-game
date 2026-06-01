@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://cguuuge3kxvc4"]
+
+[ext_resource type="Script" uid="uid://d34ein411aagx" path="res://Enemy/Resources/enemy_resource.gd" id="1_tlq5d"]
+
+[resource]
+script = ExtResource("1_tlq5d")
+speed = 350.0
+damage = 5.0
+expirience_gain = 4
+gold_gain = 2
+knockback_strength = 650.0
+knockback_friction = 1500.0
+health = 37.0
+metadata/_custom_type_script = "uid://d34ein411aagx"

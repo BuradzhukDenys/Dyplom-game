@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SwordData" format=3 uid="uid://doyyumxpbxm7e"]
+
+[ext_resource type="Script" uid="uid://5mutwwf6aioh" path="res://Items/swords_resource.gd" id="1_xyoin"]
+[ext_resource type="Texture2D" uid="uid://cbyuimp1h0uts" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_oifg3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oifg3"]
+atlas = ExtResource("2_oifg3")
+region = Rect2(4, 3204, 24, 24)
+
+[resource]
+script = ExtResource("1_xyoin")
+damage = 10.0
+attack_interval = 0.5
+texture = SubResource("AtlasTexture_oifg3")
+cost = 15
+item_name = "Dagger"
+metadata/_custom_type_script = "uid://5mutwwf6aioh"

@@ -1,18 +1,18 @@
 extends VBoxContainer
+class_name SkillsUI
 
 @export var skill_slot_scene: PackedScene
 @onready var skills_container: HBoxContainer = $HBoxContainer
-var max_skills_count: int = PlayerData.skills_slots_count
+var max_skills_count: int
 
 func _ready() -> void:
-	for i in max_skills_count:
+	max_skills_count = PlayerData.skills_slots_count
+	
+	for i in range(1, max_skills_count + 1):
 		var skill_slot = skill_slot_scene.instantiate()
 		skills_container.add_child(skill_slot)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.keycode == KEY_P and event.is_pressed():
-			for child in $HBoxContainer.get_children():
-				if child.is_free():
-					child.setup_slot(SkillsManager.ICE_HAMMER)
-					break
+func setup(skill_comp: SkillComponent) -> void:
+	for child: SkillSlot in skills_container.get_children():
+		var current_slot_number: int = child.get_index() + 1
+		child.setup(skill_comp, current_slot_number)

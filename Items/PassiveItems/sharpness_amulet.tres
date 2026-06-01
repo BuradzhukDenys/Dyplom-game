@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://dlvdctbs60ab1"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_4ojti"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_lno8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_lno8g")
+region = Rect2(16, 2176, 16, 16)
+
+[resource]
+script = ExtResource("1_4ojti")
+buffs = 16
+damage_bonus = 15.0
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 13
+item_name = "Sharpness Amulet"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

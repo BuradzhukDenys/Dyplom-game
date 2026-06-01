@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://dcmn4w2epxity"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_f6a7f"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_d56m4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_d56m4")
+region = Rect2(128, 1985, 16, 15)
+
+[resource]
+script = ExtResource("1_f6a7f")
+buffs = 32
+speed_bonus = 40.0
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 12
+item_name = "Boots"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

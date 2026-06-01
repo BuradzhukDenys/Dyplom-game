@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://t2ri4l2nrpte"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_ldy16"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_lahp4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf6j3"]
+atlas = ExtResource("2_lahp4")
+region = Rect2(96, 288, 16, 16)
+
+[resource]
+script = ExtResource("1_ldy16")
+buffs = 64
+skill_damage_type = 1
+skill_damage_percent_bonus = 0.1499999999999999
+texture = SubResource("AtlasTexture_nf6j3")
+cost = 30
+item_name = "Wizard Staff"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

@@ -1,4 +1,5 @@
 extends Control
+class_name MainMenu
 
 const level_scene: PackedScene = preload("res://Levels/level.tscn")
 
@@ -7,6 +8,7 @@ const level_scene: PackedScene = preload("res://Levels/level.tscn")
 
 func _ready() -> void:
 	get_tree().paused = true
+	AudioManager.play_music(AudioManager.main_menu_music)
 
 func _on_play_button_pressed() -> void:
 	get_tree().paused = false

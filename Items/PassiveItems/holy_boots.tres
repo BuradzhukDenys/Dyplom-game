@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://md5dg3b271vo"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_oqa0w"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_hnge3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vdqd"]
+atlas = ExtResource("2_hnge3")
+region = Rect2(48, 2160, 16, 16)
+
+[resource]
+script = ExtResource("1_oqa0w")
+buffs = 98
+health_restore_bonus = 0.15
+damage_bonus = -1.5
+speed_type = 1
+speed_percent_bonus = 0.10000000000000009
+skill_damage_bonus = 20.0
+texture = SubResource("AtlasTexture_8vdqd")
+cost = 25
+item_name = "Holy Boots"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"
