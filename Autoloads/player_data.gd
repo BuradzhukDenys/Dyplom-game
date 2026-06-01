@@ -10,12 +10,13 @@ signal experience_changed(new_value: int)
 signal gold_changed(new_value: int)
 signal weapon_changed(new_weapon: SwordData)
 
-signal max_health_changed(new_value)
-signal health_restore_changed(new_value)
-signal max_mana_changed(new_value)
-signal mana_restore_changed(new_value)
-signal damage_changed(new_value)
-signal speed_changed(new_value)
+signal max_health_changed(new_value: float)
+signal health_restore_changed(new_value: float)
+signal max_mana_changed(new_value: float)
+signal mana_restore_changed(new_value: float)
+signal damage_changed(new_value: float)
+signal skill_damage_changed(new_value: float)
+signal speed_changed(new_value: float)
 
 const MAX_SHOP_SLOTS: int = 10
 const MAX_SKILLS_SLOTS: int = 5
@@ -50,14 +51,23 @@ var damage: float:
 		if damage != value:
 			damage = value
 			damage_changed.emit(damage)
+var skill_damage: float:
+	set(value):
+		if skill_damage != value:
+			skill_damage = value
+			skill_damage_changed.emit(skill_damage)
 var speed: float = 300.0:
 	set(value):
 		var clamped_value = clamp(value, min_speed, max_speed)
 		if speed != clamped_value:
 			speed = clamped_value
 			speed_changed.emit(speed)
-		
-var max_speed: float = 1450.0
+			
+var bonus_percent_damage: float = 1.0
+var bonus_percent_speed: float = 1.0
+var bonus_percent_skill_damage: float = 1.0
+
+var max_speed: float = 1000.0
 var min_speed: float = 160.0
 
 var base_health: float = 100.0
@@ -66,24 +76,26 @@ var base_speed: float = 300.0
 var base_health_restore: float = 0.0
 var base_mana_restore: float = 0.0
 var base_damage: float
+var base_skill_damage: float = 0.0
 
 var target_health: float = 0.0
 var target_health_restore: float = 0.0
 var target_mana: float = 0.0
 var target_mana_restore: float = 0.0
 var target_damage: float = 0.0
+var target_skill_damage: float = 0.0
 var target_speed: float = 0.0
 
-var passive_health_restore: float = 0.0:
+var health_restore: float = 0.0:
 	set(value):
-		if passive_health_restore != value:
-			passive_health_restore = value
-			health_restore_changed.emit(passive_health_restore)
-var passive_mana_restore: float = 0.0:
+		if health_restore != value:
+			health_restore = value
+			health_restore_changed.emit(health_restore)
+var mana_restore: float = 0.0:
 	set(value):
-		if passive_mana_restore != value:
-			passive_mana_restore = value
-			mana_restore_changed.emit(passive_mana_restore)
+		if mana_restore != value:
+			mana_restore = value
+			mana_restore_changed.emit(mana_restore)
 
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
@@ -119,6 +131,14 @@ func reset_data() -> void:
 	player_position = Vector2.ZERO
 	self.experience = 0
 	self.gold = MAX_GOLD
+	passive_items.clear()
+	current_weapon = ItemsManager.get_item(ItemsManager.ItemsType.BASE_SWORD)
+	max_health = base_health
+	health_restore = base_health_restore
+	max_mana = base_mana
+	mana_restore = base_mana_restore
+	damage = base_damage
+	speed = base_speed
 	
 func add_gold(amount: int) -> void:
 	gold += abs(amount)
@@ -149,6 +169,7 @@ func recalculate_stats() -> void:
 	
 	var target_percent_speed: float = 1.0
 	var target_percent_damage: float = 1.0
+	var target_percent_skill_damage: float = 1.0
 	
 	for item_data: PassiveItem in passive_items:
 		if (item_data.buffs & 1) != 0:
@@ -169,13 +190,24 @@ func recalculate_stats() -> void:
 				target_speed += item_data.speed_bonus
 			elif item_data.speed_type == PassiveItem.StatType.PERCENT:
 				target_percent_speed += item_data.speed_percent_bonus
+		if (item_data.buffs & 64) != 0:
+			if item_data.skill_damage_type == PassiveItem.StatType.FLAT:
+				target_skill_damage += item_data.skill_damage_bonus
+			elif item_data.skill_damage_type == PassiveItem.StatType.PERCENT:
+				target_percent_skill_damage += item_data.skill_damage_percent_bonus
 			
 	target_damage *= target_percent_damage
 	target_speed *= target_percent_speed
+	target_skill_damage *= target_percent_skill_damage
+	
+	bonus_percent_damage = target_percent_damage
+	bonus_percent_speed = target_percent_speed
+	bonus_percent_skill_damage = target_percent_skill_damage
 			
 	max_health = target_health
-	passive_health_restore = target_health_restore
+	health_restore = target_health_restore
 	max_mana = target_mana
-	passive_mana_restore = target_mana_restore
+	mana_restore = target_mana_restore
 	damage = target_damage
 	speed = target_speed
+	skill_damage = target_skill_damage
