@@ -141,18 +141,32 @@ theme_override_constants/separation = 12
 
 [node name="HPBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/HP" unique_id=770284638]
 self_modulate = Color(0, 0.8328853, 0, 1)
-custom_minimum_size = Vector2(100, 25)
+custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="HealthValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/HP/HPBar" unique_id=1022016254]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Info/HPMana/HP/HPBar" unique_id=1114688598]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_right = 2
+
+[node name="HPRegenLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/HP/HPBar/MarginContainer" unique_id=289034119]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "+1/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/HP/HPBar/MarginContainer" unique_id=1022016254]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -167,12 +181,12 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="Control" type="Control" parent="MarginContainer/LeftSide/Info/HPMana/Mana" unique_id=930680261]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
 [node name="ManaBar" type="ProgressBar" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control" unique_id=41527189]
 self_modulate = Color(0.8509804, 0.011764706, 0.90588236, 1)
-custom_minimum_size = Vector2(100, 25)
+custom_minimum_size = Vector2(150, 30)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,13 +197,26 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 value = 100.0
 show_percentage = false
 
-[node name="ManaValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar" unique_id=269764382]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar" unique_id=1990374837]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ManaRegenLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar/MarginContainer" unique_id=1404559175]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "+1/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaValueLabel" type="Label" parent="MarginContainer/LeftSide/Info/HPMana/Mana/Control/ManaBar/MarginContainer" unique_id=269764382]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -202,21 +229,29 @@ text = "Mana"
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Points" type="VBoxContainer" parent="MarginContainer/LeftSide/PanelContainer" unique_id=363186716]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LeftSide/PanelContainer" unique_id=871773330]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Points" type="VBoxContainer" parent="MarginContainer/LeftSide/PanelContainer/MarginContainer" unique_id=363186716]
 custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 6
 script = ExtResource("2_dajm1")
 
-[node name="EXPLabel" type="Label" parent="MarginContainer/LeftSide/PanelContainer/Points" unique_id=444400241]
+[node name="EXPLabel" type="Label" parent="MarginContainer/LeftSide/PanelContainer/MarginContainer/Points" unique_id=444400241]
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "EXP: 0"
 text_overrun_behavior = 1
 
-[node name="GoldLabel" type="Label" parent="MarginContainer/LeftSide/PanelContainer/Points" unique_id=635051005]
+[node name="GoldLabel" type="Label" parent="MarginContainer/LeftSide/PanelContainer/MarginContainer/Points" unique_id=635051005]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -305,7 +340,7 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=950477632]
 layout_mode = 2
-theme_override_constants/margin_right = 175
+theme_override_constants/margin_right = 130
 
 [node name="Potions" type="HBoxContainer" parent="MarginContainer/MarginContainer" unique_id=2073007466]
 layout_mode = 2

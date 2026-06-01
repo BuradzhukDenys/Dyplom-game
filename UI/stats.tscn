@@ -7,7 +7,7 @@ content_margin_left = 15.0
 content_margin_top = 25.0
 content_margin_right = 15.0
 content_margin_bottom = 25.0
-bg_color = Color(0.7574366, 0.54987967, 0.3865854, 1)
+bg_color = Color(7.099286e-07, 0.3109304, 0.29590848, 1)
 border_width_left = 7
 border_width_top = 7
 border_width_right = 7
@@ -53,7 +53,7 @@ theme_override_constants/margin_bottom = 35
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer" unique_id=1076700743]
-custom_minimum_size = Vector2(320, 350)
+custom_minimum_size = Vector2(450, 350)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3dusc")
 
@@ -83,9 +83,12 @@ theme_override_constants/line_separation = 5
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[color=green]Max health - 
+[color=lightgreen]HP restore1 - 
 [color=purple]Max mana - 
+[color=magenta]Mana restore2- 
 [color=red]Damage - 
-[color=blue]Speed - "
+[color=blue]Speed - 
+[color=yellow]Skill amplification - "
 fit_content = true
 
 [node name="Close" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=624728539]
