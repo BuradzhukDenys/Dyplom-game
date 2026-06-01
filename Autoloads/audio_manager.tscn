@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://jug6dlbfgvee"]
+
+[ext_resource type="Script" uid="uid://jfnaemkujcl0" path="res://Autoloads/audio_manager.gd" id="1_uhgva"]
+[ext_resource type="AudioStream" uid="uid://bug6a0kaodhse" path="res://Assets/Sounds/Music/kaazoom-along-the-wayside-medieval-folk-music-128697.mp3" id="2_amsdr"]
+[ext_resource type="AudioStream" uid="uid://d1one5ic0krek" path="res://Assets/Sounds/Music/emmraan-the-tournament-280277.mp3" id="3_jpqn3"]
+[ext_resource type="AudioStream" uid="uid://2gttsle2ke58" path="res://Assets/Sounds/EndGame/rfm-1011-victory-at-last-486385.mp3" id="4_filgv"]
+[ext_resource type="AudioStream" uid="uid://dg5jb0iqf5w3d" path="res://Assets/Sounds/EndGame/eiklo-one-last-defeat-303896.mp3" id="5_monbp"]
+[ext_resource type="AudioStream" uid="uid://btym8u3dlffsc" path="res://Assets/Sounds/SFX/UI/click_003.ogg" id="6_filgv"]
+[ext_resource type="AudioStream" uid="uid://bjuwrav4o4vst" path="res://Assets/Sounds/SFX/UI/alexzavesa-clinking-coins-4-468430.mp3" id="7_monbp"]
+[ext_resource type="AudioStream" uid="uid://dfue75mh4cdox" path="res://Assets/Sounds/SFX/UI/error_005.ogg" id="8_monbp"]
+
+[node name="AudioManager" type="Node" unique_id=2062202802]
+process_mode = 3
+script = ExtResource("1_uhgva")
+main_menu_music = ExtResource("2_amsdr")
+level_music = ExtResource("3_jpqn3")
+victory_sound = ExtResource("4_filgv")
+defeat_sound = ExtResource("5_monbp")
+click_sound = ExtResource("6_filgv")
+buy_sound = ExtResource("7_monbp")
+error_sound = ExtResource("8_monbp")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=182736792]
+autoplay = true
+bus = &"Music"
+
+[node name="UIPlayer" type="AudioStreamPlayer" parent="." unique_id=1004125287]
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="ErrorPlayer" type="AudioStreamPlayer" parent="." unique_id=1701301447]
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="FanfarePlayer" type="AudioStreamPlayer" parent="." unique_id=2001732377]
+max_polyphony = 4
+bus = &"SFX"
