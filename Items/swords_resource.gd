@@ -4,7 +4,7 @@ class_name SwordData
 
 @export var damage: float
 @export var attack_interval: float
-@export var attack_range: int
+#@export var attack_range: int
 		
 @export_group("Additional Effects")
 @export_flags("Fire", "Ice", "Lightning", "Vampiric") var additional_effects: int = 0:
@@ -32,19 +32,19 @@ func get_tooltip_stats() -> String:
 	
 	lines.append("[color=red]Damage: %.1f[/color]" % damage)
 	lines.append("[color=green]Attack interval: %.3fs[/color]" % attack_interval)
-	lines.append("[color=light_blue]Attack range: %d[/color]" % attack_range)
+	#lines.append("[color=light_blue]Attack range: %d[/color]" % attack_range)
 	
 	if additional_effects != 0:
 		lines.append("\n[color=purple]Additional effetcs:[/color]")
 		
 		if (additional_effects & 1) != 0:
-			lines.append("[color=orange]Fire:\n     • Duration: %ds.\n     • Damage: %ddps[/color]" % [fire_duration, fire_damage])
+			lines.append("[color=orange]Fire:\n     - Duration: %ds.\n     - Damage: %ddps[/color]" % [fire_duration, fire_damage])
 		if (additional_effects & 2) != 0:
-			lines.append("[color=skyblue]Ice:\n     • Duration: %ds.\n     • Slowness: %d%%[/color]" % [ice_duration, ice_slowness * 100])
+			lines.append("[color=skyblue]Ice:\n     - Duration: %ds.\n     - Slowness: %d%%[/color]" % [ice_duration, ice_slowness * 100])
 		if (additional_effects & 4) != 0:
-			lines.append("[color=yellow]Lightning:\n     • Damage: %.1f\n     • Max chains: %d[/color]" % [lightning_damage, lightning_chains])
+			lines.append("[color=yellow]Lightning:\n     - Damage: %.1f\n     - Max chains: %d[/color]" % [lightning_damage, lightning_chains])
 		if (additional_effects & 8) != 0:
-			lines.append("[color=#8A0303]Vampiric:\n     • LifeSteal: %.1f[/color]" % lifesteal)
+			lines.append("[color=#8A0303]Vampiric:\n     - LifeSteal: %.1f[/color]" % lifesteal)
 			
 	return "\n".join(lines)
 			

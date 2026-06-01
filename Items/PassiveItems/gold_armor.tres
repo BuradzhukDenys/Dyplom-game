@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://dkr31odf3bvvp"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_jdonp"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="2_3mhjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_3mhjt")
+region = Rect2(352, 240, 16, 16)
+
+[resource]
+script = ExtResource("1_jdonp")
+buffs = 35
+max_health_bonus = 30.0
+health_restore_bonus = 0.1
+speed_type = 1
+speed_percent_bonus = -0.050000000000000044
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 18
+item_name = "Gold Armor"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

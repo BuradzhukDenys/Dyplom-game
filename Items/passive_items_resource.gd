@@ -8,7 +8,7 @@ enum StatType
 	PERCENT
 }
 
-@export_flags("MaxHealth", "HealthRestore", "MaxMana", "ManaRestore", "Damage", "Speed") var buffs: int:
+@export_flags("MaxHealth", "HealthRestore", "MaxMana", "ManaRestore", "Damage", "Speed", "SkillDamage") var buffs: int:
 	set(value):
 		buffs = value
 		notify_property_list_changed()
@@ -31,7 +31,7 @@ enum StatType
 		damage_type = value
 		notify_property_list_changed()
 @export var damage_bonus: float = 0.0
-@export_range(-1, 1, 0.05) var damage_percent_bonus: float = 0.0
+@export_range(-1, 1, 0.01) var damage_percent_bonus: float = 0.0
 
 @export_group("Speed", "speed_")
 @export var speed_type: StatType = StatType.FLAT:
@@ -39,7 +39,15 @@ enum StatType
 		speed_type = value
 		notify_property_list_changed()
 @export var speed_bonus: float = 0.0
-@export_range(-1, 1, 0.05) var speed_percent_bonus: float = 0.0
+@export_range(-1, 1, 0.01) var speed_percent_bonus: float = 0.0
+
+@export_group("SkillDamage", "skill_damage_")
+@export var skill_damage_type: StatType = StatType.FLAT:
+	set(value):
+		skill_damage_type = value
+		notify_property_list_changed()
+@export var skill_damage_bonus: float = 0.0
+@export_range(-1, 1, 0.01) var skill_damage_percent_bonus: float = 0.0
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "max_health_bonus":
@@ -84,6 +92,17 @@ func _validate_property(property: Dictionary) -> void:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 		elif speed_type == StatType.PERCENT and property.name == "speed_bonus":
 			property.usage &= ~PROPERTY_USAGE_EDITOR
+	if property.name.begins_with("skill_damage_"):
+		var skill_damage_buff: bool = (buffs & 64) != 0
+		
+		if not skill_damage_buff:
+			property.usage &= ~PROPERTY_USAGE_EDITOR
+			return
+			
+		if skill_damage_type == StatType.FLAT and property.name == "skill_damage_percent_bonus":
+			property.usage &= ~PROPERTY_USAGE_EDITOR
+		elif skill_damage_type == StatType.PERCENT and property.name == "skill_damage_bonus":
+			property.usage &= ~PROPERTY_USAGE_EDITOR
 
 func get_tooltip_stats() -> String:
 	var lines: PackedStringArray
@@ -114,5 +133,12 @@ func get_tooltip_stats() -> String:
 		else:
 			var amp_text: String = "+%d%%" if speed_percent_bonus >= 0 else "%d%%"
 			lines.append("[color=lightblue]Speed: " + amp_text % (speed_percent_bonus * 100) + "[/color]")
+	if (buffs & 64) != 0:
+		if skill_damage_type == StatType.FLAT:
+			var amp_text: String = "+%.2f" if skill_damage_bonus >= 0 else "%.2f"
+			lines.append("[color=yellow]Skill damage: " + amp_text % skill_damage_bonus + "[/color]")
+		else:
+			var amp_text: String = "+%d%%" if skill_damage_percent_bonus >= 0 else "%d%%"
+			lines.append("[color=yellow]Skill damage: " + amp_text % (skill_damage_percent_bonus * 100) + "[/color]")
 		
 	return "\n".join(lines)

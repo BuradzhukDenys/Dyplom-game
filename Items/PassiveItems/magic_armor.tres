@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://clgrsid4cbnrd"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_6ldln"]
+[ext_resource type="Texture2D" uid="uid://dn2hyhrsjnvee" path="res://Assets/Items/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/16x16 Assorted RPG Icons/all-assets-preview.png" id="2_sdtjj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0rqv"]
+atlas = ExtResource("2_sdtjj")
+region = Rect2(464, 80, 16, 16)
+
+[resource]
+script = ExtResource("1_6ldln")
+buffs = 45
+max_health_bonus = 35.0
+max_mana_bonus = 45.0
+mana_restore_bonus = 0.6
+speed_type = 1
+speed_percent_bonus = -0.09999999999999998
+texture = SubResource("AtlasTexture_o0rqv")
+cost = 22
+item_name = "Magic armor"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

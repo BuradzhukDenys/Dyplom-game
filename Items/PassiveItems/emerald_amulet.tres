@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PassiveItem" format=3 uid="uid://ddj6jfdjrs10r"]
+
+[ext_resource type="Script" uid="uid://ccfv6np1ewduf" path="res://Items/passive_items_resource.gd" id="1_rw4dv"]
+[ext_resource type="Texture2D" uid="uid://cxqk20akdekw" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png" id="2_qavep"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nko3"]
+atlas = ExtResource("2_qavep")
+region = Rect2(115, 1842, 11, 13)
+
+[resource]
+script = ExtResource("1_rw4dv")
+buffs = 51
+max_health_bonus = 5.0
+health_restore_bonus = 0.5
+damage_bonus = -10.0
+damage_percent_bonus = 0.5
+speed_type = 1
+speed_percent_bonus = 0.050000000000000044
+texture = SubResource("AtlasTexture_2nko3")
+cost = 12
+item_name = "Emerald Amulet"
+metadata/_custom_type_script = "uid://ccfv6np1ewduf"

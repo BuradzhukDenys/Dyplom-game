@@ -13,6 +13,6 @@ buffs = 33
 max_health_bonus = 30.0
 speed_bonus = -60.0
 texture = SubResource("AtlasTexture_1p106")
-cost = 12
+cost = 18
 item_name = "Mithrill Armor"
 metadata/_custom_type_script = "uid://ccfv6np1ewduf"
