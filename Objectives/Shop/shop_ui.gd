@@ -34,6 +34,7 @@ func _ready() -> void:
 	PlayerData.gold_changed.connect(_on_gold_changed)
 
 func show_error() -> void:
+	AudioManager.play_error()
 	if not_enough_money_tween and not_enough_money_tween.is_running():
 		return
 		
@@ -54,6 +55,7 @@ func refresh_shop() -> void:
 		refresh_cost += refresh_cost * 0.1
 	else:
 		free_refresh = false
+		
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	
 func _on_gold_changed(new_value: int) -> void:
@@ -63,7 +65,7 @@ func _on_close_pressed() -> void:
 	close()
 
 func _on_refresh_pressed() -> void:
-	if PlayerData.gold < refresh_cost:
+	if not free_refresh and PlayerData.gold < refresh_cost:
 		show_error()
 		return
 		
@@ -87,5 +89,6 @@ func _on_slot_clicked(item_data: ItemData, container: ItemContainer) -> void:
 		
 	EventBus.item_bought.emit(item_data)
 	PlayerData.spend_gold(item_data.cost)
+	AudioManager.play_sfx(AudioManager.buy_sound)
 	container.setup(null)
 	check_free_refresh()

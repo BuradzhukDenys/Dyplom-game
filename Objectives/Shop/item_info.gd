@@ -1,8 +1,8 @@
 extends PanelContainer
 class_name ItemTooltip
 
-@onready var item_name_label: RichTextLabel = $VBoxContainer/ItemName
-@onready var item_description_label: RichTextLabel = $VBoxContainer/ItemDescription
+@onready var item_name_label: RichTextLabel = $MarginContainer/VBoxContainer/ItemName
+@onready var item_description_label: RichTextLabel = $MarginContainer/VBoxContainer/ItemDescription
 
 func _ready() -> void:
 	item_name_label.text = ""
