@@ -38,6 +38,7 @@ func try_cast_skill_at_slot(slot: int, direction: Vector2) -> void:
 	
 	if hp_mana_component.mana < skill_data.mana_cost:
 		hp_mana_component.no_mana.emit()
+		AudioManager.play_error()
 		return
 		
 	hp_mana_component.spend_mana(skill_data.mana_cost)
@@ -45,7 +46,9 @@ func try_cast_skill_at_slot(slot: int, direction: Vector2) -> void:
 	cooldown[slot] = skill_data.cooldown
 	skill_casted.emit(slot, skill_data.cooldown)
 	
-	var skill: Area2D = skill_data.scene.instantiate()
+	var skill: Skill = skill_data.scene.instantiate()
 	skill.setup(direction, skill_data.damage)
+	if skill is SkillProjectile and skill_data is SkillProjectileResource:
+		skill.setup_projectile(skill_data.fly_time, skill_data.fly_speed)
 	get_tree().current_scene.add_child(skill)
 	skill.global_position = owner.global_position
