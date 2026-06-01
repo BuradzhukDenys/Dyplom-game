@@ -5,7 +5,8 @@ class_name SkillSlot
 @onready var skill_cooldown: TextureProgressBar = $PanelContainer/TextureProgressBar
 @onready var skill_cooldown_label: Label = $PanelContainer/SecondsCooldown
 @onready var skill_cooldown_timer: Timer = $CooldownTimer
-@onready var skill_key_label: Label = $PanelContainer/MarginContainer/Label
+@onready var skill_key_label: Label = $PanelContainer/MarginContainer/Keybind
+@onready var mana_cost_label: Label = $PanelContainer/MarginContainer/ManaCost
 
 var current_tween: Tween
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 	skill_cooldown_timer.stop()
 	skill_icon.texture = null
 	skill_key_label.text = str(slot_position)
+	mana_cost_label.hide()
 	
 	if skill_data:
 		setup_slot(skill_data)
@@ -49,6 +51,8 @@ func setup_slot(skill_resource: SkillResource) -> void:
 	
 	skill_icon.texture = skill_data.skill_icon
 	skill_cooldown_timer.wait_time = skill_data.cooldown
+	mana_cost_label.text = str(skill_data.mana_cost)
+	mana_cost_label.show()
 	
 func _on_skill_casted(casted_slot: int, cooldown_time: float) -> void:
 	if casted_slot != slot_position:
