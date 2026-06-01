@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxqk20akdekw"
-path="res://.godot/imported/16x16.png-ff5681d1e319a6200a23967584b7c450.ctex"
+uid="uid://cbyuimp1h0uts"
+path="res://.godot/imported/32x32.png-b13684faae11e10d72b832b314a15a71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/16x16.png"
-dest_files=["res://.godot/imported/16x16.png-ff5681d1e319a6200a23967584b7c450.ctex"]
+source_file="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png"
+dest_files=["res://.godot/imported/32x32.png-b13684faae11e10d72b832b314a15a71.ctex"]
 
 [params]
 
