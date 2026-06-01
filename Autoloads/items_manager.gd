@@ -4,6 +4,9 @@ enum ItemsType
 {
 	TORCH_SWORD,
 	BASE_SWORD,
+	DAGGER,
+	HEAVY_SWORD,
+	VOLCANIC_SWORD,
 	AMETHYST_RING,
 	BOOK_OF_MIGHT,
 	BOOTS,
@@ -24,6 +27,9 @@ enum ItemsType
 const ITEMS: Dictionary = {
 	ItemsType.TORCH_SWORD: preload("res://Items/Swords/torch_sword.tres"),
 	ItemsType.BASE_SWORD: preload("res://Items/Swords/base_sword.tres"),
+	ItemsType.DAGGER: preload("res://Items/Swords/dagger.tres"),
+	ItemsType.HEAVY_SWORD: preload("res://Items/Swords/heavy_sword.tres"),
+	ItemsType.VOLCANIC_SWORD: preload("res://Items/Swords/volcanic_sword.tres"),
 	ItemsType.AMETHYST_RING: preload("res://Items/PassiveItems/amethyst_ring.tres"),
 	ItemsType.BOOK_OF_MIGHT: preload("res://Items/PassiveItems/book_of_might.tres"),
 	ItemsType.BOOTS: preload("res://Items/PassiveItems/boots.tres"),

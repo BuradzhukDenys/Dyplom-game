@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SwordData" format=3 uid="uid://bkrb8s2ei8aj0"]
+
+[ext_resource type="Script" uid="uid://5mutwwf6aioh" path="res://Items/swords_resource.gd" id="1_s8i7v"]
+[ext_resource type="Texture2D" uid="uid://cbyuimp1h0uts" path="res://Assets/Items/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_b6m06"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8tpm"]
+atlas = ExtResource("2_b6m06")
+region = Rect2(416, 3008, 32, 32)
+
+[resource]
+script = ExtResource("1_s8i7v")
+damage = 35.0
+attack_interval = 3.5
+texture = SubResource("AtlasTexture_t8tpm")
+cost = 25
+item_name = "Heavy Sword"
+metadata/_custom_type_script = "uid://5mutwwf6aioh"
