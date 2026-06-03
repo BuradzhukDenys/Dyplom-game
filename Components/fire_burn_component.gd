@@ -14,6 +14,8 @@ func setup(new_fire_burn_duration: float, new_fire_burn_damage: float) -> void:
 	owner.modulate = Color(1.0, 0.388, 0.0, 1.0)
 	
 func _process(delta: float) -> void:
+	#Якщо підпалили, то віднімаємо тривалість підпалу щокадру, та додаємо тіки
+	#до наступного нанесення шкоди
 	if fire_burn_duration > 0.0:
 		fire_burn_duration -= delta
 		tick_timer += delta

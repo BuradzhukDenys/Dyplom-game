@@ -50,5 +50,10 @@ func try_cast_skill_at_slot(slot: int, direction: Vector2) -> void:
 	skill.setup(direction, skill_data.damage)
 	if skill is SkillProjectile and skill_data is SkillProjectileResource:
 		skill.setup_projectile(skill_data.fly_time, skill_data.fly_speed)
-	get_tree().current_scene.add_child(skill)
-	skill.global_position = owner.global_position
+		
+	if skill_data.spawn_type == SkillResource.SpawnType.AT_WORLD:
+		get_tree().current_scene.add_child(skill)
+	elif skill_data.spawn_type == SkillResource.SpawnType.AT_PLAYER:
+		owner.add_child(skill)
+		
+	skill.global_position = PlayerData.target_point

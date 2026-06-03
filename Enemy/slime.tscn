@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cllx0syaukocd" path="res://Enemy/enemy.tscn" id="1_abhn7"]
 [ext_resource type="Texture2D" uid="uid://s3nvdnhkpi4f" path="res://Assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="2_6ksop"]
 [ext_resource type="Resource" uid="uid://com8rr67dd78e" path="res://Enemy/Resources/slime_resource.tres" id="2_reo3w"]
+[ext_resource type="Script" uid="uid://b4joh4jaqldg1" path="res://Enemy/slime.gd" id="2_yoijx"]
+[ext_resource type="AudioStream" uid="uid://d3h62iek3v4o3" path="res://Assets/Sounds/SFX/Enemies/freesound_community-footsteps-mud-68694-[AudioTrimmer.com].wav" id="4_yoijx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_agwpm"]
 atlas = ExtResource("2_6ksop")
@@ -312,10 +314,15 @@ animations = [{
 }]
 
 [node name="Slime" unique_id=298853584 instance=ExtResource("1_abhn7")]
+script = ExtResource("2_yoijx")
+slime_hit_sound = ExtResource("4_yoijx")
 resource = ExtResource("2_reo3w")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1263937817]
 sprite_frames = SubResource("SpriteFrames_reo3w")
 animation = &"DieLeftRight"
+
+[node name="HitPlayer" parent="." index="5" unique_id=2063359780]
+stream = ExtResource("4_yoijx")
 
 [editable path="HitboxHurtboxComponent"]

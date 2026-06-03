@@ -9,7 +9,7 @@ func spawn_at_position(enemy: Enemy, enemy_position: Vector2) -> void:
 	
 	enemies_alive += 1
 	
-	enemy.enemy_dead.connect(_on_enenmy_dead.bind(enemy))
+	enemy.enemy_dead.connect(_on_enemy_dead.bind(enemy))
 
 func point_spawn_pos(angle: float) -> Vector2:
 	var jitter_angle: float = angle + randf_range(-0.15, 0.15)
@@ -37,12 +37,12 @@ func random_spawn_pos() -> Vector2:
 			
 		attempts += 1
 		
-	test_position.x = clamp(test_position.x, -1970, 1970)
-	test_position.y = clamp(test_position.y, -960, 960)
+	test_position.x = clamp(test_position.x, -1920, 1920)
+	test_position.y = clamp(test_position.y, -910, 910)
 	
 	return test_position
 
-func _on_enenmy_dead(enemy: CharacterBody2D) -> void:
+func _on_enemy_dead(enemy: CharacterBody2D) -> void:
 	enemy.queue_free()
 	
 	enemies_alive -= 1

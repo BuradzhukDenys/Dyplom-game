@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_tlq5d")
-speed = 350.0
+speed = 160.0
 damage = 5.0
 expirience_gain = 4
-gold_gain = 2
-knockback_strength = 650.0
-knockback_friction = 1500.0
-health = 37.0
+gold_gain = 4
+knockback_strength = 250.0
+knockback_friction = 900.0
+health = 40.0
 metadata/_custom_type_script = "uid://d34ein411aagx"

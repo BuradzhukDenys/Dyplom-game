@@ -52,11 +52,11 @@ func refresh_shop() -> void:
 		
 	if not free_refresh:
 		PlayerData.spend_gold(int(refresh_cost))
-		refresh_cost += refresh_cost * 0.1
+		refresh_cost += refresh_cost * 0.15
 	else:
 		free_refresh = false
 		
-	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
+	refresh_cost_label.text = "Refresh cost - %d gold" % floori(refresh_cost)
 	
 func _on_gold_changed(new_value: int) -> void:
 	player_gold_label.text = "Gold: %d" % new_value
@@ -65,7 +65,7 @@ func _on_close_pressed() -> void:
 	close()
 
 func _on_refresh_pressed() -> void:
-	if not free_refresh and PlayerData.gold < refresh_cost:
+	if not free_refresh and PlayerData.gold < floori(refresh_cost):
 		show_error()
 		return
 		

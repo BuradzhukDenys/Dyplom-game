@@ -1,6 +1,8 @@
 extends Skill
 class_name SkillProjectile
 
+@onready var spawn_sound_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 var fly_time: float = 0.0
 var fly_speed: float = 0.0
 var velocity: Vector2 = Vector2.ZERO
@@ -27,6 +29,9 @@ func destroy() -> void:
 func _on_hitbox_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
 		super._on_hitbox_entered(area)
+		
+		spawn_sound_player.stop()
+		AudioManager.play_spatial_sound(hit_sound, global_position)
 		
 		animation.play("hit")
 		set_physics_process(false)

@@ -10,5 +10,6 @@ scene = ExtResource("1_fvlku")
 skill_icon = ExtResource("3_guv4d")
 mana_cost = 15
 damage = 30.0
-cooldown = 1.0
+cooldown = 15.0
+spawn_type = 1
 metadata/_custom_type_script = "uid://2uanydoh5yov"

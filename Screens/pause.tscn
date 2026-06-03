@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://chp4x7yidcmlx"]
 
 [ext_resource type="Script" uid="uid://byq2pyavf3bjq" path="res://Screens/pause.gd" id="1_4bken"]
+[ext_resource type="PackedScene" uid="uid://0kj3tb51vxje" path="res://Options/options.tscn" id="2_elvlu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dusc"]
 content_margin_left = 15.0
@@ -19,12 +20,6 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="InputEventAction" id="InputEventAction_4bken"]
-action = &"pause"
-
-[sub_resource type="Shortcut" id="Shortcut_elvlu"]
-events = [SubResource("InputEventAction_4bken")]
-
 [sub_resource type="InputEventKey" id="InputEventKey_4bken"]
 device = -1
 keycode = 82
@@ -36,6 +31,9 @@ events = [SubResource("InputEventKey_4bken")]
 [node name="Pause" type="CanvasLayer" unique_id=1939718799]
 process_mode = 3
 script = ExtResource("1_4bken")
+
+[node name="Options" parent="." unique_id=1866982236 instance=ExtResource("2_elvlu")]
+layer = 10
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=897072094]
 anchors_preset = 15
@@ -87,8 +85,14 @@ custom_minimum_size = Vector2(130, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 22
-shortcut = SubResource("Shortcut_elvlu")
 text = "Resume"
+
+[node name="Options" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=689239454]
+custom_minimum_size = Vector2(130, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Options"
 
 [node name="Restart" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1771956933]
 custom_minimum_size = Vector2(130, 35)
@@ -106,5 +110,6 @@ theme_override_font_sizes/font_size = 22
 text = "Main Menu"
 
 [connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

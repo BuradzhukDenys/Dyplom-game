@@ -13,14 +13,20 @@ func _ready() -> void:
 
 func start_level() -> void:
 	for wave: WaveResource in level_resource.waves:
-		EventBus.wave_changed.emit("Wave %d/%d" % [(level_resource.waves.find(wave) + 1), level_resource.waves.size()])
+		var current_wave: int = level_resource.waves.find(wave) + 1
+		
+		PlayerData.wave_number = current_wave
+		EventBus.wave_changed.emit("Wave %d/%d" % [current_wave, level_resource.waves.size()])
+		
+		group_spawned = wave.wave_enemies.size()
+		
+		if group_spawned == 0:
+			continue
 		
 		for group: GroupResource in wave.wave_enemies:
-			group_spawned += 1
 			spawn_group(group)
 		
-		if group_spawned > 0:
-			await all_groups_spawned
+		await all_groups_spawned
 		
 		if wave.wave_offset > 0.0:
 			await get_tree().create_timer(wave.wave_offset, false).timeout
@@ -45,5 +51,5 @@ func spawn_group(group: GroupResource) -> void:
 	
 	group_spawned -= 1
 	
-	if group_spawned <= 0:
+	if group_spawned == 0:
 		all_groups_spawned.emit()

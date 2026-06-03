@@ -10,6 +10,8 @@ class_name SkillSlot
 
 var current_tween: Tween
 
+var cooldown_tween: Tween
+
 @export var skill_data: SkillResource
 @export_range(1, 5) var slot_position: int
 var has_skill: bool = false
@@ -71,3 +73,10 @@ func _on_skill_casted(casted_slot: int, cooldown_time: float) -> void:
 func _on_skill_cooldown_finished(slot: int) -> void:
 	if slot == slot_position:
 		skill_cooldown_label.visible = false
+		
+		if cooldown_tween and cooldown_tween.is_valid():
+			cooldown_tween.kill()
+			
+		cooldown_tween = create_tween()
+		cooldown_tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.15)
+		cooldown_tween.tween_property(self, "scale", Vector2(1, 1), 0.15)

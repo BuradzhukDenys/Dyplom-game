@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c8pxn05b03w32" path="res://UI/weapon_box.gd" id="1_4fiuh"]
 [ext_resource type="Script" uid="uid://baemrlxysoubl" path="res://UI/ui_manager.gd" id="1_6rr40"]
 [ext_resource type="Texture2D" uid="uid://cwpprjimvik0h" path="res://Assets/Custom Border and Panels Menu All Part/Border All 13.png" id="1_h81ot"]
+[ext_resource type="Resource" uid="uid://cug6m48d15sln" path="res://Levels/Resources/level1.tres" id="2_0w6e5"]
 [ext_resource type="Script" uid="uid://xth2fxddnml" path="res://UI/points.gd" id="2_dajm1"]
 [ext_resource type="Script" uid="uid://wi4jmxm3h3mh" path="res://UI/hp_mana_values.gd" id="2_e6gg6"]
 [ext_resource type="Texture2D" uid="uid://mj765hnpcr27" path="res://Assets/Custom Border and Panels Menu All Part/Border All 5.png" id="3_3sbvi"]
@@ -84,6 +85,7 @@ content_margin_bottom = 7.0
 
 [node name="UI" type="CanvasLayer" unique_id=1403278747]
 script = ExtResource("1_6rr40")
+level_resource = ExtResource("2_0w6e5")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1961179591]
 anchors_preset = 15
@@ -128,6 +130,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="HPMana" type="VBoxContainer" parent="MarginContainer/LeftSide/Info" unique_id=212833778]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -340,7 +343,7 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=950477632]
 layout_mode = 2
-theme_override_constants/margin_right = 130
+theme_override_constants/margin_right = 180
 
 [node name="Potions" type="HBoxContainer" parent="MarginContainer/MarginContainer" unique_id=2073007466]
 layout_mode = 2

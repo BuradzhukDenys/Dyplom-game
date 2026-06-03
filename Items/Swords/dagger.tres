@@ -9,7 +9,7 @@ region = Rect2(4, 3204, 24, 24)
 
 [resource]
 script = ExtResource("1_xyoin")
-damage = 10.0
+damage = 20.0
 attack_interval = 0.5
 texture = SubResource("AtlasTexture_oifg3")
 cost = 15

@@ -6,8 +6,15 @@ extends CanvasLayer
 @onready var wave_label: Label = $MarginContainer/TopWaveCounter/VBoxContainer/WaveCount
 @onready var level_label: Label = $MarginContainer/TopWaveCounter/VBoxContainer/LevelName
 
+@export var level_resource: LevelResource
+
+@export var stats_ui: StatsUI
+@export var inventory_ui: InventoryUI
+
 func _ready() -> void:
-	var level_resource: LevelResource = load("res://Levels/Resources/level1.tres")
+	inventory_ui.hide()
+	stats_ui.hide()
+	
 	level_label.text = level_resource.level_name
 	EventBus.wave_changed.connect(_on_wave_changed)
 	
@@ -30,6 +37,6 @@ func _on_wave_changed(text: String) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("open_inventory"):
-		EventBus.inventory_opened.emit()
+		inventory_ui.open()
 	elif event.is_action_pressed("open_stats"):
-		EventBus.stats_opened.emit()
+		stats_ui.open()

@@ -17,6 +17,7 @@ func take_durational_damage(amount: float) -> void:
 		hp_component.take_durational_damage(amount)
 
 func burn(duration: float, damage: float) -> void:
+	#Коли викликається підпал, задаємо тривальсть та шкоду
 	if fire_burn_component:
 		fire_burn_component.setup(duration, damage)
 

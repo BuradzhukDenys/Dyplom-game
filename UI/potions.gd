@@ -35,12 +35,13 @@ func play_animation_finished(scale_tween: Tween, icon: PanelContainer) -> Tween:
 		scale_tween.kill()
 		
 	var new_tween: Tween = create_tween()
-	new_tween.tween_property(icon, "scale", Vector2(1.2, 1.2), 0.15)
+	new_tween.tween_property(icon, "scale", Vector2(1.3, 1.3), 0.15)
 	new_tween.tween_property(icon, "scale", Vector2(1, 1), 0.15)
 	
 	return new_tween
 
 func _on_potion_drank(type: PlayerData.PotionType, duration: float) -> void:
+	AudioManager.play_potion_drank()
 	match type:
 		PlayerData.PotionType.HEALING:
 			healing_cooldown_tween = start_cooldown(healing_potion_cooldown, healing_cooldown_tween, duration)
@@ -48,6 +49,7 @@ func _on_potion_drank(type: PlayerData.PotionType, duration: float) -> void:
 			mana_cooldown_tween = start_cooldown(mana_potion_cooldown, mana_cooldown_tween, duration)
 
 func _on_potion_cooldown_finished(type: PlayerData.PotionType) -> void:
+	AudioManager.play_potion_refreshed()
 	match type:
 		PlayerData.PotionType.HEALING:
 			healing_scale_tween = play_animation_finished(healing_scale_tween, healing_potion_icon)

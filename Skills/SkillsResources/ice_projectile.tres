@@ -6,11 +6,12 @@
 
 [resource]
 script = ExtResource("2_1ug2k")
-fly_time = 10.0
+fly_time = 5.0
 fly_speed = 350.0
 scene = ExtResource("1_1ug2k")
 skill_icon = ExtResource("3_nmbac")
 mana_cost = 8
 damage = 10.0
 cooldown = 5.0
+spawn_type = 1
 metadata/_custom_type_script = "uid://2uanydoh5yov"

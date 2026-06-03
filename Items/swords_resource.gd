@@ -35,7 +35,7 @@ func get_tooltip_stats() -> String:
 	#lines.append("[color=light_blue]Attack range: %d[/color]" % attack_range)
 	
 	if additional_effects != 0:
-		lines.append("\n[color=purple]Additional effetcs:[/color]")
+		lines.append("\n[color=purple]Additional effects:[/color]")
 		
 		if (additional_effects & 1) != 0:
 			lines.append("[color=orange]Fire:\n     - Duration: %ds.\n     - Damage: %ddps[/color]" % [fire_duration, fire_damage])

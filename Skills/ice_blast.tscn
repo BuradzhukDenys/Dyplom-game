@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://eau3iplp0rjn"]
+
+[ext_resource type="Script" uid="uid://b8nwdhnhvluho" path="res://Skills/ice_blast.gd" id="1_mcx3m"]
+[ext_resource type="Texture2D" uid="uid://bv6gevyam2bt2" path="res://Assets/IceBlast/13.png" id="2_00xcw"]
+[ext_resource type="AudioStream" uid="uid://ng6s60nho7ee" path="res://Assets/Sounds/SFX/Character/yodguard-iced-magic-1-378607.mp3" id="3_mcx3m"]
+
+[sub_resource type="Animation" id="Animation_lkblw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HammerCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_shcy0"]
+resource_name = "default"
+length = 0.71428573
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428572, 0.2857143, 0.35714287, 0.42857143, 0.5, 0.5714286, 0.64285713),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6429),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.71),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"delete"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HammerCollision:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3572),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [52.03845, 34.058773]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gws8o"]
+_data = {
+&"RESET": SubResource("Animation_lkblw"),
+&"default": SubResource("Animation_shcy0")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48kmy"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rkct"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb3an"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha8hv"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bylsm"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xemi3"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo04y"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(1024, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghnat"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(1088, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w85w"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(1152, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlhvl"]
+atlas = ExtResource("2_00xcw")
+region = Rect2(1216, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ltgw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48kmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rkct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb3an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha8hv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bylsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xemi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo04y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghnat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6w85w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlhvl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eop5i"]
+radius = 52.03845
+
+[node name="IceBlast" type="Area2D" unique_id=480585961]
+show_behind_parent = true
+z_index = -2
+scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("1_mcx3m")
+hit_sound = ExtResource("3_mcx3m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=436582105]
+libraries/ = SubResource("AnimationLibrary_gws8o")
+autoplay = &"default"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=894124672]
+scale = Vector2(1.8, 1.8)
+sprite_frames = SubResource("SpriteFrames_ltgw6")
+flip_h = true
+
+[node name="HammerCollision" type="CollisionShape2D" parent="." unique_id=1199391186]
+shape = SubResource("CircleShape2D_eop5i")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=439578406]
+volume_db = -1.0
+max_polyphony = 2
+bus = &"SFX"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c1yooiedhmp0o"
+path="res://.godot/imported/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com] (1).ogg-75ad9d2b619e1ecef296f77df75080ff.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/Enemies/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com] (1).ogg"
+dest_files=["res://.godot/imported/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com] (1).ogg-75ad9d2b619e1ecef296f77df75080ff.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
