@@ -21,7 +21,7 @@ signal speed_changed(new_value: float)
 const MAX_SHOP_SLOTS: int = 10
 const MAX_SKILLS_SLOTS: int = 5
 const MAX_GOLD: int = 999999
-const MAX_EXPIRIENCE: int = 999999
+const MAX_EXPERIENCE: int = 999999
 const PLAYER_RADIUS_SPAWN_ENEMIES: float = 730.0
 
 var current_weapon: SwordData:
@@ -41,7 +41,7 @@ var max_health: float = 100.0:
 		if max_health != value:
 			max_health = value
 			max_health_changed.emit(max_health)
-var max_mana: float = 100000.0:
+var max_mana: float = 100.0:
 	set(value):
 		if max_mana != value:
 			max_mana = value
@@ -68,7 +68,7 @@ var bonus_percent_speed: float = 1.0
 var bonus_percent_skill_damage: float = 1.0
 
 var max_speed: float = 1000.0
-var min_speed: float = 160.0
+var min_speed: float = 180.0
 
 var base_health: float = 100.0
 var base_mana: float = 100.0
@@ -102,21 +102,23 @@ var mana_potion_heal: float = 15
 var healing_potion_cooldown: float = 8.0
 var mana_potion_cooldown: float = 8.0
 
-var slots_in_shop: int = 4:
+var slots_in_shop: int = 5:
 	set(value):
 		slots_in_shop = clampi(value, 0, MAX_SHOP_SLOTS)
-var skills_slots_count: int = 2:
+var skills_slots_count: int = 3:
 	set(value):
 		skills_slots_count = clampi(value, 0, MAX_SKILLS_SLOTS)
 
 var experience: int = 0:
 	set(new_value):
-		experience = clamp(new_value, 0, MAX_EXPIRIENCE)
+		experience = clamp(new_value, 0, MAX_EXPERIENCE)
 		experience_changed.emit(experience)
 var gold: int = 0:
 	set(new_value):
 		gold = clamp(new_value, 0, MAX_GOLD)
 		gold_changed.emit(gold)
+
+var wave_number: int = 1
 
 func _ready() -> void:
 	EventBus.item_bought.connect(_on_item_bought)
@@ -130,7 +132,7 @@ func _ready() -> void:
 func reset_data() -> void:
 	player_position = Vector2.ZERO
 	self.experience = 0
-	self.gold = MAX_GOLD
+	self.gold = 9999999990
 	passive_items.clear()
 	current_weapon = ItemsManager.get_item(ItemsManager.ItemsType.BASE_SWORD)
 	max_health = base_health
@@ -149,7 +151,7 @@ func add_experience(amount: int) -> void:
 func spend_gold(amount: int) -> void:
 	gold -= abs(amount)
 	
-func spend_expirience(amount: int) -> void:
+func spend_experience(amount: int) -> void:
 	experience -= abs(amount)
 
 func _on_item_bought(item_data: ItemData) -> void:
@@ -166,6 +168,7 @@ func recalculate_stats() -> void:
 	target_mana_restore = base_mana_restore
 	target_damage = base_damage
 	target_speed = base_speed
+	target_skill_damage = base_skill_damage
 	
 	var target_percent_speed: float = 1.0
 	var target_percent_damage: float = 1.0
@@ -196,9 +199,12 @@ func recalculate_stats() -> void:
 			elif item_data.skill_damage_type == PassiveItem.StatType.PERCENT:
 				target_percent_skill_damage += item_data.skill_damage_percent_bonus
 			
-	target_damage *= target_percent_damage
-	target_speed *= target_percent_speed
-	target_skill_damage *= target_percent_skill_damage
+	if target_damage > 0:
+		target_damage *= target_percent_damage
+	if target_speed > 0:
+		target_speed *= target_percent_speed
+	if target_skill_damage > 0:
+		target_skill_damage *= target_percent_skill_damage
 	
 	bonus_percent_damage = target_percent_damage
 	bonus_percent_speed = target_percent_speed
