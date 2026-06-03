@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Game"
-run/main_scene="uid://dbuavfrikvmh"
+run/main_scene="uid://b3jbcsxtl21qg"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://rqbdhs0jf603"
 
 [audio]
 
@@ -25,7 +25,8 @@ PlayerData="*uid://fkv1vvujsqqw"
 SkillsManager="*uid://c5m75byiel7fw"
 ItemsManager="*uid://coabopj4xx7bf"
 EventBus="*uid://d01u51ga3qupw"
-AudioManager="*uid://jug6dlbfgvee"
+AudioManager="*uid://bpku347r7wm6"
+SettingsManager="*uid://oiru4elgdx1y"
 
 [debug]
 
@@ -33,11 +34,11 @@ settings/stdout/print_fps=true
 
 [display]
 
+window/size/mode=3
 window/size/borderless=true
 window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
 
 [dotnet]
 
