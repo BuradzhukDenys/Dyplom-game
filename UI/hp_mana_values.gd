@@ -74,16 +74,16 @@ func _on_max_health_changed(new_value: float) -> void:
 	health_bar.max_value = new_value
 	
 	if player_hp_comp:
-		health_value_label.text = str(player_hp_comp.health) + "/" + str(new_value)
+		health_value_label.text = "%.1f/%.1f" % [player_hp_comp.health ,new_value]
 
 func _on_max_mana_changed(new_value: float) -> void:
 	mana_bar.max_value = new_value
 	
 	if player_hp_comp:
-		mana_value_label.text = str(player_hp_comp.mana) + "/" + str(new_value)
+		mana_value_label.text = "%.1f/%.1f" % [player_hp_comp.mana ,new_value]
 
 func _on_health_restore_changed(new_value: float) -> void:
-	hp_regen_label.text = "%.1f/s" % new_value
+	hp_regen_label.text = "%+.1f/s" % new_value
 	
 func _on_mana_restore_changed(new_value: float) -> void:
-	mana_regen_label.text = "%.1f/s" % new_value
+	mana_regen_label.text = "%+.1f/s" % new_value

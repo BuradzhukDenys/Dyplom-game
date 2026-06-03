@@ -25,6 +25,7 @@ fill_to = Vector2(0.5811966, 0.055555556)
 
 [node name="SkillSlot" type="PanelContainer" unique_id=95467887]
 custom_minimum_size = Vector2(60, 60)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_styles/panel = SubResource("StyleBoxTexture_6rr40")
 script = ExtResource("2_jnoqb")
 slot_position = 1
