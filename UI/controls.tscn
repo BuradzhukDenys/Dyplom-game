@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://bii8lt0h4nhgl"]
+
+[ext_resource type="Script" uid="uid://blnrc7f4bvurg" path="res://Objectives/interface.gd" id="1_03eog"]
+[ext_resource type="Texture2D" uid="uid://54k5hy6l05w2" path="res://Assets/Keyboard Keys/Keyboard Letters and Symbols.png" id="1_7a52b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3er0"]
+bg_color = Color(0.7822131, 0.5399266, 0.32965797, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e240q"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(97, 66, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbhad"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(1, 34, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x28t"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(33, 66, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcf2c"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(49, 34, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5loh"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(65, 98, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wefa"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(81, 34, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqjde"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(1, 66, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_homfb"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(113, 66, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbgrs"]
+atlas = ExtResource("1_7a52b")
+region = Rect2(17, 82, 13, 12)
+
+[node name="Controls" type="CanvasLayer" unique_id=1474131911]
+layer = 3
+script = ExtResource("1_03eog")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1028072021]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1932284314]
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3er0")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1994906494]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=559169993]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1262513972]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Controls"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1892991964]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Movement" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1880816550]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement" unique_id=324209617]
+layout_mode = 2
+text = "- Movement: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement" unique_id=2066034688]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement/HBoxContainer" unique_id=877871353]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_e240q")
+stretch_mode = 5
+
+[node name="AKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement/HBoxContainer" unique_id=1629224621]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_dbhad")
+expand_mode = 5
+
+[node name="SKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement/HBoxContainer" unique_id=1416054704]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5x28t")
+expand_mode = 5
+
+[node name="DKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Movement/HBoxContainer" unique_id=2131681567]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_gcf2c")
+expand_mode = 5
+
+[node name="Attack" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=720487045]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Attack" unique_id=219090586]
+layout_mode = 2
+text = "- Attack: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Attack" unique_id=2008199677]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Attack/HBoxContainer" unique_id=870699497]
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_t5loh")
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Attack/HBoxContainer" unique_id=1496523627]
+layout_mode = 2
+text = "LMB"
+
+[node name="HealingPotion" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1959635179]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HealingPotion" unique_id=1631055242]
+layout_mode = 2
+text = "- Healing Potion: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HealingPotion" unique_id=1777907495]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HealingPotion/HBoxContainer" unique_id=988420567]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_8wefa")
+stretch_mode = 5
+
+[node name="ManaPotion" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1319776870]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/ManaPotion" unique_id=531865189]
+layout_mode = 2
+text = "- Mana Potion: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/ManaPotion" unique_id=140729990]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/ManaPotion/HBoxContainer" unique_id=982500315]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_cqjde")
+stretch_mode = 5
+
+[node name="Inventory" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=686403526]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Inventory" unique_id=53291344]
+layout_mode = 2
+text = "- Inventory: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Inventory" unique_id=1759761465]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Inventory/HBoxContainer" unique_id=1092560293]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_homfb")
+stretch_mode = 5
+
+[node name="Stats" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1194910841]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Stats" unique_id=1847449957]
+layout_mode = 2
+text = "- Stats: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Stats" unique_id=1042486101]
+layout_mode = 2
+
+[node name="WKey" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Stats/HBoxContainer" unique_id=1187112144]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wbgrs")
+stretch_mode = 5
+
+[node name="Pause" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1374215967]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Pause" unique_id=1735578903]
+layout_mode = 2
+text = "- Pause: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Pause" unique_id=1722127106]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Pause/HBoxContainer" unique_id=375045320]
+layout_mode = 2
+text = "ESC"
+
+[node name="Close" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1014343475]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]

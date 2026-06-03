@@ -2,6 +2,7 @@ extends Screen
 class_name PauseMenu
 
 @onready var options: Options = $Options
+@onready var controls: Interface = $Controls
 
 func _ready() -> void:
 	hide()
@@ -11,6 +12,11 @@ func _input(event: InputEvent) -> void:
 		
 		if options.visible:
 			options._on_exit_button_pressed()
+			get_viewport().set_input_as_handled()
+			return
+			
+		if controls.visible:
+			controls._on_close_pressed()
 			get_viewport().set_input_as_handled()
 			return
 		
@@ -27,3 +33,6 @@ func _on_resume_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	options.open_menu()
+
+func _on_controls_pressed() -> void:
+	controls.open()

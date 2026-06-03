@@ -95,7 +95,7 @@ size_flags_vertical = 10
 theme_override_constants/separation = 45
 
 [node name="Items" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1190968799]
-custom_minimum_size = Vector2(120, 35)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -103,7 +103,7 @@ theme_override_font_sizes/font_size = 22
 text = "Check items"
 
 [node name="Stats" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1295100144]
-custom_minimum_size = Vector2(120, 35)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -116,13 +116,13 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 45
 
 [node name="MainMenu" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=420647254]
-custom_minimum_size = Vector2(120, 35)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Main Menu"
 
 [node name="Restart" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1771956933]
-custom_minimum_size = Vector2(120, 35)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 shortcut = SubResource("Shortcut_vf13v")

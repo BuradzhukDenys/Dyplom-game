@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b30dswxjxabwt" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_short.png" id="6_id3bs"]
 [ext_resource type="Texture2D" uid="uid://b2lapixwerq3e" path="res://Assets/Background/Horizontal/assetpack/parallax/forest/forest_moon.png" id="7_b3er0"]
 [ext_resource type="Texture2D" uid="uid://dt4x8arv1opa2" path="res://Assets/UI/Interface2/UIBundleFree/UIBundleFree/MediavelFree.png" id="8_83n0s"]
+[ext_resource type="PackedScene" uid="uid://bii8lt0h4nhgl" path="res://UI/controls.tscn" id="11_id3bs"]
 [ext_resource type="PackedScene" uid="uid://0kj3tb51vxje" path="res://Options/options.tscn" id="11_iej5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n28k"]
@@ -139,7 +140,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="PlayButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=144206244]
-custom_minimum_size = Vector2(150, 55)
+custom_minimum_size = Vector2(150, 35)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
@@ -151,7 +152,7 @@ vertical_icon_alignment = 2
 expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=862361474]
-custom_minimum_size = Vector2(150, 55)
+custom_minimum_size = Vector2(150, 35)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
@@ -162,8 +163,19 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
+[node name="ControlsButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=356142547]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "CONTROLS"
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
 [node name="QuitButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons" unique_id=233524075]
-custom_minimum_size = Vector2(150, 55)
+custom_minimum_size = Vector2(150, 35)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
@@ -176,7 +188,10 @@ expand_icon = true
 
 [node name="Options" parent="." unique_id=1866982236 instance=ExtResource("11_iej5p")]
 
+[node name="Controls" parent="." unique_id=1474131911 instance=ExtResource("11_id3bs")]
+
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="options_closed" from="Options" to="." method="_on_options_closed"]

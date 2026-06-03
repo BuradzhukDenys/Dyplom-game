@@ -5,6 +5,7 @@ const level_scene: PackedScene = preload("res://Levels/level.tscn")
 
 @onready var options: CanvasLayer = $Options
 @onready var menu: CanvasLayer = $CanvasLayer
+@onready var controls: Interface = $Controls
 
 func _ready() -> void:
 	get_tree().paused = true
@@ -23,3 +24,6 @@ func _on_quit_button_pressed() -> void:
 	
 func _on_options_closed() -> void:
 	menu.show()
+
+func _on_controls_button_pressed() -> void:
+	controls.open()

@@ -36,6 +36,7 @@ process_mode = 3
 script = ExtResource("1_imdgr")
 item_container_scene = ExtResource("3_tmtiu")
 item_information_scene = ExtResource("3_pyha1")
+unpasu_on_close = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1827632675]
 anchors_preset = 15
