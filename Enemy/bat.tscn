@@ -2,9 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cllx0syaukocd" path="res://Enemy/enemy.tscn" id="1_dlfbl"]
 [ext_resource type="Texture2D" uid="uid://cb1jdfnrhko2h" path="res://Assets/Bat/Bat/Death/SimpleEnemies Bat_Death Spritesheet.png" id="2_2dgkk"]
-[ext_resource type="Resource" uid="uid://cguuuge3kxvc4" path="res://Enemy/Resources/bat.tres" id="2_xejny"]
+[ext_resource type="Script" uid="uid://bnlx02o000pqx" path="res://Enemy/bat.gd" id="2_xejny"]
+[ext_resource type="AudioStream" uid="uid://c1yooiedhmp0o" path="res://Assets/Sounds/SFX/Enemies/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com] (1).ogg" id="3_ghf1q"]
 [ext_resource type="Texture2D" uid="uid://bphhlrxims18d" path="res://Assets/Bat/Bat/Idle/SimpleEnemies Bat_Idle Spritesheet.png" id="3_xejny"]
+[ext_resource type="AudioStream" uid="uid://m8mlwblf0bbf" path="res://Assets/Sounds/SFX/Enemies/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com] (2).ogg" id="4_em3mq"]
 [ext_resource type="Texture2D" uid="uid://dr2l3qf0slfrq" path="res://Assets/Bat/Bat/Hit/SimpleEnemies Bat_Hit Spritesheet.png" id="4_y7lgg"]
+[ext_resource type="AudioStream" uid="uid://svx1m6ije1ks" path="res://Assets/Sounds/SFX/Enemies/sound_garage-rat-squeaks-4-fx-396298-[AudioTrimmer.com].ogg" id="5_047pa"]
+[ext_resource type="Resource" uid="uid://cguuuge3kxvc4" path="res://Enemy/Resources/bat.tres" id="6_6v8cf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnwhh"]
 atlas = ExtResource("2_2dgkk")
@@ -223,10 +227,19 @@ animations = [{
 }]
 
 [node name="Bat" unique_id=298853584 instance=ExtResource("1_dlfbl")]
-resource = ExtResource("2_xejny")
+script = ExtResource("2_xejny")
+BatHitSounds = Dictionary[int, AudioStream]({
+0: ExtResource("3_ghf1q"),
+1: ExtResource("4_em3mq"),
+2: ExtResource("5_047pa")
+})
+resource = ExtResource("6_6v8cf")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1263937817]
 sprite_frames = SubResource("SpriteFrames_wv81q")
-animation = &"TakeDamageUp"
+animation = &"TakeDamageDown"
+
+[node name="HitPlayer" parent="." index="5" unique_id=2063359780]
+volume_db = 7.0
 
 [editable path="HitboxHurtboxComponent"]

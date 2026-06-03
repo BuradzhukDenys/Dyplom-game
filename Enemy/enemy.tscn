@@ -106,6 +106,10 @@ shape = SubResource("CircleShape2D_ncf7h")
 
 [node name="FireBurnComponent" parent="." unique_id=1511111482 instance=ExtResource("4_ncf7h")]
 
+[node name="HitPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2063359780]
+volume_db = 13.0
+bus = &"SFX"
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="HitboxHurtboxComponent/Hitbox" to="." method="_on_hitbox_area_exited"]

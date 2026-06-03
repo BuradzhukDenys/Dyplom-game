@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cdplihi5ufoju" path="res://Components/ranged_component.tscn" id="4_pjkbo"]
 [ext_resource type="PackedScene" uid="uid://b6sbw5rpun7xh" path="res://Enemy/projectile.tscn" id="5_fhvmi"]
 [ext_resource type="Resource" uid="uid://1j7adwdvrr1g" path="res://Enemy/Resources/ranged_slime_projectile.tres" id="7_8k62o"]
+[ext_resource type="AudioStream" uid="uid://kge17to35vb2" path="res://Assets/Sounds/SFX/Enemies/1-57. SFX limbs pop.ogg" id="8_a7t4u"]
+[ext_resource type="AudioStream" uid="uid://d3h62iek3v4o3" path="res://Assets/Sounds/SFX/Enemies/freesound_community-footsteps-mud-68694-[AudioTrimmer.com].wav" id="9_8343k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjkbo"]
 atlas = ExtResource("3_pjkbo")
@@ -483,6 +485,7 @@ animations = [{
 [node name="SlimeRange" unique_id=298853584 node_paths=PackedStringArray("ranged_component") instance=ExtResource("1_fc4cw")]
 script = ExtResource("2_fhvmi")
 ranged_component = NodePath("RangedComponent")
+slime_hit_sound = ExtResource("9_8343k")
 resource = ExtResource("2_57t2p")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1263937817]
@@ -506,6 +509,15 @@ projectile_data = ExtResource("7_8k62o")
 
 [node name="ShootPoint" type="Marker2D" parent="." index="5" unique_id=651009670]
 position = Vector2(0, -16)
+
+[node name="ShootPlayer" type="AudioStreamPlayer2D" parent="." index="7" unique_id=29626945]
+stream = ExtResource("8_a7t4u")
+volume_db = 6.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="HitPlayer" parent="." index="8" unique_id=2063359780]
+stream = ExtResource("9_8343k")
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 
