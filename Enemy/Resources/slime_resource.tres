@@ -6,7 +6,7 @@
 script = ExtResource("1_d0e0i")
 speed = 130.0
 damage = 10.0
-expirience_gain = 8
+experience_gain = 12
 gold_gain = 6
 knockback_strength = 300.0
 knockback_friction = 800.0

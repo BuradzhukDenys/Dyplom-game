@@ -6,7 +6,7 @@
 script = ExtResource("1_tlq5d")
 speed = 160.0
 damage = 5.0
-expirience_gain = 4
+experience_gain = 8
 gold_gain = 4
 knockback_strength = 250.0
 knockback_friction = 900.0
