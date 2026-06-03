@@ -143,6 +143,7 @@ custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
 text = "PLAY"
 icon = SubResource("AtlasTexture_id3bs")
 icon_alignment = 1
@@ -154,6 +155,7 @@ custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
 text = "OPTIONS"
 icon = SubResource("AtlasTexture_b3er0")
 icon_alignment = 1
@@ -165,6 +167,7 @@ custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
 text = "QUIT"
 icon = SubResource("AtlasTexture_qmlj8")
 icon_alignment = 1
@@ -176,5 +179,4 @@ expand_icon = true
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/CenterContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="animation_ended" from="Options" to="." method="_on_options_animation_ended"]
 [connection signal="options_closed" from="Options" to="." method="_on_options_closed"]
