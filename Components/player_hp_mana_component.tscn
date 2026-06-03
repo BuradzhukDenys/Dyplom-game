@@ -10,7 +10,4 @@ script = ExtResource("2_0ucoa")
 process_callback = 0
 one_shot = true
 
-[node name="RegenTimer" type="Timer" parent="." index="1" unique_id=1755970972]
-
 [connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
-[connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]

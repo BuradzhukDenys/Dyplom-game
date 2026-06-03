@@ -33,7 +33,9 @@ func try_drink(potion_type: PlayerData.PotionType) -> void:
 	potion_drank.emit(potion_type, duration)
 	cooldowns[potion_type] = true
 	
-	await get_tree().create_timer(duration).timeout
+	await get_tree().create_timer(duration, false).timeout
+	if not is_inside_tree():
+		return
 	
 	cooldowns[potion_type] = false
 	potion_cooldown_finished.emit(potion_type)
