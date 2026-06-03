@@ -10,10 +10,10 @@ region = Rect2(177, 2129, 14, 14)
 [resource]
 script = ExtResource("1_wxbtv")
 buffs = 80
-damage_type = 1
-damage_percent_bonus = 0.10000000000000009
-skill_damage_type = 1
-skill_damage_percent_bonus = 0.10000000000000009
+damage_bonus = 20.0
+damage_percent_bonus = 0.10000000000000007
+skill_damage_bonus = 20.0
+skill_damage_percent_bonus = 0.10000000000000007
 texture = SubResource("AtlasTexture_o0rqv")
 cost = 28
 item_name = "Sigil of Might"
