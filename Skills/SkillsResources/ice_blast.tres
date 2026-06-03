@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillResource" format=3 uid="uid://dkllcig072bqa"]
+
+[ext_resource type="PackedScene" uid="uid://eau3iplp0rjn" path="res://Skills/ice_blast.tscn" id="1_0f2mj"]
+[ext_resource type="Script" uid="uid://2uanydoh5yov" path="res://Skills/SkillsResources/skill_resource.gd" id="1_npfyx"]
+[ext_resource type="Texture2D" uid="uid://se3g21hcy7j1" path="res://Assets/FrostMage_Free/FrostMage_Free/FrostMage_9.png" id="3_u6a3m"]
+
+[resource]
+script = ExtResource("1_npfyx")
+scene = ExtResource("1_0f2mj")
+skill_icon = ExtResource("3_u6a3m")
+mana_cost = 10
+damage = 20.0
+cooldown = 10.0
+metadata/_custom_type_script = "uid://2uanydoh5yov"

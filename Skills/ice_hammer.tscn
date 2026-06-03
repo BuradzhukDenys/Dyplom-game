@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c7mlhif7slned"]
 
-[ext_resource type="Script" uid="uid://dxlsu5o6jnis4" path="res://Skills/skill.gd" id="1_f6k80"]
+[ext_resource type="Script" uid="uid://cmvs413s73bvq" path="res://Skills/ice_hammer.gd" id="1_w8auh"]
 [ext_resource type="Texture2D" uid="uid://ck4ey2qotb788" path="res://Assets/Pixel Art VFX - Frost Knight - FREE Version/VFX1/sprite-sheet/sprite-sheet.png" id="2_w8auh"]
+[ext_resource type="AudioStream" uid="uid://b0syc1ltx213g" path="res://Assets/Sounds/SFX/Character/mixkit-icicles-spell-whoosh-881-[AudioTrimmer.com].wav" id="3_w8auh"]
 
 [sub_resource type="Animation" id="Animation_lkblw"]
 length = 0.001
@@ -93,55 +94,55 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
-tracks/3/type = "method"
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".")
+tracks/3/path = NodePath("HammerCollision:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.875),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HammerCollision:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.375, 0.4375, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(37.5, 0), Vector2(37.5, 0), Vector2(95, 0), Vector2(130, 24)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/5/path = NodePath("AnimatedSprite2D:offset:x")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [65.0]
 }
-tracks/6/type = "value"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("AnimatedSprite2D:offset:x")
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.8725),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [65.0]
+"values": [{
+"args": [],
+"method": &"delete"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_vd1nl"]
@@ -190,11 +191,11 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.875),
+"times": PackedFloat32Array(0.8725),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"delete"
 }]
 }
 tracks/4/type = "value"
@@ -354,7 +355,8 @@ radius = 45.0
 show_behind_parent = true
 collision_layer = 4
 collision_mask = 32
-script = ExtResource("1_f6k80")
+script = ExtResource("1_w8auh")
+hit_sound = ExtResource("3_w8auh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=436582105]
 libraries/ = SubResource("AnimationLibrary_gws8o")
@@ -369,3 +371,8 @@ flip_h = true
 position = Vector2(37.5, 0)
 shape = SubResource("CircleShape2D_eop5i")
 disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=439578406]
+volume_db = -1.0
+max_polyphony = 2
+bus = &"SFX"
