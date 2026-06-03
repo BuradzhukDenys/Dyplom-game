@@ -3,7 +3,9 @@ class_name EndScreen
 
 @onready var end_screen_label: Label = $MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Control/Label
 
-var label_tween: Tween
+@export var stats_ui: StatsUI
+@export var inventory_ui: InventoryUI
+
 var label_color_tween: Tween
 
 func _ready() -> void:
@@ -23,7 +25,6 @@ func on_victory() -> void:
 	end_screen_label.text = "Victory"
 	end_screen_label.modulate = Color(0.877, 0.0, 0.0, 1.0)
 	
-	start_rotation_tween_deg(25, 1)
 	if label_color_tween and label_color_tween.is_valid():
 		label_color_tween.kill()
 		
@@ -45,36 +46,6 @@ func on_defeat() -> void:
 	end_screen_label.text = "Defeat"
 	end_screen_label.modulate = Color(0.877, 0.0, 0.0, 1.0)
 	
-	start_rotation_tween_deg(25, 1)
-	
-func start_rotation_tween(tween_rotation: float, time: float, loops: int = 0) -> void:
-	end_screen_label.rotation = -tween_rotation
-	
-	if label_tween and label_tween.is_valid():
-		label_tween.kill()
-		
-	label_tween = create_tween()
-	
-	label_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	label_tween.set_loops(loops)
-	
-	label_tween.tween_property(end_screen_label, "rotation", tween_rotation, time)
-	label_tween.tween_property(end_screen_label, "rotation", -tween_rotation, time)
-	
-func start_rotation_tween_deg(rotation_degrees: float, time: float, loops: int = 0) -> void:
-	end_screen_label.rotation_degrees = -rotation_degrees
-	
-	if label_tween and label_tween.is_valid():
-		label_tween.kill()
-		
-	label_tween = create_tween()
-	
-	label_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	label_tween.set_loops(loops)
-	
-	label_tween.tween_property(end_screen_label, "rotation_degrees", rotation_degrees, time)
-	label_tween.tween_property(end_screen_label, "rotation_degrees", -rotation_degrees, time)
-	
 func return_to_main_menu() -> void:
 	super.return_to_main_menu()
 	
@@ -86,7 +57,7 @@ func restart() -> void:
 	EventBus.game_end = false
 
 func _on_items_pressed() -> void:
-	EventBus.inventory_opened.emit()
+	inventory_ui.open()
 
 func _on_stats_pressed() -> void:
-	EventBus.stats_opened.emit()
+	stats_ui.open()
