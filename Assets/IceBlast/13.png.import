@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bowkfuntvtib"
-path="res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"
+uid="uid://bv6gevyam2bt2"
+path="res://.godot/imported/13.png-51cc43807b8c11f66d3ce9791b1978d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Particles/Healing particle.png"
-dest_files=["res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"]
+source_file="res://Assets/IceBlast/13.png"
+dest_files=["res://.godot/imported/13.png-51cc43807b8c11f66d3ce9791b1978d2.ctex"]
 
 [params]
 

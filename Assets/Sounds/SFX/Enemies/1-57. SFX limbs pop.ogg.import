@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kge17to35vb2"
+path="res://.godot/imported/1-57. SFX limbs pop.ogg-4594902015f2cf350dbf7e2cd6afa7ab.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/Enemies/1-57. SFX limbs pop.ogg"
+dest_files=["res://.godot/imported/1-57. SFX limbs pop.ogg-4594902015f2cf350dbf7e2cd6afa7ab.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bowkfuntvtib"
-path="res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"
+uid="uid://dqh88rko2gyub"
+path="res://.godot/imported/sparkles_particle.png-73546d52342a0a763864d57390448889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Particles/Healing particle.png"
-dest_files=["res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"]
+source_file="res://Assets/Particles/sparkles_particle.png"
+dest_files=["res://.godot/imported/sparkles_particle.png-73546d52342a0a763864d57390448889.ctex"]
 
 [params]
 

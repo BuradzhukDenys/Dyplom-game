@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bowkfuntvtib"
-path="res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"
+uid="uid://dyrtoca78qn0f"
+path="res://.godot/imported/sprite-sheet.png-9d9ecb4b3d93495aff4c5e1ddec65ef6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Particles/Healing particle.png"
-dest_files=["res://.godot/imported/Healing particle.png-d9c3cea606b21125157df4e0e9351238.ctex"]
+source_file="res://Assets/Slash/sprite-sheet.png"
+dest_files=["res://.godot/imported/sprite-sheet.png-9d9ecb4b3d93495aff4c5e1ddec65ef6.ctex"]
 
 [params]
 
