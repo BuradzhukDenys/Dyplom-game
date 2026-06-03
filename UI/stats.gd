@@ -7,6 +7,7 @@ func _ready() -> void:
 	hide()
 
 func open() -> void:
+	#Генеруємо характеристики в залежності від характеристик гравця
 	var lines: PackedStringArray = stats.text.split("\n")
 	
 	for i in lines.size():

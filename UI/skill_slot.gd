@@ -17,6 +17,7 @@ var cooldown_tween: Tween
 var has_skill: bool = false
 
 func _ready() -> void:
+	#Скидуємо все на початку
 	skill_cooldown.value = 0
 	skill_cooldown_label.text = ""
 	skill_cooldown_label.visible = false
@@ -29,6 +30,7 @@ func _ready() -> void:
 		setup_slot(skill_data)
 
 func _process(_delta: float) -> void:
+	#Пишемо скільки секунд залишилось до відновлення здібності
 	if skill_cooldown_label.visible:
 		skill_cooldown_label.text = str(int(skill_cooldown_timer.time_left) + 1)
 		

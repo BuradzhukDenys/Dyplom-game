@@ -26,6 +26,7 @@ func start_level() -> void:
 		for group: GroupResource in wave.wave_enemies:
 			spawn_group(group)
 		
+		#Чекаємо щоб всі групи заспавнились, і після цього запускаємо наступну хвилю
 		await all_groups_spawned
 		
 		if wave.wave_offset > 0.0:

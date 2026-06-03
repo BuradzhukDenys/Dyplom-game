@@ -50,6 +50,8 @@ enum StatType
 @export_range(-1, 1, 0.01) var skill_damage_percent_bonus: float = 0.0
 
 func _validate_property(property: Dictionary) -> void:
+	#В залежності від того який бонус увімкнено в інспекторі
+	#Показуємо налаштування цього бонусу
 	if property.name == "max_health_bonus":
 		var max_health_buff: bool = (buffs & 1) != 0
 		
@@ -105,6 +107,7 @@ func _validate_property(property: Dictionary) -> void:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 
 func get_tooltip_stats() -> String:
+	#UГенеруємо опис предмета
 	var lines: PackedStringArray
 	
 	if (buffs & 1) != 0:

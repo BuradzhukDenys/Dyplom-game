@@ -75,6 +75,7 @@ func _show_tooltip() -> void:
 	var tooltip_size: Vector2 = current_tooltip.size
 	var target_pos: Vector2 = get_global_mouse_position() + Vector2(15, 15)
 	
+	#Перевіряємо чи підказка до предмета не виходить за екран
 	if target_pos.x + tooltip_size.x > screen_size.x:
 		target_pos.x = get_global_mouse_position().x - tooltip_size.x - 15
 		

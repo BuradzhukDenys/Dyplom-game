@@ -4,6 +4,7 @@ var all_waves_spawned: bool = false
 var enemies_alive: int = 0
 
 func spawn_at_position(enemy: Enemy, enemy_position: Vector2) -> void:
+	#Спавнимо ворога та додаємо його до кількості живих ворогів
 	enemy.global_position = enemy_position
 	add_child(enemy)
 	
@@ -15,6 +16,7 @@ func point_spawn_pos(angle: float) -> Vector2:
 	var jitter_angle: float = angle + randf_range(-0.15, 0.15)
 	var test_position: Vector2
 	
+	#Беремо одиничний вектор з кута спавну групи, та знаходимо позицію для спавну
 	var spawn_pos: Vector2 = Vector2.from_angle(jitter_angle) * PlayerData.PLAYER_RADIUS_SPAWN_ENEMIES
 	test_position = PlayerData.player_position + spawn_pos
 

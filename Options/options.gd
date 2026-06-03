@@ -54,6 +54,7 @@ func open_menu() -> void:
 	switch_buttons_disable(options_buttons, false)
 
 func switch_buttons_disable(container: Node, disable: bool) -> void:
+	#Вимикаємо або вмикаємо всі кнопки в налаштуваннях
 	for child in container.get_children():
 		if child is BaseButton and not child.has_meta("ignore_disable"):
 			child.disabled = disable

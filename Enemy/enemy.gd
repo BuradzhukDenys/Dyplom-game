@@ -26,6 +26,7 @@ var current_attack_timer: float = 0.0
 var damage_flash_tween: Tween
 
 func _ready() -> void:
+	#Збільшуємо хп ворогу в залежності від хвилі
 	var hp_multiplier: float = 1.0
 	if PlayerData.wave_number > 1:
 		hp_multiplier += (PlayerData.wave_number - 1) * 0.5
@@ -37,6 +38,7 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 		
+	#Визначаємо напрямок руху, та зменшуємо силу поштовхів від натовпу
 	target_direction = global_position.direction_to(PlayerData.player_position)
 	push_velocity = push_velocity.move_toward(Vector2.ZERO, resource.knockback_friction * delta)
 	var move_velocity: Vector2 = target_direction * resource.speed
@@ -49,12 +51,15 @@ func _physics_process(delta: float) -> void:
 	if not another_animation_play:
 		play_animation_directionaly("Move")
 		
+	#Перевіряємо чи позиція ворога більша за дозволену дистанцію до ворога, щоб вони
+	#не смикались
 	var distance_to_player: float = global_position.distance_to(PlayerData.player_position)
 	var stop_distance: float = 2.0
 	
 	if distance_to_player > stop_distance:
 		move_and_slide()
 		
+		#Робимо, щоб вороги штовхали оди оного
 		if not another_animation_play:
 			for i in get_slide_collision_count():
 				var collision: KinematicCollision2D = get_slide_collision(i)
@@ -63,6 +68,7 @@ func _physics_process(delta: float) -> void:
 				if collider is CharacterBody2D and "push_velocity" in collider:
 					collider.push_velocity = target_direction * (resource.speed * 0.8)
 					
+	#Робимо, щоб овроги атакували гравця кожні 0.5 секунд
 	if is_touching_player:
 		current_attack_timer -= delta
 		if current_attack_timer <= 0.0:
@@ -140,6 +146,7 @@ func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_
 	
 	match type:
 		HPComponent.HEALTH_CHANGED_TYPE.TAKE_DAMAGE:
+			#Застосовуємо відштовхування від атаки по ворогу
 			knockback_velocity = -target_direction * resource.knockback_strength
 			play_animation_directionaly("TakeDamage")
 

@@ -23,6 +23,7 @@ func _ready() -> void:
 	player_gold_label.text = "Gold: %d" % PlayerData.gold
 	refresh_cost_label.text = "Refresh cost - %d gold" % refresh_cost
 	
+	#Вибираємо випадковий предмет, то додаємо слот до магазину
 	for i in max_items:
 		var random_item: int = randi_range(0, ItemsManager.all_items_count() - 1)
 		var item_container: ItemContainer = item_container_scene.instantiate()

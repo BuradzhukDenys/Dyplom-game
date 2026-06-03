@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name Interface
 
-@export var unpasu_on_close: bool
+@export var unpause_on_close: bool
 
 func _ready() -> void:
 	hide()
@@ -12,7 +12,7 @@ func open() -> void:
 	show()
 
 func close() -> void:
-	if unpasu_on_close:
+	if unpause_on_close:
 		get_tree().paused = false
 		
 	hide()

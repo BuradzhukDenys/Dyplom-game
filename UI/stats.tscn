@@ -29,7 +29,7 @@ events = [SubResource("InputEventKey_ulria")]
 [node name="Stats" type="CanvasLayer" unique_id=1939718799]
 process_mode = 3
 script = ExtResource("1_ulria")
-unpasu_on_close = true
+unpause_on_close = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=897072094]
 anchors_preset = 15

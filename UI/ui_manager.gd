@@ -18,6 +18,7 @@ func _ready() -> void:
 	level_label.text = level_resource.level_name
 	EventBus.wave_changed.connect(_on_wave_changed)
 	
+	#Передаємо компоненти з гравця, щоб показувати правильно дані з них
 	var character: Character = get_tree().get_first_node_in_group("character")
 	
 	if character:

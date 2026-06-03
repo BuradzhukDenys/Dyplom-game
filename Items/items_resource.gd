@@ -6,6 +6,7 @@ class_name ItemData
 @export var item_name: String = ""
 
 func get_tooltip_name_cost() -> String:
+	#Повертаємо рядок з характеристиками назви та вартості предмета
 	var lines_name: PackedStringArray = PackedStringArray()
 	
 	lines_name.append("[b]%s[/b]" % item_name)

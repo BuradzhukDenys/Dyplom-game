@@ -60,6 +60,9 @@ func play_ui_click() -> void:
 	
 func stop_sfx() -> void:
 	ui_player.stop()
+	error_player.stop()
+	potion_drank_player.stop()
+	potion_refreshed_player.stop()
 	
 func stop_fanfare() -> void:
 	fanfare_player.stop()

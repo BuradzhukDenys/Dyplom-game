@@ -28,6 +28,7 @@ class_name SwordData
 @export var lifesteal: float
 
 func get_tooltip_stats() -> String:
+	#Генеруємо опис меча
 	var lines = PackedStringArray()
 	
 	lines.append("[color=red]Damage: %.1f[/color]" % damage)
@@ -50,6 +51,8 @@ func get_tooltip_stats() -> String:
 			
 
 func _validate_property(property: Dictionary) -> void:
+	#В залежності від того який додатковий еффект увімкнено в інспекторі
+	#Показуємо налаштування цього ефекту
 	if property.name == "fire_duration" or property.name == "fire_damage":
 		var has_fire = (additional_effects & 1) != 0
 		
