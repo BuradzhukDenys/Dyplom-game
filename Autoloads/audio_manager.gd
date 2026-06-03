@@ -4,6 +4,8 @@ extends Node
 @onready var ui_player: AudioStreamPlayer = $UIPlayer
 @onready var error_player: AudioStreamPlayer = $ErrorPlayer
 @onready var fanfare_player: AudioStreamPlayer = $FanfarePlayer
+@onready var potion_drank_player: AudioStreamPlayer = $PotionDrankPlayer
+@onready var potion_refreshed_player: AudioStreamPlayer = $PotionRefreshedPlayer
 
 @export var main_menu_music: AudioStream
 @export var level_music: AudioStream
@@ -14,6 +16,8 @@ extends Node
 @export var click_sound: AudioStream
 @export var buy_sound: AudioStream
 @export var error_sound: AudioStream
+@export var potion_drank_sound: AudioStream
+@export var potion_refreshed_sound: AudioStream
 
 func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
@@ -66,6 +70,30 @@ func play_error() -> void:
 	if error_sound:
 		error_player.stream = error_sound
 		error_player.play()
+	
+func play_potion_drank() -> void:
+	play_sfx(potion_drank_sound)
+	
+func play_potion_refreshed() -> void:
+	play_sfx(potion_refreshed_sound)
+	
+func play_spatial_sound(stream: AudioStream, position: Vector2, bus_name: String = "SFX") -> void:
+	if stream == null:
+		push_error("AudioManager: Не передано звук для відтворення")
+		return
+		
+	var audio_player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	
+	audio_player.stream = stream
+	audio_player.volume_db = 3
+	audio_player.global_position = position
+	audio_player.bus = bus_name
+	
+	get_tree().current_scene.add_child(audio_player)
+	
+	audio_player.play()
+	
+	audio_player.finished.connect(audio_player.queue_free)
 	
 func _on_node_added(node: Node) -> void:
 	if node is BaseButton:
