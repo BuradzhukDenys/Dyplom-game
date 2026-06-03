@@ -1,7 +1,11 @@
 extends CanvasLayer
 class_name Interface
 
-signal interface_closed
+func open() -> void:
+	AudioManager.play_ui_click()
+	get_tree().paused = true
+	show()
 
 func close() -> void:
-	interface_closed.emit()
+	get_tree().paused = false
+	hide()

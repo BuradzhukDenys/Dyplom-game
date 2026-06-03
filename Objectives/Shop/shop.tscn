@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bn7nbsgnck1vb" path="res://Objectives/objective.tscn" id="1_r5evm"]
 [ext_resource type="Texture2D" uid="uid://bufqtasf3wrnf" path="res://Assets/Objectives/Shop.png" id="2_g55c7"]
-[ext_resource type="PackedScene" uid="uid://cdrrfpugvvnyy" path="res://Objectives/Shop/shop_ui.tscn" id="3_ksff2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g55c7"]
 size = Vector2(177, 128)
@@ -14,7 +13,6 @@ size = Vector2(324, 290)
 size = Vector2(216, 141)
 
 [node name="Shop" unique_id=842312657 instance=ExtResource("1_r5evm")]
-objective_interface_scene = ExtResource("3_ksff2")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1468209027]
 texture = ExtResource("2_g55c7")
