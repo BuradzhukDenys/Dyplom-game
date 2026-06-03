@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blr7pspjf4dj8"
-path="res://.godot/imported/defeat screen.png-75bc222ad3645c24a371b1c0c7776b31.ctex"
+uid="uid://cd7vi5sqpoh5c"
+path="res://.godot/imported/defeat_screen.png-7eeb74df7bc395ff4655f6e9b831b149.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screenshots/defeat screen.png"
-dest_files=["res://.godot/imported/defeat screen.png-75bc222ad3645c24a371b1c0c7776b31.ctex"]
+source_file="res://Screenshots/defeat_screen.png"
+dest_files=["res://.godot/imported/defeat_screen.png-7eeb74df7bc395ff4655f6e9b831b149.ctex"]
 
 [params]
 
