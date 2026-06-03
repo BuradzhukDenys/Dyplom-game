@@ -32,7 +32,7 @@ var FootstepsSounds: Dictionary = {
 var speed: float
 var damage: float
 
-const SPEED_WHEN_ATTACK: float = 0.5
+const SPEED_WHEN_ATTACK: float = 0.6
 const SPEED_TAKE_DAMAGE_SLOWNESS: float = 0.8
 var last_direction: Vector2 = Vector2.DOWN
 var can_attack: bool = true
@@ -58,18 +58,19 @@ var current_state: States = States.IDLE
 #endregion
 
 func _ready() -> void:
+	#Коли змінюється швкидкість або шкода змінюємо їх локально
 	PlayerData.speed_changed.connect(func(new_value): speed = new_value)
 	PlayerData.damage_changed.connect(func(new_value): damage = new_value)
 	speed = PlayerData.speed
 	damage = PlayerData.damage
-	#slash_animated_sprite.stop()
+	slash_animated_sprite.stop()
 	slash_animated_sprite.hide()
 	
 	PlayerData.weapon_changed.connect(_on_weapon_changed)
 	_on_weapon_changed(PlayerData.current_weapon)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack") and can_attack and current_state in [States.IDLE, States.MOVE]:
+	if event.is_action_pressed("attack") and can_attack:
 		switch_state(States.ATTACK)
 		
 	if event.is_action_pressed("drink_healing_potion"):
@@ -100,14 +101,15 @@ func _enter_state(state: States) -> void:
 			attack_cooldown_timer.start(PlayerData.current_weapon.attack_interval)
 			play_animation_directionaly("Attack")
 		States.TAKE_DAMAGE:
-			hurt_player.play()
 			play_animation_directionaly("TakeDamage")
 		States.DEAD:
 			die_player.play()
 			play_animation_directionaly("Die")
+			#Вимикаємо обробку вводу та фізику при смерті
 			set_physics_process(false)
 			set_process_unhandled_input(false)
 			
+			#Вимикаємо колізії при смерті
 			hitbox_collision.set_deferred("disabled", true)
 			hurtbox_collision.set_deferred("disabled", true)
 			
@@ -199,6 +201,7 @@ func _on_hp_component_health_changed(new_value: float, type: HPComponent.HEALTH_
 			heal_tween = create_tween()
 			heal_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
 		HPComponent.HEALTH_CHANGED_TYPE.TAKE_DAMAGE:
+			hurt_player.play()
 			if new_value > 0:
 				if current_state != States.ATTACK:
 					switch_state(States.TAKE_DAMAGE)
@@ -232,6 +235,7 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack_effect_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
 
 func _on_hitbox_area_entered(area: Hurtbox) -> void:
+	#Наносимо шкоду ворогу, і якщо є вогонь на зброї, підпалюємо його
 	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
 		area.take_damage(damage)
 		if hitbox.has_fire:

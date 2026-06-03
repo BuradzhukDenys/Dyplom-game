@@ -12,6 +12,7 @@ enum HEALTH_CHANGED_TYPE
 }
 
 var max_health: float = 100:
+	#При зміні max_health також змінюмо health вибираючи найменше значення між ними
 	set(new_value):
 		max_health = new_value
 		

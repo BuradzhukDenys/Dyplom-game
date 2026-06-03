@@ -18,13 +18,13 @@ func try_drink(potion_type: PlayerData.PotionType) -> void:
 	var duration: float
 	match potion_type:
 		PlayerData.PotionType.HEALING:
-			if hp_mana_component.health >= PlayerData.max_health:
+			if hp_mana_component.health >= hp_mana_component.max_health:
 				return
 				
 			hp_mana_component.heal(PlayerData.healing_potion_heal)
 			duration = PlayerData.healing_potion_cooldown
 		PlayerData.PotionType.MANA:
-			if hp_mana_component.mana >= PlayerData.max_mana:
+			if hp_mana_component.mana >= hp_mana_component.local_max_mana:
 				return
 				
 			hp_mana_component.restore_mana(PlayerData.mana_potion_heal)

@@ -6,10 +6,13 @@ enum PotionType
 	MANA
 }
 
+#region ItemsChangedSignals
 signal experience_changed(new_value: int)
 signal gold_changed(new_value: int)
 signal weapon_changed(new_weapon: SwordData)
+#endregion
 
+#region StatsChangedSignals
 signal max_health_changed(new_value: float)
 signal health_restore_changed(new_value: float)
 signal max_mana_changed(new_value: float)
@@ -17,25 +20,32 @@ signal mana_restore_changed(new_value: float)
 signal damage_changed(new_value: float)
 signal skill_damage_changed(new_value: float)
 signal speed_changed(new_value: float)
+#endregion
 
+#region ConstantsForSlotsAndPoints
 const MAX_SHOP_SLOTS: int = 10
 const MAX_SKILLS_SLOTS: int = 5
 const MAX_GOLD: int = 999999
 const MAX_EXPERIENCE: int = 999999
 const PLAYER_RADIUS_SPAWN_ENEMIES: float = 730.0
+#endregion
 
+#region ItemsVariables
 var current_weapon: SwordData:
 	set(new_value):
 		if current_weapon != new_value:
 			current_weapon = new_value
 			base_damage = current_weapon.damage
-			weapon_changed.emit(current_weapon)
-		
+			weapon_changed.emit(current_weapon)	
 var passive_items: Array[ItemData] = []
+#endregion
 
+#region Position
 var player_position: Vector2 = Vector2.ZERO
 var target_point: Vector2 = Vector2.ZERO
+#endregion
 
+#region Stats
 var max_health: float = 100.0:
 	set(value):
 		if max_health != value:
@@ -56,6 +66,9 @@ var skill_damage: float:
 		if skill_damage != value:
 			skill_damage = value
 			skill_damage_changed.emit(skill_damage)
+			
+var max_speed: float = 1000.0
+var min_speed: float = 180.0
 var speed: float = 300.0:
 	set(value):
 		var clamped_value = clamp(value, min_speed, max_speed)
@@ -63,29 +76,6 @@ var speed: float = 300.0:
 			speed = clamped_value
 			speed_changed.emit(speed)
 			
-var bonus_percent_damage: float = 1.0
-var bonus_percent_speed: float = 1.0
-var bonus_percent_skill_damage: float = 1.0
-
-var max_speed: float = 1000.0
-var min_speed: float = 180.0
-
-var base_health: float = 100.0
-var base_mana: float = 100.0
-var base_speed: float = 300.0
-var base_health_restore: float = 0.0
-var base_mana_restore: float = 0.0
-var base_damage: float
-var base_skill_damage: float = 0.0
-
-var target_health: float = 0.0
-var target_health_restore: float = 0.0
-var target_mana: float = 0.0
-var target_mana_restore: float = 0.0
-var target_damage: float = 0.0
-var target_skill_damage: float = 0.0
-var target_speed: float = 0.0
-
 var health_restore: float = 0.0:
 	set(value):
 		if health_restore != value:
@@ -96,19 +86,51 @@ var mana_restore: float = 0.0:
 		if mana_restore != value:
 			mana_restore = value
 			mana_restore_changed.emit(mana_restore)
+#endregion			
 
+#region PercentStats
+var bonus_percent_damage: float = 1.0
+var bonus_percent_speed: float = 1.0
+var bonus_percent_skill_damage: float = 1.0
+#endregion
+
+#region BaseStats
+var base_health: float = 100.0
+var base_mana: float = 100.0
+var base_speed: float = 300.0
+var base_health_restore: float = 0.0
+var base_mana_restore: float = 0.0
+var base_damage: float
+var base_skill_damage: float = 0.0
+#endregion
+
+#region ChangedStats
+var target_health: float = 0.0
+var target_health_restore: float = 0.0
+var target_mana: float = 0.0
+var target_mana_restore: float = 0.0
+var target_damage: float = 0.0
+var target_skill_damage: float = 0.0
+var target_speed: float = 0.0
+#endregion
+
+#region PotionsStats
 var healing_potion_heal: float = 10
 var mana_potion_heal: float = 15
 var healing_potion_cooldown: float = 8.0
 var mana_potion_cooldown: float = 8.0
+#endregion
 
+#region Slots
 var slots_in_shop: int = 5:
 	set(value):
 		slots_in_shop = clampi(value, 0, MAX_SHOP_SLOTS)
 var skills_slots_count: int = 3:
 	set(value):
 		skills_slots_count = clampi(value, 0, MAX_SKILLS_SLOTS)
+#endregion
 
+#region Points
 var experience: int = 0:
 	set(new_value):
 		experience = clamp(new_value, 0, MAX_EXPERIENCE)
@@ -117,6 +139,7 @@ var gold: int = 0:
 	set(new_value):
 		gold = clamp(new_value, 0, MAX_GOLD)
 		gold_changed.emit(gold)
+#endregion
 
 var wave_number: int = 1
 
@@ -132,7 +155,7 @@ func _ready() -> void:
 func reset_data() -> void:
 	player_position = Vector2.ZERO
 	self.experience = 0
-	self.gold = 9999999990
+	self.gold = 0
 	passive_items.clear()
 	current_weapon = ItemsManager.get_item(ItemsManager.ItemsType.BASE_SWORD)
 	max_health = base_health
@@ -175,6 +198,8 @@ func recalculate_stats() -> void:
 	var target_percent_skill_damage: float = 1.0
 	
 	for item_data: PassiveItem in passive_items:
+		#Щоразу при покупці предмета, перераховую характеристики та через пітові прапори
+		#Перевіряю який саме пасивний еффект є в предмета
 		if (item_data.buffs & 1) != 0:
 			target_health += item_data.max_health_bonus
 		if (item_data.buffs & 2) != 0:

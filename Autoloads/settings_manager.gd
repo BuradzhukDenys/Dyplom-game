@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 	load_and_apply()
 	
+#Функція для читтання фалу налаштувань та застосування до мікшерів та вікна
 func load_and_apply() -> void:
 	if config.load(SETTINGS_PATH) != OK:
 		return

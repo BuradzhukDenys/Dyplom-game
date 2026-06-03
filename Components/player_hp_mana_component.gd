@@ -28,6 +28,7 @@ func _ready() -> void:
 	mana = local_max_mana
 
 func _process(delta: float) -> void:
+	#Застовоюмо регенерацію, щоб плавно відновлювати хп
 	if PlayerData.health_restore > 0.0 and health < max_health:
 		health = clampf(health + PlayerData.health_restore * delta, 0, max_health)
 		health_changed.emit(health, HEALTH_CHANGED_TYPE.PASSIVE_HEAL)
@@ -36,6 +37,7 @@ func _process(delta: float) -> void:
 		mana_changed.emit(mana, MANA_CHANGED_TYPE.PASSIVE_RESTORE)
 
 func take_damage(amount: float) -> void:
+	#Перевіряємо чи гравець вразлвиий
 	if is_invincible:
 		return
 		
@@ -56,6 +58,7 @@ func restore_mana(amount: float) -> void:
 func _on_take_damage_timer_timeout() -> void:
 	is_invincible = false
 
+#Функції для зміни максимального хп та мани від предметів
 func _on_max_health_changed(new_value: float) -> void:
 	var difference: float = new_value - max_health
 	

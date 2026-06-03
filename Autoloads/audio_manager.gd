@@ -1,25 +1,34 @@
 extends Node
 
+#region players
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var ui_player: AudioStreamPlayer = $UIPlayer
 @onready var error_player: AudioStreamPlayer = $ErrorPlayer
 @onready var fanfare_player: AudioStreamPlayer = $FanfarePlayer
 @onready var potion_drank_player: AudioStreamPlayer = $PotionDrankPlayer
 @onready var potion_refreshed_player: AudioStreamPlayer = $PotionRefreshedPlayer
+#endregion
 
+#region musics
 @export var main_menu_music: AudioStream
 @export var level_music: AudioStream
+#endregion
 
+#region fanfarues
 @export var victory_sound: AudioStream
 @export var defeat_sound: AudioStream
+#endregion
 
+#region SFX
 @export var click_sound: AudioStream
 @export var buy_sound: AudioStream
 @export var error_sound: AudioStream
 @export var potion_drank_sound: AudioStream
 @export var potion_refreshed_sound: AudioStream
+#endregion
 
 func _ready() -> void:
+	#Додаю динамічно для кожної кнопки в прокті звук кліка
 	get_tree().node_added.connect(_on_node_added)
 	
 	_setup_existing_nodes(get_tree().root)
@@ -30,6 +39,7 @@ func _setup_existing_nodes(node: Node) -> void:
 	for child in node.get_children():
 		_setup_existing_nodes(child)
 
+#Функція для відтворення музики
 func play_music(new_track: AudioStream) -> void:
 	if music_player.stream == new_track and music_player.playing:
 		return
@@ -77,11 +87,13 @@ func play_potion_drank() -> void:
 func play_potion_refreshed() -> void:
 	play_sfx(potion_refreshed_sound)
 	
+#Функція для відвторення звуків у просторі
 func play_spatial_sound(stream: AudioStream, position: Vector2, bus_name: String = "SFX") -> void:
 	if stream == null:
 		push_error("AudioManager: Не передано звук для відтворення")
 		return
 		
+	#Створюю просторовий плеєр та налаштовую його
 	var audio_player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	
 	audio_player.stream = stream
@@ -89,6 +101,7 @@ func play_spatial_sound(stream: AudioStream, position: Vector2, bus_name: String
 	audio_player.global_position = position
 	audio_player.bus = bus_name
 	
+	#Додаю його до сцени, при завершенні видаляю
 	get_tree().current_scene.add_child(audio_player)
 	
 	audio_player.play()
