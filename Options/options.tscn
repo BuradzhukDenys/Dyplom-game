@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://0kj3tb51vxje"]
 
-[ext_resource type="Texture2D" uid="uid://b4lg3331xab0m" path="res://Assets/UI/Interface/MegaPackFree/MegaPackFree/UIBundleFree/MediavelFree.png" id="1_6k1gw"]
+[ext_resource type="Texture2D" uid="uid://bfmfiwyddn4kx" path="res://Assets/UI/Interface/MegaPackFree/MegaPackFree/UIBundleFree/MediavelFree.png" id="1_6k1gw"]
 [ext_resource type="Script" uid="uid://sux0ft82o20v" path="res://Options/options.gd" id="1_ooduq"]
 [ext_resource type="Theme" uid="uid://eogs1xs75p0y" path="res://Themes_AnotherFiles/new_theme.tres" id="3_ymabl"]
-[ext_resource type="Script" uid="uid://dgpbjwnfqn6vr" path="res://Options/resolution.gd" id="4_ijs52"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooduq"]
 atlas = ExtResource("1_6k1gw")
@@ -56,6 +55,7 @@ events = [SubResource("InputEventKey_ymabl")]
 
 [node name="Options" type="CanvasLayer" unique_id=1866982236]
 process_mode = 3
+layer = 5
 script = ExtResource("1_ooduq")
 
 [node name="OptionMenu" type="MarginContainer" parent="." unique_id=1227912220]
@@ -107,265 +107,90 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("3_ymabl")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 50
 text = "Options"
 
 [node name="MarginContainer" type="MarginContainer" parent="OptionMenu/PanelContainer/MarginContainer" unique_id=1838870822]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 15
 
-[node name="MainOptions" type="Control" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=1290870528]
+[node name="SoundsSettings" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=1749594041]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-
-[node name="SoundsSettings*" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions" unique_id=1749594041]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -120.0
-offset_right = 300.0
-offset_bottom = 120.0
-grow_vertical = 2
-size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_constants/separation = 45
 alignment = 2
 
-[node name="Sound" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*" unique_id=700457254]
+[node name="Sound" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=700457254]
 layout_mode = 2
 
-[node name="SoundLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Sound" unique_id=278761112]
+[node name="MasterLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=278761112]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 21
-text = "Sound"
+theme_override_font_sizes/font_size = 26
+text = "Master"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SoundHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Sound" unique_id=812251003]
+[node name="MasterHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Sound" unique_id=812251003]
 layout_mode = 2
 min_value = 0.001
+max_value = 1.0
 step = 0.01
-value = 100.0
-rounded = true
+value = 1.0
 
-[node name="Music" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*" unique_id=1591972771]
+[node name="Music" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=1591972771]
 layout_mode = 2
 
-[node name="MusicLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Music" unique_id=1339214142]
+[node name="MusicLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1339214142]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 26
 text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/Music" unique_id=1480896058]
+[node name="MusicHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/Music" unique_id=1480896058]
 layout_mode = 2
 min_value = 0.001
+max_value = 1.0
 step = 0.01
-value = 100.0
-rounded = true
+value = 1.0
 
-[node name="SFX" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*" unique_id=218453709]
+[node name="SFX" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings" unique_id=218453709]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="SFXLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/SFX" unique_id=1099053285]
+[node name="SFXLabel" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=1099053285]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 26
 text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/SoundsSettings*/SFX" unique_id=479135008]
+[node name="SFXHSlider" type="HSlider" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/SoundsSettings/SFX" unique_id=479135008]
 layout_mode = 2
 min_value = 0.001
+max_value = 1.0
 step = 0.01
-value = 100.0
-rounded = true
+value = 1.0
 
-[node name="Settings" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions" unique_id=929097594]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -139.0
-offset_bottom = 139.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = 45
-alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings" unique_id=438649606]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 15
-alignment = 2
-
-[node name="FullScreen" type="CheckBox" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer" unique_id=1259414048]
+[node name="FullScreen" type="CheckBox" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=1259414048]
 texture_filter = 1
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Fullscreen"
 alignment = 2
 
-[node name="Resolution*" type="OptionButton" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer" unique_id=1775886772]
-texture_filter = 1
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 20
-alignment = 1
-selected = 0
-item_count = 4
-popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
-popup/item_1/text = "1600x900"
-popup/item_1/id = 1
-popup/item_2/text = "1280x720"
-popup/item_2/id = 2
-popup/item_3/id = 3
-script = ExtResource("4_ijs52")
-
-[node name="MainButtons*" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings" unique_id=682972468]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/separation = 15
-
-[node name="ChangeKeybinds" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1393674571]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 22
-text = "Change keybinds"
-
-[node name="ResetSettings" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1351697031]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 22
-text = "Reset settings"
-
-[node name="ResetProgress" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/MainButtons*" unique_id=1366779204]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 22
-text = "Reset progress"
-
-[node name="ChangeKeybindsOptions" type="Control" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer" unique_id=643247742]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions" unique_id=1302238241]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -62.5
-offset_top = -58.0
-offset_right = 62.5
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Message" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/VBoxContainer" unique_id=577432904]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-theme_override_font_sizes/font_size = 30
-text = "test"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResetKeybinds" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/VBoxContainer" unique_id=136855232]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Reset keybinds"
-
-[node name="InventoryKeys" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions" unique_id=370048507]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -46.5
-offset_right = 188.0
-offset_bottom = 46.5
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=600920804]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Inventory"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealingButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=1748087126]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Drink healing potion - F"
-flat = true
-
-[node name="ManaButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/InventoryKeys" unique_id=399521200]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Drink mana potion - Q"
-flat = true
-
-[node name="GameKeys" type="VBoxContainer" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions" unique_id=730558935]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -188.0
-offset_top = -46.5
-offset_bottom = 46.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1790181886]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PauseButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1413066281]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Pause - ESC"
-flat = true
-
-[node name="ShootButton" type="Button" parent="OptionMenu/PanelContainer/MarginContainer/MarginContainer/ChangeKeybindsOptions/GameKeys" unique_id=1313284639]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("3_ymabl")
-text = "Shoot - LMB"
-flat = true
-
 [connection signal="pressed" from="OptionMenu/PanelContainer/MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="toggled" from="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]
-[connection signal="item_selected" from="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer/Resolution*" to="OptionMenu/PanelContainer/MarginContainer/MarginContainer/MainOptions/Settings/HBoxContainer/Resolution*" method="_on_item_selected"]
