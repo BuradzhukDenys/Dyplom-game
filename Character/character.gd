@@ -1,6 +1,12 @@
 extends CharacterBody2D
 class_name Character
 
+var FootstepsSounds: Dictionary = {
+	0: preload("res://Assets/Sounds/SFX/Character/footstep00.ogg"),
+	1: preload("res://Assets/Sounds/SFX/Character/footstep01.ogg"),
+	2: preload("res://Assets/Sounds/SFX/Character/footstep02.ogg")
+}
+
 #region nodes
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -14,6 +20,12 @@ class_name Character
 @onready var healing_particles: GPUParticles2D = $ParticleManager/HealParticles
 @onready var mana_particles: GPUParticles2D = $ParticleManager/ManaParticles
 @onready var target_point: Marker2D = $TargetPoint
+@onready var sword_whoosh_player: AudioStreamPlayer2D = $Sounds/SwordWhooshSound
+@onready var footstep_player: AudioStreamPlayer2D = $Sounds/FootStepSound
+@onready var hurt_player: AudioStreamPlayer2D = $Sounds/HurtSound
+@onready var die_player: AudioStreamPlayer2D = $Sounds/DieSound
+@onready var slash_animated_sprite: AnimatedSprite2D = $AnimatedSprite2DSlash
+@onready var can_attack_particles: GPUParticles2D = $ParticleManager/AttackCooldownParticles
 #endregion
 
 #region values
@@ -29,6 +41,7 @@ var can_attack: bool = true
 #region tweens
 var mana_restore_tween: Tween
 var heal_tween: Tween
+var can_attack_effect_tween: Tween
 #endregion
 
 #region states
@@ -49,6 +62,8 @@ func _ready() -> void:
 	PlayerData.damage_changed.connect(func(new_value): damage = new_value)
 	speed = PlayerData.speed
 	damage = PlayerData.damage
+	#slash_animated_sprite.stop()
+	slash_animated_sprite.hide()
 	
 	PlayerData.weapon_changed.connect(_on_weapon_changed)
 	_on_weapon_changed(PlayerData.current_weapon)
@@ -81,24 +96,31 @@ func _enter_state(state: States) -> void:
 			play_animation_directionaly("Idle")
 		States.ATTACK:
 			can_attack = false
+			sword_whoosh_player.play()
 			attack_cooldown_timer.start(PlayerData.current_weapon.attack_interval)
 			play_animation_directionaly("Attack")
 		States.TAKE_DAMAGE:
+			hurt_player.play()
 			play_animation_directionaly("TakeDamage")
 		States.DEAD:
+			die_player.play()
 			play_animation_directionaly("Die")
 			set_physics_process(false)
 			set_process_unhandled_input(false)
 			
 			hitbox_collision.set_deferred("disabled", true)
 			hurtbox_collision.set_deferred("disabled", true)
+			
+			await die_player.finished
+			
+			show_defeat()
 
 func _exit_state(state: States) -> void:
 	match state:
 		States.IDLE:
 			pass
 		States.MOVE:
-			pass
+			footstep_player.stop()
 		States.ATTACK, States.TAKE_DAMAGE:
 			animated_sprite.self_modulate = Color(1, 1, 1, 1)
 		States.DEAD:
@@ -115,6 +137,11 @@ func process_state(_delta: float) -> void:
 		States.MOVE:
 			velocity = direction * speed
 			if direction:
+				if not footstep_player.playing:
+					var random_footstep_sound: AudioStream = FootstepsSounds[randi_range(0, 2)]
+					footstep_player.stream = random_footstep_sound
+					footstep_player.play()
+					
 				if abs(direction.x) > abs(direction.y):
 					last_direction = Vector2(signf(direction.x), 0)
 				else:
@@ -194,6 +221,15 @@ func _on_player_hp_mana_component_mana_changed(_new_value: int, type: PlayerHPMa
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true
+	
+	can_attack_particles.emitting = true
+	
+	if can_attack_effect_tween and can_attack_effect_tween.is_valid():
+		can_attack_effect_tween.kill()
+		
+	animated_sprite.self_modulate = Color(1.0, 0.894, 0.0, 1.0)
+	can_attack_effect_tween = create_tween()
+	can_attack_effect_tween.tween_property(animated_sprite, "self_modulate", Color.WHITE, 0.5)
 
 func _on_hitbox_area_entered(area: Hurtbox) -> void:
 	if area.is_in_group("enemy_hurtbox") and area is Hurtbox:
