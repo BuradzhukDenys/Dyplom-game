@@ -26,7 +26,7 @@ events = [SubResource("InputEventKey_fi2cs")]
 process_mode = 3
 script = ExtResource("1_dk10o")
 item_container_scene = ExtResource("2_vy1hj")
-unpasu_on_close = true
+unpause_on_close = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1827632675]
 anchors_preset = 15
