@@ -8,7 +8,7 @@
 -  Динамічна система характеристик: Плоскі бонуси та відсотки.
 -  Магазин та інвентар: Можливість купувати пасивні предмети та зброю.
 -  Магінчні навички: Різні скіли, зі своїми характеристиками та поведінкою.
-## Завантаження: [Release](https://github.com/Student-Papers/1-BuradzhukDenys/releases/tag/Release)
+## Завантаження: [Release](https://github.com/BuradzhukDenys/Dyplom-game/releases/tag/Release)
 ## Керування:
 -  Переміщення - `W` `A` `S` `D`
 -  Атака - `LMB` (ЛКМ), `SPACE`
