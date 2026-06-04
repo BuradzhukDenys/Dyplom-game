@@ -154,16 +154,20 @@ func _ready() -> void:
 
 func reset_data() -> void:
 	player_position = Vector2.ZERO
+	target_point = Vector2.ZERO
+	
 	self.experience = 0
-	self.gold = 0
+	self.gold = 990
+	wave_number = 1
+	
 	passive_items.clear()
 	current_weapon = ItemsManager.get_item(ItemsManager.ItemsType.BASE_SWORD)
-	max_health = base_health
-	health_restore = base_health_restore
-	max_mana = base_mana
-	mana_restore = base_mana_restore
-	damage = base_damage
-	speed = base_speed
+	
+	bonus_percent_damage = 1.0
+	bonus_percent_speed = 1.0
+	bonus_percent_skill_damage = 1.0
+	
+	recalculate_stats()
 	
 func add_gold(amount: int) -> void:
 	gold += abs(amount)

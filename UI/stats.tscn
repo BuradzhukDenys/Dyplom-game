@@ -84,9 +84,9 @@ theme_override_constants/line_separation = 5
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[color=green]Max health - 
-[color=lightgreen]HP restore1 - 
+[color=lightgreen]Health restore - 
 [color=purple]Max mana - 
-[color=magenta]Mana restore2- 
+[color=magenta]Mana restore- 
 [color=red]Damage - 
 [color=blue]Speed - 
 [color=yellow]Skill amplification - "

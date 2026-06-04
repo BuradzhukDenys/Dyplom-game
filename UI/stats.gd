@@ -18,15 +18,19 @@ func open() -> void:
 			var bonus_str: String = " (%+d)" % flat_bonus if flat_bonus != 0 else ""
 			
 			stat_text = "[color=green]Max health: " + str(PlayerData.max_health) + bonus_str + "[/color]"
-		elif lines[i].containsn("restore1"):
-			stat_text = "[color=lightgreen]Health restore: " + str(PlayerData.health_restore) + "[/color]"
+		elif lines[i].containsn("Health restore"):
+			var restore_bonus:float = PlayerData.health_restore - PlayerData.base_health_restore
+			var bonus_str: String = " (%+.1f)" % restore_bonus if abs(restore_bonus) > 0.001 else ""
+			stat_text = "[color=lightgreen]Health restore: %.1f%s[/color]" % [PlayerData.health_restore, bonus_str]
 		elif lines[i].containsn("Max mana"):
 			var flat_bonus: int = round(PlayerData.max_mana - PlayerData.base_mana)
 			
 			var bonus_str: String = " (%+d)" % flat_bonus if flat_bonus != 0 else ""
 			stat_text = "[color=purple]Max mana: " + str(PlayerData.max_mana) + bonus_str + "[/color]"
-		elif lines[i].containsn("restore2"):
-			stat_text = "[color=magenta]Mana restore: " + str(PlayerData.mana_restore) + "[/color]"
+		elif lines[i].containsn("Mana restore"):
+			var restore_bonus:float = PlayerData.mana_restore - PlayerData.base_mana_restore
+			var bonus_str: String = " (%+.1f)" % restore_bonus if abs(restore_bonus) > 0.001 else ""
+			stat_text = "[color=magenta]Mana restore: %.1f%s[/color]" % [PlayerData.mana_restore, bonus_str]
 		elif lines[i].containsn("Damage"):
 			var percent: int = round((PlayerData.bonus_percent_damage - 1.0) * 100.0)
 			var flat_bonus: int = round((PlayerData.damage / PlayerData.bonus_percent_damage) - PlayerData.base_damage)
